@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:nextFocusDown="@+id/etPassword"
+        android:hint="@string/FormInputEmailHint" />
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/VerticalMargin"
+        android:inputType="textPassword"
+        android:nextFocusDown="@+id/etPhone"
+        android:hint="@string/FormInputPasswordHint" />
+    <EditText
+        android:id="@+id/etPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/VerticalMargin"
+        android:inputType="phone"
+        android:nextFocusDown="@id/btnWizard"
+        android:hint="@string/FormInputPhoneHint" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/FormDescriptionTextSize"
+        android:layout_marginTop="@dimen/VerticalMargin"
+        android:text="@string/FormDescriptionEmail" />
+</LinearLayout>

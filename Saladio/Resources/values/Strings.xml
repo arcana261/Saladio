@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+  <string name="ApplicationName">پای و سالاد</string>
+  
   <string name="Welcome1">سالادهای ما یک وعده غذای کامل است...</string>
   <string name="Welcome2">با ما در تجربه سبز همراه شوید</string>
   <string name="BtnStart">برای شروع تجربه سبز کلیک کن</string>
-  <string name="ApplicationName">پای و سالاد</string>
+  <string name="BtnNext">ادامه...</string>
+
+  <string name="FormInputEmailHint">آدرس ایمیل</string>
+  <string name="FormInputPasswordHint">رمز عبور</string>
+  <string name="FormInputPhoneHint">تلفن همراه</string>
+  <string name="FormDescriptionEmail">&#8226; آدرس ایمیل به عنوان نام کاربری شما در سیستم می باشد. </string>
+
+  <string name="FormInputFirstNameHint">نام</string>
+  <string name="FormInputLastNameHint">نام خانوادگی</string>
+  <string name="FormInputGenderHint">جنسیت</string>
+  <string name="FormInputBirthDateHint">تاریخ تولد</string>
+  <string name="FormInputWeightHint">وزن</string>
+  <string name="FormInputAddress1">آدرس ۱</string>
+  <string name="FormInputAddress2">آدرس ۲</string>
+
+  <string name="Male">مرد</string>
+  <string name="Female">زن</string>
+  
 </resources>

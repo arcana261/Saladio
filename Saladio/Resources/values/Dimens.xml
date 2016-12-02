@@ -4,6 +4,13 @@
   <dimen name="ButtonGradientRadius">4dp</dimen>
   <dimen name="ButtonStrokeWidth">1dp</dimen>
   <dimen name="ButtonPadding">10dp</dimen>
+
+  <dimen name="EditTextFocusedStroke">3dp</dimen>
+  <dimen name="EditTextRadius">3dp</dimen>
+  <dimen name="EditTextPaddingLeft">10dp</dimen>
+  <dimen name="EditTextPaddingTop">6dp</dimen>
+  <dimen name="EditTextPaddingRight">10dp</dimen>
+  <dimen name="EditTextPaddingBottom">6dp</dimen>
   
   <dimen name="ScreenBottomMargin">30dp</dimen>
   <dimen name="ScreenLeftMargin">20dp</dimen>
@@ -12,4 +19,6 @@
 
   <dimen name="VerticalMargin">15dp</dimen>
   <dimen name="HorizontalMargin">10dp</dimen>
+
+  <dimen name="FormDescriptionTextSize">15sp</dimen>
 </resources>

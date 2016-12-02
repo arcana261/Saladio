@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+  <LinearLayout
+      android:orientation="vertical"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+    <EditText
+        android:id="@+id/etFirstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:nextFocusDown="@+id/etLastName"
+        android:hint="@string/FormInputFirstNameHint" />
+    <EditText
+        android:id="@+id/etLastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:nextFocusDown="@+id/spGender"
+        android:hint="@string/FormInputLastNameHint"
+        android:layout_marginTop="@dimen/VerticalMargin"/>
+
+    <Spinner
+      android:id="@+id/spGender"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:entries="@array/GenderTypes"
+      android:layout_marginTop="@dimen/VerticalMargin"
+      android:nextFocusDown="@+id/etBirthDate"/>
+
+    <EditText
+        android:id="@+id/etBirthDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:nextFocusDown="@+id/etWeight"
+        android:hint="@string/FormInputBirthDateHint"
+        android:layout_marginTop="@dimen/VerticalMargin"/>
+
+    <EditText
+        android:id="@+id/etWeight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:nextFocusDown="@+id/etAddress1"
+        android:hint="@string/FormInputWeightHint"
+        android:layout_marginTop="@dimen/VerticalMargin"/>
+
+    <EditText
+        android:id="@+id/etAddress1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:nextFocusDown="@+id/etAddress2"
+        android:hint="@string/FormInputAddress1"
+        android:layout_marginTop="@dimen/VerticalMargin"/>
+
+    <EditText
+        android:id="@+id/etAddress2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:nextFocusDown="@+id/btnWizard"
+        android:hint="@string/FormInputAddress2"
+        android:layout_marginTop="@dimen/VerticalMargin"/>
+  </LinearLayout>
+</ScrollView>
