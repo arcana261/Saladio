@@ -177,41 +177,56 @@ namespace Saladio
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f090001
-			public const int btnWizard = 2131296257;
-			
-			// aapt resource value: 0x7f09000a
-			public const int etAddress1 = 2131296266;
-			
-			// aapt resource value: 0x7f09000b
-			public const int etAddress2 = 2131296267;
-			
-			// aapt resource value: 0x7f090008
-			public const int etBirthDate = 2131296264;
-			
 			// aapt resource value: 0x7f090002
-			public const int etEmail = 2131296258;
-			
-			// aapt resource value: 0x7f090005
-			public const int etFirstName = 2131296261;
-			
-			// aapt resource value: 0x7f090006
-			public const int etLastName = 2131296262;
-			
-			// aapt resource value: 0x7f090003
-			public const int etPassword = 2131296259;
-			
-			// aapt resource value: 0x7f090004
-			public const int etPhone = 2131296260;
-			
-			// aapt resource value: 0x7f090009
-			public const int etWeight = 2131296265;
-			
-			// aapt resource value: 0x7f090007
-			public const int spGender = 2131296263;
+			public const int btnWizard = 2131296258;
 			
 			// aapt resource value: 0x7f090000
-			public const int wizardContainer = 2131296256;
+			public const int contentFragment = 2131296256;
+			
+			// aapt resource value: 0x7f09000f
+			public const int etAddress1 = 2131296271;
+			
+			// aapt resource value: 0x7f090010
+			public const int etAddress2 = 2131296272;
+			
+			// aapt resource value: 0x7f09000d
+			public const int etBirthDate = 2131296269;
+			
+			// aapt resource value: 0x7f090007
+			public const int etEmail = 2131296263;
+			
+			// aapt resource value: 0x7f09000a
+			public const int etFirstName = 2131296266;
+			
+			// aapt resource value: 0x7f09000b
+			public const int etLastName = 2131296267;
+			
+			// aapt resource value: 0x7f090008
+			public const int etPassword = 2131296264;
+			
+			// aapt resource value: 0x7f090009
+			public const int etPhone = 2131296265;
+			
+			// aapt resource value: 0x7f09000e
+			public const int etWeight = 2131296270;
+			
+			// aapt resource value: 0x7f090003
+			public const int slidingTabs = 2131296259;
+			
+			// aapt resource value: 0x7f09000c
+			public const int spGender = 2131296268;
+			
+			// aapt resource value: 0x7f090005
+			public const int txtItemSubTitle = 2131296261;
+			
+			// aapt resource value: 0x7f090006
+			public const int txtItemTitle = 2131296262;
+			
+			// aapt resource value: 0x7f090004
+			public const int viewPager = 2131296260;
+			
+			// aapt resource value: 0x7f090001
+			public const int wizardContainer = 2131296257;
 			
 			static Id()
 			{
@@ -227,16 +242,25 @@ namespace Saladio
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int ActivityStart = 2130903040;
+			public const int ActivityMain = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int PageSignUp = 2130903041;
+			public const int ActivityStart = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int PageSignUpDetails = 2130903042;
+			public const int FragmentSlidingTabs = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int PageWelcome = 2130903043;
+			public const int PagerItem = 2130903043;
+			
+			// aapt resource value: 0x7f030004
+			public const int PageSignUp = 2130903044;
+			
+			// aapt resource value: 0x7f030005
+			public const int PageSignUpDetails = 2130903045;
+			
+			// aapt resource value: 0x7f030006
+			public const int PageWelcome = 2130903046;
 			
 			static Layout()
 			{

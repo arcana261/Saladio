@@ -75,12 +75,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\ActivityMain.cs" />
     <Compile Include="Activities\ActivityStart.cs" />
     <Compile Include="ActivityExtensions.cs" />
     <Compile Include="Components\ManualViewPager.cs" />
     <Compile Include="Components\RtlActivity.cs" />
+    <Compile Include="Components\SlidingTabsAdapter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Components\Impl\SlidingTabScrollView.cs" />
+    <Compile Include="Components\SlidingTabsFragment.cs" />
+    <Compile Include="Components\Impl\SlidingTabStrip.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
@@ -94,6 +99,11 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\PageSignUpDetails.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\PagerItem.axml" />
+    <AndroidResource Include="Resources\layout\FragmentSlidingTabs.axml" />
+    <AndroidResource Include="Resources\layout\ActivityMain.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

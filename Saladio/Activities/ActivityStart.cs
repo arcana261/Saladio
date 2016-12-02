@@ -109,6 +109,7 @@ namespace Saladio.Activities
                     SwitchToPage(WizardPage.SignUpDetails);
                     break;
                 case WizardPage.SignUpDetails:
+                    StartActivity(typeof(ActivityMain));
                     break;
                 default:
                     throw new ArgumentException("invalid requested page: " + page.ToString(), "page");
