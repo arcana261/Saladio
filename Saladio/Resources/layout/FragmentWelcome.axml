@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="100">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="30"
+        android:layout_marginBottom="@dimen/VerticalMargin">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/pic_pie_salad"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15"
+        android:layout_marginTop="@dimen/VerticalMargin"
+        android:layout_marginBottom="@dimen/VerticalMargin">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/pic_salad_1"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="55"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/VerticalMargin"
+            android:layout_marginBottom="@dimen/VerticalMargin"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Welcome1"
+                android:gravity="center" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Welcome2"
+                android:gravity="center" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

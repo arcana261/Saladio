@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+  <style name="SaladioTheme" parent="@android:style/Theme.Holo.Light.DarkActionBar">
+    <item name="android:actionBarStyle">@style/SaladioActionBar</item>
+    <item name="android:buttonStyle">@style/SaladioButton</item>
+  </style>
+
+  <style name="SaladioActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+    <item name="android:background">@color/SaladioPrimary</item>
+  </style>
+
+  <style name="SaladioButton" parent="@android:style/Widget.Holo.Light.Button">
+    <item name="android:background">@drawable/ButtonStyle</item>
+  </style>
+</resources>

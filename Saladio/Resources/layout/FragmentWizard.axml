@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:layout_marginTop="@dimen/ScreenTopMargin">
+    <FrameLayout
+      android:id="@+id/layoutContent"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content">
+    </FrameLayout>
+  </RelativeLayout>
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:layout_marginLeft="@dimen/ScreenLeftMargin"
+    android:layout_marginRight="@dimen/ScreenRightMargin"
+    android:layout_marginBottom="@dimen/ScreenBottomMargin">
+    <Button
+      android:id="@+id/btnWizard"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Click Me"/>
+  </RelativeLayout>
+</LinearLayout>

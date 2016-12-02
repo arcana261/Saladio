@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+  <dimen name="ButtonSolidRadius">2dp</dimen>
+  <dimen name="ButtonGradientRadius">4dp</dimen>
+  <dimen name="ButtonStrokeWidth">1dp</dimen>
+  <dimen name="ButtonPadding">10dp</dimen>
+  
+  <dimen name="ScreenBottomMargin">30dp</dimen>
+  <dimen name="ScreenLeftMargin">20dp</dimen>
+  <dimen name="ScreenRightMargin">20dp</dimen>
+  <dimen name="ScreenTopMargin">30dp</dimen>
+
+  <dimen name="VerticalMargin">15dp</dimen>
+  <dimen name="HorizontalMargin">10dp</dimen>
+</resources>

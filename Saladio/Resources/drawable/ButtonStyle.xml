@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:state_pressed="false">
+    <layer-list>
+      <item android:right="5dp" android:top="5dp">
+        <shape>
+          <solid android:color="@color/SaladioPrimary" />
+          <corners android:radius="@dimen/ButtonSolidRadius" />
+        </shape>
+      </item>
+      <item android:left="2dp" android:bottom="2dp">
+        <shape>
+          <gradient android:startColor="@color/SaladioPrimary" android:endColor="@color/SaladioPrimary" />
+          <stroke android:width="@dimen/ButtonStrokeWidth" android:color="@color/SaladioPrimaryDark" />
+          <corners android:radius="@dimen/ButtonGradientRadius" />
+          <padding android:left="@dimen/ButtonPadding" android:top="@dimen/ButtonPadding" android:right="@dimen/ButtonPadding" android:bottom="@dimen/ButtonPadding" />
+        </shape>
+      </item>
+    </layer-list>
+  </item>
+
+  <item android:state_pressed="true">
+    <layer-list>
+      <item android:right="5dp" android:top="5dp">
+        <shape>
+          <solid android:color="@color/SaladioPrimary" />
+          <corners android:radius="@dimen/ButtonSolidRadius" />
+        </shape>
+      </item>
+      <item android:left="2dp" android:bottom="2dp">
+        <shape>
+          <gradient android:startColor="@color/SaladioPrimaryDark" android:endColor="@color/SaladioPrimary" />
+          <stroke android:width="@dimen/ButtonStrokeWidth" android:color="@color/SaladioPrimaryDark" />
+          <corners android:radius="@dimen/ButtonGradientRadius" />
+          <padding android:left="@dimen/ButtonPadding" android:top="@dimen/ButtonPadding" android:right="@dimen/ButtonPadding" android:bottom="@dimen/ButtonPadding" />
+        </shape>
+      </item>
+    </layer-list>
+  </item>
+</selector>

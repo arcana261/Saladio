@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="Hello">Hello World, Click Me!</string>
-    <string name="ApplicationName">Saladio</string>
+  <string name="Welcome1">سالادهای ما یک وعده غذای کامل است...</string>
+  <string name="Welcome2">با ما در تجربه سبز همراه شوید</string>
+  <string name="BtnStart">برای شروع تجربه سبز کلیک کن</string>
+  <string name="ApplicationName">پای و سالاد</string>
 </resources>
