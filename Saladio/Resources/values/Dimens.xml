@@ -34,4 +34,11 @@
   <dimen name="PlusMinusButtonSize">30dip</dimen>
   <dimen name="PlusMinusButtonPadding">5dip</dimen>
   <dimen name="PlusMinusButtonStroke">1dp</dimen>
+
+  <dimen name="ListDividerStroke">1dp</dimen>
+  <dimen name="DividerMargin">5dp</dimen>
+
+  <dimen name="CustomSaladInformationTextSize">12sp</dimen>
+  <dimen name="CustomSaladInformationRadius">8dp</dimen>
+  <dimen name="CustomSaladInformationMinHeight">35dp</dimen>
 </resources>

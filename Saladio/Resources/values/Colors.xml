@@ -5,6 +5,8 @@
   <color name="SaladioPrimaryLight">#00FF72</color>
   <color name="SaladioPrimaryDimmedLight">#E8FFF2</color>
 
+  <color name="SaladioSecondary">#FF9933</color>
+  
   <color name="ButtonSolidColor">@color/SaladioPrimary</color>
   <color name="ButtonGradientColor">@color/SaladioPrimaryDark</color>
   
@@ -16,4 +18,8 @@
   <color name="PlusMinusButtonNormal">@color/SaladioPrimaryDimmedLight</color>
   <color name="PlusMinusButtonPressed">@color/SaladioPrimaryLight</color>
   <color name="PlusMinusButtonStroke">@color/SaladioPrimaryLight</color>
+
+  <color name="ListDividerStroke">@android:color/darker_gray</color>
+
+  <color name="CustomSaladInformationBackground">@color/SaladioSecondary</color>
 </resources>

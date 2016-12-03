@@ -17,16 +17,11 @@ namespace Saladio.Adapters
     {
         private Context mContext;
         private IList<SaladComponentGroup> mGroups;
-        private Func<SaladComponentGroup, BaseAdapter<SaladComponent>> mAdapterGenerator;
 
         public SaladComponentGroupAdapter(Context context, IList<SaladComponentGroup> groups)
-            : this(context, groups, x => new SaladComponentAdapter(context, x.Components)) { }
-
-        public SaladComponentGroupAdapter(Context context, IList<SaladComponentGroup> groups, Func<SaladComponentGroup, BaseAdapter<SaladComponent>> adapterGenerator)
         {
             mContext = context;
             mGroups = groups;
-            mAdapterGenerator = adapterGenerator;
         }
 
         public override SaladComponentGroup this[int position]
@@ -60,12 +55,38 @@ namespace Saladio.Adapters
             }
 
             TextView txtSaladComponentGroup = row.FindViewById<TextView>(Resource.Id.txtSaladComponentGroup);
-            ListView lstSaladComponents = row.FindViewById<ListView>(Resource.Id.lstSaladComponents);
+            LinearLayout lstSaladComponents = row.FindViewById<LinearLayout>(Resource.Id.layoutSaladComponents);
             SaladComponentGroup item = this[position];
 
             txtSaladComponentGroup.Text = item.Name;
 
-            lstSaladComponents.Adapter = mAdapterGenerator(item);
+            int dividerMargin = (int)mContext.Resources.GetDimension(Resource.Dimension.DividerMargin);
+            View lastSubRow = null;
+            lstSaladComponents.RemoveAllViews();
+            foreach (SaladComponent saladComponent in item.Components)
+            {
+                View subRow = LayoutInflater.From(mContext).Inflate(Resource.Layout.RowSaladComponent, lstSaladComponents, false);
+                if (lastSubRow == null)
+                {
+                    subRow.SetPadding(0, dividerMargin, 0, 0);
+                }
+                lastSubRow = subRow;
+
+                TextView txtSaladComponent = subRow.FindViewById<TextView>(Resource.Id.txtSaladComponent);
+
+                txtSaladComponent.Text = saladComponent.Name;
+
+                lstSaladComponents.AddView(subRow);
+            }
+
+            if (lastSubRow != null)
+            {
+                lastSubRow.SetPadding(0, 0, 0, dividerMargin);
+
+                LinearLayout layoutContainer = lastSubRow.FindViewById<LinearLayout>(Resource.Id.layoutContainer);
+
+                layoutContainer.RemoveView(lastSubRow.FindViewById<View>(Resource.Id.divider));
+            }
 
             return row;
         }

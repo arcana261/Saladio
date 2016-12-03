@@ -13,4 +13,24 @@
     <item name="android:height">@dimen/PlusMinusButtonSize</item>
     <item name="android:background">@drawable/PlusMinusButtonStyle</item>
   </style>
+
+  <style name="SaladioListDivider">
+    <item name="android:height">@dimen/ListDividerStroke</item>
+    <item name="android:background">@color/ListDividerStroke</item>
+  </style>
+
+  <style name="VerticalListDivider">
+    <item name="android:width">@dimen/ListDividerStroke</item>
+    <item name="android:background">@color/ListDividerStroke</item>
+  </style>
+
+  <style name="CustomSaladInformation" parent="@style/SaladioTextView">
+    <item name="android:textSize">@dimen/CustomSaladInformationTextSize</item>
+    <item name="android:gravity">center</item>
+  </style>
+
+  <style name="CustomSaladInformationBar">
+    <item name="android:background">@drawable/CustomSaladInformationStyle</item>
+    <item name="android:minHeight">@dimen/CustomSaladInformationMinHeight</item>
+  </style>
 </resources>

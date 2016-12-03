@@ -78,13 +78,12 @@
     <Compile Include="Activities\ActivityMain.cs" />
     <Compile Include="Activities\ActivityStart.cs" />
     <Compile Include="ActivityExtensions.cs" />
-    <Compile Include="Adapters\SaladComponentAdapter.cs" />
     <Compile Include="Adapters\SaladComponentGroupAdapter.cs" />
     <Compile Include="Components\ManualViewPager.cs" />
     <Compile Include="Components\RtlActivity.cs" />
     <Compile Include="Components\SlidingTabsAdapter.cs" />
-    <Compile Include="Components\WrapContentListView.cs" />
     <Compile Include="Contexts\SaladioContext.cs" />
+    <Compile Include="ListViewExtensions.cs" />
     <Compile Include="Models\SaladComponent.cs" />
     <Compile Include="Models\SaladComponentGroup.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -187,6 +186,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-v21\PlusMinusButtonStyle.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\CustomSaladInformationStyle.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

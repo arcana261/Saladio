@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:layout_marginLeft="@dimen/ScreenLeftMargin"
-              android:layout_marginTop="@dimen/ScreenTopMargin"
-              android:layout_marginRight="@dimen/ScreenRightMargin"
-              android:layout_marginBottom="@dimen/ScreenBottomMargin">
-  <Saladio.Components.ManualViewPager
-      android:id="@+id/wizardContainer"
-      android:layout_width="match_parent"
-      android:layout_height="fill_parent"
-      android:layout_weight="1" />
-  <Button
-      android:id="@+id/btnWizard"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:text="ClickMe!" />
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/ScreenLeftMargin"
+    android:layout_marginTop="@dimen/ScreenTopMargin"
+    android:layout_marginRight="@dimen/ScreenRightMargin"
+    android:layout_marginBottom="@dimen/ScreenBottomMargin">
+    <Saladio.Components.ManualViewPager
+        android:id="@+id/wizardContainer"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" />
+    <Button
+        android:id="@+id/btnWizard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ClickMe!" />
 </LinearLayout>

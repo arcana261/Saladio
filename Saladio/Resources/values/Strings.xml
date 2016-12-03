@@ -27,5 +27,14 @@
   <string name="Female">زن</string>
 
   <string name="Bullet">&#8226;</string>
-  
+
+  <string name="CustomSaladInformationOther">سایر...</string>
+  <string name="CustomSaladInformationPrice">قیمت سالاد شما</string>
+  <string name="CustomSaladInformationWeight">وزن تقریبی سالاد شما</string>
+  <string name="CustomSaladInformatonCalorie">کالری سالاد شما</string>
+  <string name="CustomSaladInformationToman">تومان</string>
+  <string name="CustomSaladInformationGrams">گرم</string>
+  <string name="CustomSaladInformationKilloCalorie">کیلو کالری</string>
+  <string name="CustomSaladMoreDetails">توضیح خاص در مورد سالاد شما که باید مد نظر قرار گیرد (حداکثر 150 کاراکتر)</string>
+  <string name="CustomSaladSave">ثبت سالاد انتخابی</string>
 </resources>

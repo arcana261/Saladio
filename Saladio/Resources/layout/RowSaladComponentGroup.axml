@@ -9,8 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Catagory" />
-    <Saladio.Components.WrapContentListView
-        android:id="@+id/lstSaladComponents"
+    <LinearLayout
+        android:id="@+id/layoutSaladComponents"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"/>
 </LinearLayout>

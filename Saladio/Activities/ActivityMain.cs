@@ -70,6 +70,7 @@ namespace Saladio.Activities
                             ListView lstCustomSalad = view.FindViewById<ListView>(Resource.Id.lstCustomSalad);
 
                             lstCustomSalad.Adapter = new SaladComponentGroupAdapter(mActivity, saladioContext.SaladComponentGroups);
+                            lstCustomSalad.SetListViewHeightBasedOnChildren();
 
                             return view;
                         }

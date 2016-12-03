@@ -60,29 +60,35 @@ namespace Saladio
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f050005
-			public const int ButtonGradientColor = 2131034117;
-			
-			// aapt resource value: 0x7f050004
-			public const int ButtonSolidColor = 2131034116;
-			
 			// aapt resource value: 0x7f050006
-			public const int EditTextBackground = 2131034118;
+			public const int ButtonGradientColor = 2131034118;
+			
+			// aapt resource value: 0x7f050005
+			public const int ButtonSolidColor = 2131034117;
+			
+			// aapt resource value: 0x7f05000e
+			public const int CustomSaladInformationBackground = 2131034126;
 			
 			// aapt resource value: 0x7f050007
-			public const int EditTextStroke = 2131034119;
-			
-			// aapt resource value: 0x7f050009
-			public const int PlusMinusButtonNormal = 2131034121;
-			
-			// aapt resource value: 0x7f05000a
-			public const int PlusMinusButtonPressed = 2131034122;
-			
-			// aapt resource value: 0x7f05000b
-			public const int PlusMinusButtonStroke = 2131034123;
+			public const int EditTextBackground = 2131034119;
 			
 			// aapt resource value: 0x7f050008
-			public const int SaladComponentGroupStroke = 2131034120;
+			public const int EditTextStroke = 2131034120;
+			
+			// aapt resource value: 0x7f05000d
+			public const int ListDividerStroke = 2131034125;
+			
+			// aapt resource value: 0x7f05000a
+			public const int PlusMinusButtonNormal = 2131034122;
+			
+			// aapt resource value: 0x7f05000b
+			public const int PlusMinusButtonPressed = 2131034123;
+			
+			// aapt resource value: 0x7f05000c
+			public const int PlusMinusButtonStroke = 2131034124;
+			
+			// aapt resource value: 0x7f050009
+			public const int SaladComponentGroupStroke = 2131034121;
 			
 			// aapt resource value: 0x7f050000
 			public const int SaladioPrimary = 2131034112;
@@ -95,6 +101,9 @@ namespace Saladio
 			
 			// aapt resource value: 0x7f050002
 			public const int SaladioPrimaryLight = 2131034114;
+			
+			// aapt resource value: 0x7f050004
+			public const int SaladioSecondary = 2131034116;
 			
 			static Color()
 			{
@@ -133,6 +142,18 @@ namespace Saladio
 			// aapt resource value: 0x7f060002
 			public const int ButtonStrokeWidth = 2131099650;
 			
+			// aapt resource value: 0x7f060020
+			public const int CustomSaladInformationMinHeight = 2131099680;
+			
+			// aapt resource value: 0x7f06001f
+			public const int CustomSaladInformationRadius = 2131099679;
+			
+			// aapt resource value: 0x7f06001e
+			public const int CustomSaladInformationTextSize = 2131099678;
+			
+			// aapt resource value: 0x7f06001d
+			public const int DividerMargin = 2131099677;
+			
 			// aapt resource value: 0x7f060008
 			public const int EditTextFocusedStroke = 2131099656;
 			
@@ -156,6 +177,9 @@ namespace Saladio
 			
 			// aapt resource value: 0x7f060013
 			public const int HorizontalMargin = 2131099667;
+			
+			// aapt resource value: 0x7f06001c
+			public const int ListDividerStroke = 2131099676;
 			
 			// aapt resource value: 0x7f06001a
 			public const int PlusMinusButtonPadding = 2131099674;
@@ -210,22 +234,25 @@ namespace Saladio
 			public const int ButtonStyle = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int EditTextStyle = 2130837505;
+			public const int CustomSaladInformationStyle = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int ic_pie_salad_64 = 2130837506;
+			public const int EditTextStyle = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int pic_pie_salad = 2130837507;
+			public const int ic_pie_salad_64 = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int pic_salad_1 = 2130837508;
+			public const int pic_pie_salad = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int PlusMinusButtonStyle = 2130837509;
+			public const int pic_salad_1 = 2130837509;
 			
 			// aapt resource value: 0x7f020006
-			public const int SaladCatagoryGroupTitleStyle = 2130837510;
+			public const int PlusMinusButtonStyle = 2130837510;
+			
+			// aapt resource value: 0x7f020007
+			public const int SaladCatagoryGroupTitleStyle = 2130837511;
 			
 			static Drawable()
 			{
@@ -240,17 +267,20 @@ namespace Saladio
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f090011
-			public const int btnMinus = 2131296273;
+			// aapt resource value: 0x7f090012
+			public const int btnMinus = 2131296274;
 			
-			// aapt resource value: 0x7f090013
-			public const int btnPlus = 2131296275;
+			// aapt resource value: 0x7f090014
+			public const int btnPlus = 2131296276;
 			
 			// aapt resource value: 0x7f090002
 			public const int btnWizard = 2131296258;
 			
 			// aapt resource value: 0x7f090000
 			public const int contentFragment = 2131296256;
+			
+			// aapt resource value: 0x7f090016
+			public const int divider = 2131296278;
 			
 			// aapt resource value: 0x7f09000f
 			public const int etAddress1 = 2131296271;
@@ -279,11 +309,14 @@ namespace Saladio
 			// aapt resource value: 0x7f09000e
 			public const int etWeight = 2131296270;
 			
-			// aapt resource value: 0x7f090017
-			public const int lstCustomSalad = 2131296279;
+			// aapt resource value: 0x7f090011
+			public const int layoutContainer = 2131296273;
 			
-			// aapt resource value: 0x7f090016
-			public const int lstSaladComponents = 2131296278;
+			// aapt resource value: 0x7f090018
+			public const int layoutSaladComponents = 2131296280;
+			
+			// aapt resource value: 0x7f090019
+			public const int lstCustomSalad = 2131296281;
 			
 			// aapt resource value: 0x7f090003
 			public const int slidingTabs = 2131296259;
@@ -291,26 +324,20 @@ namespace Saladio
 			// aapt resource value: 0x7f09000c
 			public const int spGender = 2131296268;
 			
-			// aapt resource value: 0x7f090018
-			public const int stateNormal = 2131296280;
-			
-			// aapt resource value: 0x7f090019
-			public const int statePressed = 2131296281;
-			
 			// aapt resource value: 0x7f090005
 			public const int txtItemSubTitle = 2131296261;
 			
 			// aapt resource value: 0x7f090006
 			public const int txtItemTitle = 2131296262;
 			
-			// aapt resource value: 0x7f090012
-			public const int txtQuantity = 2131296274;
-			
-			// aapt resource value: 0x7f090014
-			public const int txtSaladComponent = 2131296276;
+			// aapt resource value: 0x7f090013
+			public const int txtQuantity = 2131296275;
 			
 			// aapt resource value: 0x7f090015
-			public const int txtSaladComponentGroup = 2131296277;
+			public const int txtSaladComponent = 2131296277;
+			
+			// aapt resource value: 0x7f090017
+			public const int txtSaladComponentGroup = 2131296279;
 			
 			// aapt resource value: 0x7f090004
 			public const int viewPager = 2131296260;
@@ -389,6 +416,33 @@ namespace Saladio
 			// aapt resource value: 0x7f070014
 			public const int Bullet = 2131165204;
 			
+			// aapt resource value: 0x7f07001a
+			public const int CustomSaladInformationGrams = 2131165210;
+			
+			// aapt resource value: 0x7f07001b
+			public const int CustomSaladInformationKilloCalorie = 2131165211;
+			
+			// aapt resource value: 0x7f070015
+			public const int CustomSaladInformationOther = 2131165205;
+			
+			// aapt resource value: 0x7f070016
+			public const int CustomSaladInformationPrice = 2131165206;
+			
+			// aapt resource value: 0x7f070019
+			public const int CustomSaladInformationToman = 2131165209;
+			
+			// aapt resource value: 0x7f070017
+			public const int CustomSaladInformationWeight = 2131165207;
+			
+			// aapt resource value: 0x7f070018
+			public const int CustomSaladInformatonCalorie = 2131165208;
+			
+			// aapt resource value: 0x7f07001c
+			public const int CustomSaladMoreDetails = 2131165212;
+			
+			// aapt resource value: 0x7f07001d
+			public const int CustomSaladSave = 2131165213;
+			
 			// aapt resource value: 0x7f070013
 			public const int Female = 2131165203;
 			
@@ -453,26 +507,38 @@ namespace Saladio
 		public partial class Style
 		{
 			
+			// aapt resource value: 0x7f080004
+			public const int CustomSaladInformation = 2131230724;
+			
+			// aapt resource value: 0x7f080005
+			public const int CustomSaladInformationBar = 2131230725;
+			
 			// aapt resource value: 0x7f080001
 			public const int PlusMinusButton = 2131230721;
 			
 			// aapt resource value: 0x7f080000
 			public const int SaladComponentGroupTitle = 2131230720;
 			
-			// aapt resource value: 0x7f080003
-			public const int SaladioActionBar = 2131230723;
+			// aapt resource value: 0x7f080007
+			public const int SaladioActionBar = 2131230727;
 			
-			// aapt resource value: 0x7f080004
-			public const int SaladioButton = 2131230724;
+			// aapt resource value: 0x7f080008
+			public const int SaladioButton = 2131230728;
 			
-			// aapt resource value: 0x7f080005
-			public const int SaladioEditText = 2131230725;
-			
-			// aapt resource value: 0x7f080006
-			public const int SaladioTextView = 2131230726;
+			// aapt resource value: 0x7f080009
+			public const int SaladioEditText = 2131230729;
 			
 			// aapt resource value: 0x7f080002
-			public const int SaladioTheme = 2131230722;
+			public const int SaladioListDivider = 2131230722;
+			
+			// aapt resource value: 0x7f08000a
+			public const int SaladioTextView = 2131230730;
+			
+			// aapt resource value: 0x7f080006
+			public const int SaladioTheme = 2131230726;
+			
+			// aapt resource value: 0x7f080003
+			public const int VerticalListDivider = 2131230723;
 			
 			static Style()
 			{
