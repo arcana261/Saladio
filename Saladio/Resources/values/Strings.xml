@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
   <string name="ApplicationName">پای و سالاد</string>
+
+  <string name="TabCustomSalad">انتخاب اجزای سالاد</string>
+  <string name="TabAbout">درباره ما</string>
   
   <string name="Welcome1">سالادهای ما یک وعده غذای کامل است...</string>
   <string name="Welcome2">با ما در تجربه سبز همراه شوید</string>
@@ -22,5 +25,7 @@
 
   <string name="Male">مرد</string>
   <string name="Female">زن</string>
+
+  <string name="Bullet">&#8226;</string>
   
 </resources>

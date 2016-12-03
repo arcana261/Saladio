@@ -4,6 +4,10 @@
   <dimen name="ButtonGradientRadius">4dp</dimen>
   <dimen name="ButtonStrokeWidth">1dp</dimen>
   <dimen name="ButtonPadding">10dp</dimen>
+  <dimen name="ButtonSolidRight">5dp</dimen>
+  <dimen name="ButtonSolidTop">5dp</dimen>
+  <dimen name="ButtonGradientLeft">2dp</dimen>
+  <dimen name="ButtonGradientBottom">2dp</dimen>
 
   <dimen name="EditTextFocusedStroke">3dp</dimen>
   <dimen name="EditTextRadius">3dp</dimen>
@@ -21,4 +25,13 @@
   <dimen name="HorizontalMargin">10dp</dimen>
 
   <dimen name="FormDescriptionTextSize">15sp</dimen>
+
+  <dimen name="SaladComponentGroupTitleStroke">4dp</dimen>
+  <dimen name="SaladComponentGroupTitleRadius">4dp</dimen>
+  <dimen name="SaladComponentGroupTitleVerticalPadding">5dp</dimen>
+  <dimen name="SaladComponentGroupTitleHorizontalPadding">10dp</dimen>
+
+  <dimen name="PlusMinusButtonSize">30dip</dimen>
+  <dimen name="PlusMinusButtonPadding">5dip</dimen>
+  <dimen name="PlusMinusButtonStroke">1dp</dimen>
 </resources>

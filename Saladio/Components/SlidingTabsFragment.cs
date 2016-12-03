@@ -20,6 +20,7 @@ namespace Saladio.Components
     {
         private SlidingTabScrollView slidingTabScrollView;
         private ViewPager viewPager;
+        private SlidingTabsAdapter customAdapter;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -31,14 +32,24 @@ namespace Saladio.Components
             slidingTabScrollView = view.FindViewById<SlidingTabScrollView>(Resource.Id.slidingTabs);
             viewPager = view.FindViewById<ViewPager>(Resource.Id.viewPager);
 
-            viewPager.Adapter = new SamplePagerAdapter();
+            viewPager.Adapter = customAdapter != null ? customAdapter : new SamplePagerAdapter();
             slidingTabScrollView.ViewPager = viewPager;
         }
 
         public SlidingTabsAdapter Adapter
         {
-            get { return (SlidingTabsAdapter)viewPager.Adapter; }
-            set { viewPager.Adapter = value; }
+            get { return viewPager != null ? (SlidingTabsAdapter)viewPager.Adapter : customAdapter; }
+            set
+            {
+                if (viewPager == null)
+                {
+                    customAdapter = value;
+                }
+                else
+                {
+                    viewPager.Adapter = value;
+                }
+            }
         }
 
         private class SamplePagerAdapter : SlidingTabsAdapter

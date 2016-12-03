@@ -2,15 +2,15 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
   <item android:state_pressed="false">
     <layer-list>
-      <item android:right="5dp" android:top="5dp">
+      <item android:right="@dimen/ButtonSolidRight" android:top="@dimen/ButtonSolidTop">
         <shape>
-          <solid android:color="@color/SaladioPrimary" />
+          <solid android:color="@color/ButtonSolidColor" />
           <corners android:radius="@dimen/ButtonSolidRadius" />
         </shape>
       </item>
-      <item android:left="2dp" android:bottom="2dp">
+      <item android:left="@dimen/ButtonGradientLeft" android:bottom="@dimen/ButtonGradientBottom">
         <shape>
-          <gradient android:startColor="@color/SaladioPrimary" android:endColor="@color/SaladioPrimary" />
+          <gradient android:startColor="@color/ButtonSolidColor" android:endColor="@color/ButtonSolidColor" />
           <stroke android:width="@dimen/ButtonStrokeWidth" android:color="@color/SaladioPrimaryDark" />
           <corners android:radius="@dimen/ButtonGradientRadius" />
           <padding android:left="@dimen/ButtonPadding" android:top="@dimen/ButtonPadding" android:right="@dimen/ButtonPadding" android:bottom="@dimen/ButtonPadding" />
@@ -21,15 +21,15 @@
 
   <item android:state_pressed="true">
     <layer-list>
-      <item android:right="5dp" android:top="5dp">
+      <item android:right="@dimen/ButtonSolidRight" android:top="@dimen/ButtonSolidTop">
         <shape>
-          <solid android:color="@color/SaladioPrimary" />
+          <solid android:color="@color/ButtonSolidColor" />
           <corners android:radius="@dimen/ButtonSolidRadius" />
         </shape>
       </item>
-      <item android:left="2dp" android:bottom="2dp">
+      <item android:left="@dimen/ButtonGradientLeft" android:bottom="@dimen/ButtonGradientBottom">
         <shape>
-          <gradient android:startColor="@color/SaladioPrimaryDark" android:endColor="@color/SaladioPrimary" />
+          <gradient android:startColor="@color/ButtonGradientColor" android:endColor="@color/ButtonSolidColor" />
           <stroke android:width="@dimen/ButtonStrokeWidth" android:color="@color/SaladioPrimaryDark" />
           <corners android:radius="@dimen/ButtonGradientRadius" />
           <padding android:left="@dimen/ButtonPadding" android:top="@dimen/ButtonPadding" android:right="@dimen/ButtonPadding" android:bottom="@dimen/ButtonPadding" />

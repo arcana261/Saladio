@@ -2,7 +2,18 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
   <color name="SaladioPrimary">#00B050</color>
   <color name="SaladioPrimaryDark">#007231</color>
+  <color name="SaladioPrimaryLight">#00FF72</color>
+  <color name="SaladioPrimaryDimmedLight">#E8FFF2</color>
 
+  <color name="ButtonSolidColor">@color/SaladioPrimary</color>
+  <color name="ButtonGradientColor">@color/SaladioPrimaryDark</color>
+  
   <color name="EditTextBackground">#FFF</color>
   <color name="EditTextStroke">@color/SaladioPrimaryDark</color>
+
+  <color name="SaladComponentGroupStroke">@color/SaladioPrimaryDark</color>
+
+  <color name="PlusMinusButtonNormal">@color/SaladioPrimaryDimmedLight</color>
+  <color name="PlusMinusButtonPressed">@color/SaladioPrimaryLight</color>
+  <color name="PlusMinusButtonStroke">@color/SaladioPrimaryLight</color>
 </resources>

@@ -78,9 +78,15 @@
     <Compile Include="Activities\ActivityMain.cs" />
     <Compile Include="Activities\ActivityStart.cs" />
     <Compile Include="ActivityExtensions.cs" />
+    <Compile Include="Adapters\SaladComponentAdapter.cs" />
+    <Compile Include="Adapters\SaladComponentGroupAdapter.cs" />
     <Compile Include="Components\ManualViewPager.cs" />
     <Compile Include="Components\RtlActivity.cs" />
     <Compile Include="Components\SlidingTabsAdapter.cs" />
+    <Compile Include="Components\WrapContentListView.cs" />
+    <Compile Include="Contexts\SaladioContext.cs" />
+    <Compile Include="Models\SaladComponent.cs" />
+    <Compile Include="Models\SaladComponentGroup.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Components\Impl\SlidingTabScrollView.cs" />
@@ -104,6 +110,18 @@
     <AndroidResource Include="Resources\layout\PagerItem.axml" />
     <AndroidResource Include="Resources\layout\FragmentSlidingTabs.axml" />
     <AndroidResource Include="Resources\layout\ActivityMain.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\RowSaladComponent.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\RowSaladComponentGroup.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\TabOrderCustomSalad.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\TabAbout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -134,10 +152,14 @@
     <AndroidResource Include="Resources\values\Colors.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ButtonStyle.xml" />
+    <AndroidResource Include="Resources\drawable\ButtonStyle.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values\Dimens.xml" />
+    <AndroidResource Include="Resources\values\Dimens.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="xamandroidsupportv13-18">
@@ -153,6 +175,18 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Arrays.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\Styles.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\SaladCatagoryGroupTitleStyle.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\PlusMinusButtonStyle.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-v21\PlusMinusButtonStyle.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

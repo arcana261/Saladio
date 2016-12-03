@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+  <style name="SaladComponentGroupTitle" parent="@style/SaladioTextView">
+    <item name="android:background">@drawable/SaladCatagoryGroupTitleStyle</item>
+    <item name="android:paddingTop">@dimen/SaladComponentGroupTitleVerticalPadding</item>
+    <item name="android:paddingBottom">@dimen/SaladComponentGroupTitleVerticalPadding</item>
+    <item name="android:paddingLeft">@dimen/SaladComponentGroupTitleHorizontalPadding</item>
+    <item name="android:paddingRight">@dimen/SaladComponentGroupTitleHorizontalPadding</item>
+  </style>
+
+  <style name="PlusMinusButton" parent="@style/SaladioButton">
+    <item name="android:width">@dimen/PlusMinusButtonSize</item>
+    <item name="android:height">@dimen/PlusMinusButtonSize</item>
+    <item name="android:background">@drawable/PlusMinusButtonStyle</item>
+  </style>
+</resources>

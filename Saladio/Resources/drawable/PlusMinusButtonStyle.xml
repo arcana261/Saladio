@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:state_pressed="false">
+    <shape android:shape="oval">
+      <size android:width="@dimen/PlusMinusButtonSize" android:height="@dimen/PlusMinusButtonSize" />
+      <solid android:color="@color/PlusMinusButtonNormal" />
+      <padding android:left="@dimen/PlusMinusButtonPadding" android:top="@dimen/PlusMinusButtonPadding"
+               android:right="@dimen/PlusMinusButtonPadding" android:bottom="@dimen/PlusMinusButtonPadding" />
+    </shape>
+  </item>
+  <item android:state_pressed="true">
+    <shape android:shape="oval">
+      <size android:width="@dimen/PlusMinusButtonSize" android:height="@dimen/PlusMinusButtonSize" />
+      <solid android:color="@color/PlusMinusButtonPressed" />
+      <stroke android:width="@dimen/PlusMinusButtonStroke" android:color="@color/PlusMinusButtonStroke" />
+      <padding android:left="@dimen/PlusMinusButtonPadding" android:top="@dimen/PlusMinusButtonPadding"
+               android:right="@dimen/PlusMinusButtonPadding" android:bottom="@dimen/PlusMinusButtonPadding" />
+    </shape>
+  </item>
+</selector>

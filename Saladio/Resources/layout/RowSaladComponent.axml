@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:paddingTop="@dimen/VerticalMargin"
+              android:paddingBottom="@dimen/VerticalMargin">
+    <Button
+        android:id="@+id/btnMinus"
+        style="@style/PlusMinusButton"
+        android:layout_width="@dimen/PlusMinusButtonSize"
+        android:layout_height="@dimen/PlusMinusButtonSize"
+        android:text="-" />
+    <TextView
+        android:id="@+id/txtQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/HorizontalMargin"
+        android:layout_marginRight="@dimen/HorizontalMargin"
+        android:text="0" />
+    <Button
+        android:id="@+id/btnPlus"
+        style="@style/PlusMinusButton"
+        android:layout_width="@dimen/PlusMinusButtonSize"
+        android:layout_height="@dimen/PlusMinusButtonSize"
+        android:text="+" />
+    <TextView
+        android:id="@+id/txtSaladComponent"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="Salad Component" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Bullet"
+        android:layout_marginLeft="@dimen/HorizontalMargin" />
+</LinearLayout>
