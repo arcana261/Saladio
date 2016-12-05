@@ -19,5 +19,6 @@ namespace Saladio.Models
         public int Callorie { get; set; }
         public int Price { get; set; }
         public byte[] Image { get; set; }
+        public SavedSaladGroup Group { get; set; }
     }
 }

@@ -11,6 +11,9 @@ using Android.Views;
 using Android.Widget;
 using Saladio.Models;
 using Saladio.Utility;
+using Android.Graphics.Drawables;
+using Android.Support.V4.Content;
+using Android.Graphics;
 
 namespace Saladio.Adapters
 {
@@ -20,6 +23,7 @@ namespace Saladio.Adapters
         private IList<SavedSaladGroup> mSavedSalads;
         private ISet<int> mExpandableGroups;
         private ISet<int> mInitiallyClosed;
+        private ISet<KeyValuePair<int, int>> mSelectedStateSalads; // (Group Index, Salad Index)
 
         public SavedSaladGroupAdapter(Context context, IList<SavedSaladGroup> savedSalads)
         {
@@ -74,6 +78,43 @@ namespace Saladio.Adapters
 
                 return mInitiallyClosed;
             }
+        }
+
+        public ISet<KeyValuePair<int, int>> SelectedStateSalads
+        {
+            get
+            {
+                if (mSelectedStateSalads == null)
+                {
+                    mSelectedStateSalads = new HashSet<KeyValuePair<int, int>>();
+                }
+
+                return mSelectedStateSalads;
+            }
+        }
+
+        private KeyValuePair<int,int> GetIndexAsPair(SavedSalad savedSalad)
+        {
+            return new KeyValuePair<int, int>(mSavedSalads.IndexOf(savedSalad.Group), savedSalad.Group.Salads.IndexOf(savedSalad));
+        }
+
+        public void SetSelectedStateSalad(SavedSalad savedSalad, bool enabled)
+        {
+            var index = GetIndexAsPair(savedSalad);
+
+            if (enabled)
+            {
+                SelectedStateSalads.Add(index);
+            }
+            else
+            {
+                SelectedStateSalads.Remove(index);
+            }
+        }
+
+        public void ClearSelectedStateSalad()
+        {
+            SelectedStateSalads.Clear();
         }
 
         public override View GetView(int position, View convertView, ViewGroup parent)
@@ -133,6 +174,13 @@ namespace Saladio.Adapters
                 subRow.Tag = position.ToString() + ":" + i;
                 subRow.Click += SubRow_Click;
 
+                if (SelectedStateSalads.Contains(new KeyValuePair<int, int>(position, i)))
+                {
+                    int color = ContextCompat.GetColor(mContext, Resource.Color.SavedSaladSelected);
+                    subRow.Background = new ColorDrawable(Color.Argb(Color.GetAlphaComponent(color), Color.GetRedComponent(color),
+                        Color.GetGreenComponent(color), Color.GetBlueComponent(color)));
+                }
+
                 layoutSavedSalads.AddView(subRow);
             }
 
@@ -159,7 +207,7 @@ namespace Saladio.Adapters
 
             SavedSalad savedSalad = this[position].Salads[itemIndex];
 
-            SavedSaladSelected(this, new SavedSaladSelectedEventArgs(savedSalad));
+            SavedSaladSelected?.Invoke(this, new SavedSaladSelectedEventArgs(savedSalad));
         }
 
         private void TxtSavedSaladGroup_Click(object sender, EventArgs e)

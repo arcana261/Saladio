@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\ActivityMain.cs" />
+    <Compile Include="Activities\ActivityOrderScheduled.cs" />
     <Compile Include="Activities\ActivityStart.cs" />
     <Compile Include="ActivityExtensions.cs" />
     <Compile Include="Adapters\SaladComponentGroupAdapter.cs" />
@@ -144,6 +145,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ActionBar.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ActivityOrderScheduled.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\PageSelectSalad.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

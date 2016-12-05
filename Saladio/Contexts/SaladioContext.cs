@@ -37,14 +37,16 @@ namespace Saladio.Contexts
                         Name = "سالاد سزار",
                         Ingredients = "کاهو رسمی، سینه مرغ طعم دار شده، زیتون سیاه، گوجه گیلاسی، سس سزار",
                         Callorie = 760,
-                        Price = 17000
+                        Price = 17000,
+                        Group = lettuce
                     });
                     lettuce.Salads.Add(new SavedSalad()
                     {
                         Name = "سالاد چاینیز",
                         Ingredients = "کاهو، سینه مرغ طعم دار شده، کنجد، گوجه گیلاسی، فلفل دلمه ای، سس کره بادام زمینی",
                         Callorie = 760,
-                        Price = 17000
+                        Price = 17000,
+                        Group = lettuce
                     });
 
                     SavedSaladGroup bandSalads = new SavedSaladGroup() { Name = "باند سالادها" };
@@ -53,7 +55,8 @@ namespace Saladio.Contexts
                         Name = "چیکن باند سالاد",
                         Ingredients = "سینه مرغ، کرفس، بادام زمینی، سس مخصوص",
                         Callorie = 760,
-                        Price = 17000
+                        Price = 17000,
+                        Group = bandSalads
                     });
 
                     mClassicSalads.Add(lettuce);
@@ -116,14 +119,16 @@ namespace Saladio.Contexts
                         Name = "سالاد پروتئینه 1",
                         Ingredients = "کاهو رسمی، سینه مرغ طعم دار شده، لوبیای پیمنتو، سویای خشک ، بروکلی، کلم سفید",
                         Callorie = 760,
-                        Price = 17000
+                        Price = 17000,
+                        Group = savedSalads
                     });
                     savedSalads.Salads.Add(new SavedSalad()
                     {
                         Name = "سالاد پروتئینه 2",
                         Ingredients = "کاهو رسمی، سینه مرغ طعم دار شده، لوبیای پیمنتو، سویای خشک ، بروکلی، کلم سفید",
                         Callorie = 760,
-                        Price = 17000
+                        Price = 17000,
+                        Group = savedSalads
                     });
 
                     SavedSaladGroup classicSalads = new SavedSaladGroup()
@@ -135,7 +140,8 @@ namespace Saladio.Contexts
                         Name = "چیکن باند سالاد",
                         Ingredients = "سینه مرغ، کرفس، بادام زمینی، سس مخصوص",
                         Callorie = 760,
-                        Price = 17000
+                        Price = 17000,
+                        Group = classicSalads
                     });
 
                     mSavedSalads.Add(savedSalads);

@@ -120,6 +120,9 @@ namespace Saladio.Activities
             ActionBar.SetDisplayOptions(ActionBarDisplayOptions.ShowCustom, ActionBarDisplayOptions.ShowCustom);
             ActionBar.SetCustomView(Resource.Layout.MainActionBar);
 
+            Button actionBarOrderScheduled = ActionBar.CustomView.FindViewById<Button>(Resource.Id.btnOrderScheduledSalad);
+            actionBarOrderScheduled.Click += ActionBarOrderScheduled_Click;
+
             // Create your application here
             SlidingTabsFragment slidingTabs = new SlidingTabsFragment();
             slidingTabs.Adapter = new TabAdapter(this);
@@ -129,6 +132,11 @@ namespace Saladio.Activities
                 transaction.Replace(Resource.Id.contentFragment, slidingTabs);
                 transaction.Commit();
             }
+        }
+
+        private void ActionBarOrderScheduled_Click(object sender, EventArgs e)
+        {
+            StartActivity(typeof(ActivityOrderScheduled));
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
