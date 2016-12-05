@@ -41,4 +41,8 @@
   <dimen name="CustomSaladInformationTextSize">12sp</dimen>
   <dimen name="CustomSaladInformationRadius">8dp</dimen>
   <dimen name="CustomSaladInformationMinHeight">35dp</dimen>
+  
+  <dimen name="SavedSaladGroupTitleRadius">8dp</dimen>
+  <dimen name="SavedSaladGroupTitleHorizontalPadding">10dp</dimen>
+  <dimen name="SavedSaladGroupTitleVerticalPadding">7dp</dimen>
 </resources>

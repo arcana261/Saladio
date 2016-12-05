@@ -22,4 +22,8 @@
   <color name="ListDividerStroke">@android:color/darker_gray</color>
 
   <color name="CustomSaladInformationBackground">@color/SaladioSecondary</color>
+
+  <color name="SavedSaladGroupTitleBackground">@color/SaladioPrimary</color>
+  <color name="SavedSaladGroupTitleForeground">@android:color/white</color>
+  <color name="SavedSaladGroupTitleExpandable">@android:color/gray</color>
 </resources>

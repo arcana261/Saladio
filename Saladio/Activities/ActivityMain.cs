@@ -21,6 +21,8 @@ namespace Saladio.Activities
         private enum MainTabs
         {
             CustomSalad = 0,
+            ClassicSalads,
+            SavedSalads,
             About,
             Total
         }
@@ -52,6 +54,10 @@ namespace Saladio.Activities
                         return mActivity.Resources.GetString(Resource.String.TabCustomSalad);
                     case MainTabs.About:
                         return mActivity.Resources.GetString(Resource.String.TabAbout);
+                    case MainTabs.ClassicSalads:
+                        return mActivity.Resources.GetString(Resource.String.TabClassicSalads);
+                    case MainTabs.SavedSalads:
+                        return mActivity.Resources.GetString(Resource.String.TabSavedSalads);
                     default:
                         throw new ArgumentException("unsupported tab: " + tab.ToString());
                 }
@@ -76,6 +82,26 @@ namespace Saladio.Activities
                         }
                     case MainTabs.About:
                         return LayoutInflater.From(mActivity).Inflate(Resource.Layout.TabAbout, container, false);
+                    case MainTabs.ClassicSalads:
+                        using (SaladioContext saladioContext = new SaladioContext())
+                        {
+                            View view = LayoutInflater.From(mActivity).Inflate(Resource.Layout.TabClassicSalads, container, false);
+                            ListView lstClassicSalads = view.FindViewById<ListView>(Resource.Id.lstClassicSalads);
+
+                            lstClassicSalads.Adapter = new SavedSaladGroupAdapter(mActivity, saladioContext.ClassicSaladGroups);
+
+                            return view;
+                        }
+                    case MainTabs.SavedSalads:
+                        using (SaladioContext saladioContext = new SaladioContext())
+                        {
+                            View view = LayoutInflater.From(mActivity).Inflate(Resource.Layout.TabSavedSalads, container, false);
+                            ListView lstSavedSalads = view.FindViewById<ListView>(Resource.Id.lstSavedSalads);
+
+                            lstSavedSalads.Adapter = new SavedSaladGroupAdapter(mActivity, saladioContext.SavedSaladGroups);
+
+                            return view;
+                        }
                     default:
                         throw new ArgumentException("unsupported tab: " + tab.ToString());
                 }

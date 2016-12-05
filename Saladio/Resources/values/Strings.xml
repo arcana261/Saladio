@@ -3,6 +3,8 @@
   <string name="ApplicationName">پای و سالاد</string>
 
   <string name="TabCustomSalad">انتخاب اجزای سالاد</string>
+  <string name="TabClassicSalads">سالادهای کلاسیک</string>
+  <string name="TabSavedSalads">سالادهای من</string>
   <string name="TabAbout">درباره ما</string>
   
   <string name="Welcome1">سالادهای ما یک وعده غذای کامل است...</string>
@@ -37,4 +39,6 @@
   <string name="CustomSaladInformationKilloCalorie">کیلو کالری</string>
   <string name="CustomSaladMoreDetails">توضیح خاص در مورد سالاد شما که باید مد نظر قرار گیرد (حداکثر 150 کاراکتر)</string>
   <string name="CustomSaladSave">ثبت سالاد انتخابی</string>
+
+  <string name="MoreInformation">اطلاعات بیشتر . . .</string>
 </resources>

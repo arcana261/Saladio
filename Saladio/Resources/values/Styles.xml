@@ -33,4 +33,23 @@
     <item name="android:background">@drawable/CustomSaladInformationStyle</item>
     <item name="android:minHeight">@dimen/CustomSaladInformationMinHeight</item>
   </style>
+  
+  <style name="SavedSaladGroupTitle" parent="@style/SaladioTextView">
+    <item name="android:background">@drawable/SavedSaladGroupTitleStyle</item>
+    <item name="android:paddingRight">@dimen/SavedSaladGroupTitleHorizontalPadding</item>
+    <item name="android:paddingLeft">@dimen/SavedSaladGroupTitleHorizontalPadding</item>
+    <item name="android:paddingTop">@dimen/SavedSaladGroupTitleVerticalPadding</item>
+    <item name="android:paddingBottom">@dimen/SavedSaladGroupTitleVerticalPadding</item>
+    <item name="android:textColor">@color/SavedSaladGroupTitleForeground</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+
+  <style name="SavedSaladGroupTitleExpandable" parent="@style/SavedSaladGroupTitle">
+    <item name="android:textColor">@color/SavedSaladGroupTitleExpandable</item>
+  </style>
+
+  <style name="SavedSaladTitle" parent="@style/SaladioTextView">
+    <item name="android:textStyle">bold</item>
+  </style>
+  
 </resources>
