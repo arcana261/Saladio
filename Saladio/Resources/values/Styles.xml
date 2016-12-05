@@ -44,10 +44,6 @@
     <item name="android:textStyle">bold</item>
   </style>
 
-  <style name="SavedSaladGroupTitleExpandable" parent="@style/SavedSaladGroupTitle">
-    <item name="android:textColor">@color/SavedSaladGroupTitleExpandable</item>
-  </style>
-
   <style name="SavedSaladTitle" parent="@style/SaladioTextView">
     <item name="android:textStyle">bold</item>
   </style>

@@ -29,6 +29,9 @@
   <string name="Female">زن</string>
 
   <string name="Bullet">&#8226;</string>
+  
+  <string name="ExpandableArrowDown">+</string>
+  <string name="ExpandableArrowUp">-</string>
 
   <string name="CustomSaladInformationOther">سایر...</string>
   <string name="CustomSaladInformationPrice">قیمت سالاد شما</string>
@@ -41,4 +44,6 @@
   <string name="CustomSaladSave">ثبت سالاد انتخابی</string>
 
   <string name="MoreInformation">اطلاعات بیشتر . . .</string>
+
+  <string name="ScheduledOrder">سفارش منظم</string>
 </resources>

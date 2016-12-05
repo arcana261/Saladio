@@ -1,11 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
+  <color name="transparent">#00000000</color>
+  <color name="SaladioActionBarTitle">@android:color/white</color>
+  <color name="SaladioActionBarButtonSolid">@color/SaladioSecondary</color>
+  <color name="SaladioActionBarButtonGradient">@color/SaladioSecondaryLight</color>
+
   <color name="SaladioPrimary">#00B050</color>
   <color name="SaladioPrimaryDark">#007231</color>
   <color name="SaladioPrimaryLight">#00FF72</color>
   <color name="SaladioPrimaryDimmedLight">#E8FFF2</color>
 
   <color name="SaladioSecondary">#FF9933</color>
+  <color name="SaladioSecondaryLight">#FFD3AD</color>
   
   <color name="ButtonSolidColor">@color/SaladioPrimary</color>
   <color name="ButtonGradientColor">@color/SaladioPrimaryDark</color>
@@ -25,5 +31,4 @@
 
   <color name="SavedSaladGroupTitleBackground">@color/SaladioPrimary</color>
   <color name="SavedSaladGroupTitleForeground">@android:color/white</color>
-  <color name="SavedSaladGroupTitleExpandable">@android:color/gray</color>
 </resources>

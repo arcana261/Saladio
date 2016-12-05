@@ -9,8 +9,8 @@ using Saladio.Components;
 
 namespace Saladio.Activities
 {
-    [Activity(Label = "@string/ApplicationName", MainLauncher = true, Icon = "@drawable/ic_pie_salad_64")]
-    public class StartActivity : RtlActivity
+    [Activity(Label = "@string/ApplicationName", MainLauncher = true)]
+    public class StartActivity : Activity
     {
         private class WizardPagerAdapter : PagerAdapter
         {
@@ -70,6 +70,9 @@ namespace Saladio.Activities
             // Set our view from the "main" layout resource
             SetContentView (Resource.Layout.ActivityStart);
 
+            ActionBar.SetDisplayOptions(ActionBarDisplayOptions.ShowCustom, ActionBarDisplayOptions.ShowCustom);
+            ActionBar.SetCustomView(Resource.Layout.ActionBar);
+
             mWizardContainer = FindViewById<ManualViewPager>(Resource.Id.wizardContainer);
             mBtnWizard = FindViewById<Button>(Resource.Id.btnWizard);
 
@@ -77,6 +80,19 @@ namespace Saladio.Activities
 
             mBtnWizard.Click += BtnWizard_Click;
             SwitchToPage(WizardPage.Welcome);
+        }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.MainMenu, menu);
+            return base.OnCreateOptionsMenu(menu);
+        }
+
+        public override bool OnPrepareOptionsMenu(IMenu menu)
+        {
+            menu.FindItem(Resource.Id.iconLogo).SetEnabled(false);
+
+            return base.OnPrepareOptionsMenu(menu);
         }
 
         private void OnInitializePage(WizardPage page, View view)

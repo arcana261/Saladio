@@ -9,6 +9,7 @@
 
   <style name="SaladioActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
     <item name="android:background">@color/SaladioPrimary</item>
+    <item name="android:logo">@color/transparent</item>
   </style>
 
   <style name="SaladioButton" parent="@android:style/Widget.Holo.Light.Button">
@@ -24,5 +25,18 @@
   <style name="SaladioTextView" parent="@android:style/Widget.Holo.Light.TextView">
     <item name="android:textDirection">rtl</item>
     <item name="android:gravity">right</item>
+  </style>
+
+  <style name="SaladioActionBarTitle" parent="@style/SaladioTextView">
+    <item name="android:textColor">@color/SaladioActionBarTitle</item>
+    <item name="android:textSize">@dimen/SaladioActionBarTitle</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+  
+  <style name="SaladioActionBarButton" parent="@style/SaladioButton">
+    <item name="android:background">@drawable/ActionBarButtonStyle</item>
+    <item name="android:textColor">@color/SaladioActionBarTitle</item>
+    <item name="android:textSize">@dimen/SaladioActionBarTitle</item>
+    <item name="android:minHeight">@dimen/SaladioActionBarButtonHeight</item>
   </style>
 </resources>

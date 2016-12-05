@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Saladio.Models;
+using Saladio.Utility;
 
 namespace Saladio.Adapters
 {
@@ -18,12 +19,15 @@ namespace Saladio.Adapters
         private Context mContext;
         private IList<SavedSaladGroup> mSavedSalads;
         private ISet<int> mExpandableGroups;
+        private ISet<int> mInitiallyClosed;
 
         public SavedSaladGroupAdapter(Context context, IList<SavedSaladGroup> savedSalads)
         {
             mContext = context;
             mSavedSalads = savedSalads;
         }
+
+        public event EventHandler<SavedSaladSelectedEventArgs> SavedSaladSelected;
 
         public override SavedSaladGroup this[int position]
         {
@@ -59,6 +63,19 @@ namespace Saladio.Adapters
             }
         }
 
+        public ISet<int> InitiallyClosed
+        {
+            get
+            {
+                if (mInitiallyClosed == null)
+                {
+                    mInitiallyClosed = new HashSet<int>();
+                }
+
+                return mInitiallyClosed;
+            }
+        }
+
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             View row = convertView;
@@ -68,17 +85,38 @@ namespace Saladio.Adapters
                 row = LayoutInflater.From(mContext).Inflate(Resource.Layout.RowSavedSaladGroup, parent, false);
             }
 
+            row.Tag = position;
             SavedSaladGroup item = this[position];
             TextView txtSavedSaladGroup = row.FindViewById<TextView>(Resource.Id.txtSavedSaladGroup);
             LinearLayout layoutSavedSalads = row.FindViewById<LinearLayout>(Resource.Id.layoutSavedSalads);
 
             txtSavedSaladGroup.Text = item.Name;
 
+            if (ExpandableGroups.Contains(position))
+            {
+                if (!InitiallyClosed.Contains(position))
+                {
+                    txtSavedSaladGroup.Text = mContext.Resources.GetString(Resource.String.ExpandableArrowDown) + " " + txtSavedSaladGroup.Text;
+                }
+                else
+                {
+                    txtSavedSaladGroup.Text = mContext.Resources.GetString(Resource.String.ExpandableArrowUp) + " " + txtSavedSaladGroup.Text;
+                    layoutSavedSalads.Tag = true;
+                    layoutSavedSalads.ScaleX = 0.0f;
+                    layoutSavedSalads.ScaleY = 0.0f;
+                }
+                txtSavedSaladGroup.Click -= TxtSavedSaladGroup_Click;
+                txtSavedSaladGroup.Click += TxtSavedSaladGroup_Click;
+                txtSavedSaladGroup.Tag = row;
+            }
+
             int dividerMargin = (int)mContext.Resources.GetDimension(Resource.Dimension.DividerMargin);
             View lastSubRow = null;
             layoutSavedSalads.RemoveAllViews();
-            foreach (SavedSalad savedSalad in item.Salads)
+            for (int i = 0; i < item.Salads.Count; i++)
             {
+                SavedSalad savedSalad = item.Salads[i];
+
                 View subRow = LayoutInflater.From(mContext).Inflate(Resource.Layout.RowSavedSalad, layoutSavedSalads, false);
                 if (lastSubRow == null)
                 {
@@ -91,6 +129,9 @@ namespace Saladio.Adapters
 
                 txtSaladTitle.Text = savedSalad.Name;
                 txtSaladDescription.Text = savedSalad.Ingredients;
+
+                subRow.Tag = position.ToString() + ":" + i;
+                subRow.Click += SubRow_Click;
 
                 layoutSavedSalads.AddView(subRow);
             }
@@ -105,6 +146,45 @@ namespace Saladio.Adapters
             }
 
             return row;
+        }
+
+        private void SubRow_Click(object sender, EventArgs e)
+        {
+            View subRow = (View)sender;
+            string tag = (string)subRow.Tag;
+            string[] parts = tag.Split(':');
+
+            int position = int.Parse(parts[0]);
+            int itemIndex = int.Parse(parts[1]);
+
+            SavedSalad savedSalad = this[position].Salads[itemIndex];
+
+            SavedSaladSelected(this, new SavedSaladSelectedEventArgs(savedSalad));
+        }
+
+        private void TxtSavedSaladGroup_Click(object sender, EventArgs e)
+        {
+            TextView txtSavedSaladGroup = (TextView)sender;
+            View row = (View)txtSavedSaladGroup.Tag;
+            LinearLayout layoutSavedSalads = row.FindViewById<LinearLayout>(Resource.Id.layoutSavedSalads);
+
+            int position = (int)row.Tag;
+            SavedSaladGroup item = this[position];
+
+            if (layoutSavedSalads.Tag == null || ((bool)layoutSavedSalads.Tag) == false)
+            {
+                txtSavedSaladGroup.Text = mContext.Resources.GetString(Resource.String.ExpandableArrowUp) + " " + item.Name;
+
+                layoutSavedSalads.Tag = true;
+                layoutSavedSalads.Animate().ScaleX(0.0f).ScaleY(0.0f).SetDuration(200).Start();
+            }
+            else
+            {
+                txtSavedSaladGroup.Text = mContext.Resources.GetString(Resource.String.ExpandableArrowDown) + " " + item.Name;
+
+                layoutSavedSalads.Tag = false;
+                layoutSavedSalads.Animate().ScaleX(1.0f).ScaleY(1.0f).SetDuration(200).Start();
+            }
         }
     }
 }

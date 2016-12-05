@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:state_pressed="false">
+    <layer-list>
+      <item android:left="@dimen/ButtonGradientLeft" android:bottom="@dimen/ButtonGradientBottom">
+        <shape>
+          <gradient android:startColor="@color/SaladioActionBarButtonSolid" android:endColor="@color/SaladioActionBarButtonSolid" />
+          <corners android:radius="@dimen/SaladioActionBarButtonRadius" />
+          <padding android:left="@dimen/SaladioActionBarButtonPadding" android:top="@dimen/SaladioActionBarButtonPadding"
+                   android:right="@dimen/SaladioActionBarButtonPadding" android:bottom="@dimen/SaladioActionBarButtonPadding" />
+        </shape>
+      </item>
+    </layer-list>
+  </item>
+
+  <item android:state_pressed="true">
+    <layer-list>
+      <item android:left="@dimen/ButtonGradientLeft" android:bottom="@dimen/ButtonGradientBottom">
+        <shape>
+          <gradient android:startColor="@color/SaladioActionBarButtonGradient" android:endColor="@color/SaladioActionBarButtonSolid" />
+          <corners android:radius="@dimen/SaladioActionBarButtonRadius" />
+          <padding android:left="@dimen/SaladioActionBarButtonPadding" android:top="@dimen/SaladioActionBarButtonPadding"
+                   android:right="@dimen/SaladioActionBarButtonPadding" android:bottom="@dimen/SaladioActionBarButtonPadding" />
+        </shape>
+      </item>
+    </layer-list>
+  </item>
+</selector>

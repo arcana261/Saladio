@@ -15,8 +15,8 @@ using Saladio.Contexts;
 
 namespace Saladio.Activities
 {
-    [Activity(Label = "@string/ApplicationName", Icon = "@drawable/ic_pie_salad_64")]
-    public class ActivityMain : RtlActivity
+    [Activity(Label = "@string/ApplicationName")]
+    public class ActivityMain : Activity
     {
         private enum MainTabs
         {
@@ -98,7 +98,11 @@ namespace Saladio.Activities
                             View view = LayoutInflater.From(mActivity).Inflate(Resource.Layout.TabSavedSalads, container, false);
                             ListView lstSavedSalads = view.FindViewById<ListView>(Resource.Id.lstSavedSalads);
 
-                            lstSavedSalads.Adapter = new SavedSaladGroupAdapter(mActivity, saladioContext.SavedSaladGroups);
+                            SavedSaladGroupAdapter adapter = new SavedSaladGroupAdapter(mActivity, saladioContext.SavedSaladGroups);
+                            adapter.ExpandableGroups.Add(1);
+                            adapter.InitiallyClosed.Add(1);
+
+                            lstSavedSalads.Adapter = adapter;
 
                             return view;
                         }
@@ -111,8 +115,10 @@ namespace Saladio.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
             SetContentView(Resource.Layout.ActivityMain);
+
+            ActionBar.SetDisplayOptions(ActionBarDisplayOptions.ShowCustom, ActionBarDisplayOptions.ShowCustom);
+            ActionBar.SetCustomView(Resource.Layout.MainActionBar);
 
             // Create your application here
             SlidingTabsFragment slidingTabs = new SlidingTabsFragment();
@@ -123,6 +129,19 @@ namespace Saladio.Activities
                 transaction.Replace(Resource.Id.contentFragment, slidingTabs);
                 transaction.Commit();
             }
+        }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.MainMenu, menu);
+            return base.OnCreateOptionsMenu(menu);
+        }
+
+        public override bool OnPrepareOptionsMenu(IMenu menu)
+        { 
+            menu.FindItem(Resource.Id.iconLogo).SetEnabled(false);
+
+            return base.OnPrepareOptionsMenu(menu);
         }
     }
 }

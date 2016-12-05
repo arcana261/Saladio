@@ -80,6 +80,7 @@
     <Compile Include="ActivityExtensions.cs" />
     <Compile Include="Adapters\SaladComponentGroupAdapter.cs" />
     <Compile Include="Adapters\SavedSaladGroupAdapter.cs" />
+    <Compile Include="Adapters\SavedSaladSelectedEventArgs.cs" />
     <Compile Include="Components\ManualViewPager.cs" />
     <Compile Include="Components\RtlActivity.cs" />
     <Compile Include="Components\SlidingTabsAdapter.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Components\Impl\SlidingTabScrollView.cs" />
     <Compile Include="Components\SlidingTabsFragment.cs" />
     <Compile Include="Components\Impl\SlidingTabStrip.cs" />
+    <Compile Include="Utility\ExpandCollapseAnimation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
@@ -136,6 +138,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\TabSavedSalads.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\MainActionBar.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ActionBar.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -212,7 +220,15 @@
     <AndroidResource Include="Resources\drawable\CustomSaladInformationStyle.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\SavedSaladGroupTitleStyle.xml" />
+    <AndroidResource Include="Resources\drawable\SavedSaladGroupTitleStyle.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\MainMenu.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ActionBarButtonStyle.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

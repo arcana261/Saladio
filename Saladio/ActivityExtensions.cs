@@ -19,6 +19,7 @@ namespace Saladio
             if (Build.VERSION.SdkInt >= BuildVersionCodes.JellyBeanMr1)
             {
                 activity.Window.DecorView.LayoutDirection = LayoutDirection.Rtl;
+                activity.Window.DecorView.TextDirection = TextDirection.Rtl;
             }
         }
     }
