@@ -5,6 +5,7 @@
     <item name="android:buttonStyle">@style/SaladioButton</item>
     <item name="android:editTextStyle">@style/SaladioEditText</item>
     <item name="android:textViewStyle">@style/SaladioTextView</item>
+    <item name="android:radioButtonStyle">@style/SaladioRadioButton</item>
   </style>
 
   <style name="SaladioActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
@@ -24,6 +25,10 @@
 
   <style name="SaladioTextView" parent="@android:style/Widget.Holo.Light.TextView">
     <item name="android:textDirection">rtl</item>
+    <item name="android:gravity">right</item>
+  </style>
+
+  <style name="SaladioRadioButton" parent="@android:style/Widget.Holo.Light.CompoundButton.RadioButton">
     <item name="android:gravity">right</item>
   </style>
 

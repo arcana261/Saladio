@@ -48,4 +48,19 @@
   <string name="ScheduledOrder">سفارش منظم</string>
 
   <string name="SelectSaladToSchedule">سالاد خودتو انتخاب کن</string>
+  <string name="SelectSaladDeliveryDate">تاریخ تحویل سالاد رو مشخص کن</string>
+  <string name="SelectSaladDeliveryHour">تاریخ تحویل سالاد رو مشخص کن</string>
+
+  <string name="PersianMonth1">فروردین</string>
+  <string name="PersianMonth2">اردیبهشت</string>
+  <string name="PersianMonth3">خرداد</string>
+  <string name="PersianMonth4">تیر</string>
+  <string name="PersianMonth5">مرداد</string>
+  <string name="PersianMonth6">شهریور</string>
+  <string name="PersianMonth7">مهر</string>
+  <string name="PersianMonth8">آبان</string>
+  <string name="PersianMonth9">آذر</string>
+  <string name="PersianMonth10">دی</string>
+  <string name="PersianMonth11">بهمن</string>
+  <string name="PersianMonth12">اسفند</string>
 </resources>

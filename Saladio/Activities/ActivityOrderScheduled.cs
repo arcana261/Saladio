@@ -14,6 +14,8 @@ using Saladio.Components;
 using Android.Support.V4.Content;
 using Saladio.Adapters;
 using Saladio.Contexts;
+using Saladio.Models;
+using Saladio.Fragments;
 
 namespace Saladio.Activities
 {
@@ -23,6 +25,8 @@ namespace Saladio.Activities
         private enum WizardPage
         {
             SelectSalad = 0,
+            SelectDeliveryDate,
+            SelectDeliveryHour,
             Total
         }
 
@@ -101,6 +105,8 @@ namespace Saladio.Activities
             return base.OnPrepareOptionsMenu(menu);
         }
 
+        private SavedSalad mSelectedSalad;
+
         private void OnInitializePage(WizardPage page, View view)
         {
             switch (page)
@@ -109,17 +115,28 @@ namespace Saladio.Activities
                     using (SaladioContext context = new SaladioContext())
                     {
                         ListView lstSelectSalad = view.FindViewById<ListView>(Resource.Id.lstSelectSalad);
+                        mSelectedSalad = null;
 
                         SavedSaladGroupAdapter adapter = new SavedSaladGroupAdapter(this, context.SavedSaladGroups);
                         adapter.SavedSaladSelected += (sender, args) =>
                         {
                             adapter.ClearSelectedStateSalad();
                             adapter.SetSelectedStateSalad(args.SavedSalad, true);
+                            mSelectedSalad = args.SavedSalad;
 
                             adapter.NotifyDataSetChanged();
                         };
 
                         lstSelectSalad.Adapter = adapter;
+                    }
+                    break;
+                case WizardPage.SelectDeliveryDate:
+                    using (FragmentTransaction transaction = FragmentManager.BeginTransaction())
+                    {
+                        FragmentDatePicker datePicker = new FragmentDatePicker();
+
+                        transaction.Replace(Resource.Id.layoutDatePickerContainer, datePicker);
+                        transaction.Commit();
                     }
                     break;
                 default:
@@ -133,6 +150,8 @@ namespace Saladio.Activities
             {
                 case WizardPage.SelectSalad:
                     return Resources.GetString(Resource.String.SelectSaladToSchedule);
+                case WizardPage.SelectDeliveryDate:
+                    return Resources.GetString(Resource.String.SelectSaladDeliveryDate);
                 default:
                     throw new ArgumentException("invalid requested page: " + page.ToString(), "page");
             }
@@ -142,6 +161,9 @@ namespace Saladio.Activities
         {
             switch (page)
             {
+                case WizardPage.SelectSalad:
+                    SwitchToPage(WizardPage.SelectDeliveryDate);
+                    break;
                 default:
                     throw new ArgumentException("invalid requested page: " + page.ToString(), "page");
             }
@@ -153,6 +175,8 @@ namespace Saladio.Activities
             {
                 case WizardPage.SelectSalad:
                     return Resource.Layout.PageSelectSalad;
+                case WizardPage.SelectDeliveryDate:
+                    return Resource.Layout.PageSelectDeliveryDate;
                 default:
                     throw new ArgumentException("invalid requested page: " + page.ToString(), "page");
             }

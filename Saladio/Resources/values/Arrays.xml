@@ -4,4 +4,19 @@
     <item>@string/Male</item>
     <item>@string/Female</item>
   </string-array>
+
+  <string-array name="PersianMonths">
+    <item>@string/PersianMonth1</item>
+    <item>@string/PersianMonth2</item>
+    <item>@string/PersianMonth3</item>
+    <item>@string/PersianMonth4</item>
+    <item>@string/PersianMonth5</item>
+    <item>@string/PersianMonth6</item>
+    <item>@string/PersianMonth7</item>
+    <item>@string/PersianMonth8</item>
+    <item>@string/PersianMonth9</item>
+    <item>@string/PersianMonth10</item>
+    <item>@string/PersianMonth11</item>
+    <item>@string/PersianMonth12</item>
+  </string-array>
 </resources>

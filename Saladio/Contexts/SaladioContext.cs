@@ -18,6 +18,7 @@ namespace Saladio.Contexts
         private IList<SaladComponentGroup> mGroups;
         private IList<SavedSaladGroup> mClassicSalads;
         private IList<SavedSaladGroup> mSavedSalads;
+        private IList<DeliveryHourRange> mDeliveryHours;
 
         public SaladioContext()
         {
@@ -149,6 +150,55 @@ namespace Saladio.Contexts
                 }
 
                 return mSavedSalads;
+            }
+        }
+
+        public IList<DeliveryHourRange> DeliveryHours
+        {
+            get
+            {
+                if (mDeliveryHours == null)
+                {
+                    mDeliveryHours = new List<DeliveryHourRange>();
+
+                    mDeliveryHours.Add(new DeliveryHourRange()
+                    {
+                        From = 10,
+                        To = 12
+                    });
+
+                    mDeliveryHours.Add(new DeliveryHourRange()
+                    {
+                        From = 12,
+                        To = 14
+                    });
+
+                    mDeliveryHours.Add(new DeliveryHourRange()
+                    {
+                        From = 14,
+                        To = 16
+                    });
+
+                    mDeliveryHours.Add(new DeliveryHourRange()
+                    {
+                        From = 16,
+                        To = 18
+                    });
+
+                    mDeliveryHours.Add(new DeliveryHourRange()
+                    {
+                        From = 18,
+                        To = 20
+                    });
+
+                    mDeliveryHours.Add(new DeliveryHourRange()
+                    {
+                        From = 20,
+                        To = 22
+                    });
+                }
+            
+                return mDeliveryHours;
             }
         }
 
