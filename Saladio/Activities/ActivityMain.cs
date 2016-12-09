@@ -23,6 +23,7 @@ namespace Saladio.Activities
             CustomSalad = 0,
             ClassicSalads,
             SavedSalads,
+            OrderSchedule,
             About,
             Total
         }
@@ -58,6 +59,8 @@ namespace Saladio.Activities
                         return mActivity.Resources.GetString(Resource.String.TabClassicSalads);
                     case MainTabs.SavedSalads:
                         return mActivity.Resources.GetString(Resource.String.TabSavedSalads);
+                    case MainTabs.OrderSchedule:
+                        return mActivity.Resources.GetString(Resource.String.TabOrderSchedule);
                     default:
                         throw new ArgumentException("unsupported tab: " + tab.ToString());
                 }
@@ -103,6 +106,18 @@ namespace Saladio.Activities
                             adapter.InitiallyClosed.Add(1);
 
                             lstSavedSalads.Adapter = adapter;
+
+                            return view;
+                        }
+                    case MainTabs.OrderSchedule:
+                        using (SaladioContext saladioContext = new SaladioContext()) 
+                        {
+                            View view = LayoutInflater.From(mActivity).Inflate(Resource.Layout.TabOrderSchedule, container, false);
+                            ListView lstOrderSchedule = view.FindViewById<ListView>(Resource.Id.lstOrderSchedule);
+
+                            OrderScheduleCalendarAdapter adapter = new OrderScheduleCalendarAdapter(mActivity, saladioContext.OrderSchedules);
+                            lstOrderSchedule.Adapter = adapter;
+                            //lstOrderSchedule.SetListViewHeightBasedOnChildren();
 
                             return view;
                         }

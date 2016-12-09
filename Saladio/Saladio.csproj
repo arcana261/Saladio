@@ -80,6 +80,7 @@
     <Compile Include="Activities\ActivityStart.cs" />
     <Compile Include="ActivityExtensions.cs" />
     <Compile Include="Adapters\ItemSelectorAdapter.cs" />
+    <Compile Include="Adapters\OrderScheduleCalendarAdapter.cs" />
     <Compile Include="Adapters\SaladComponentGroupAdapter.cs" />
     <Compile Include="Adapters\SavedSaladGroupAdapter.cs" />
     <Compile Include="Adapters\SavedSaladSelectedEventArgs.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Fragments\FragmentDatePicker.cs" />
     <Compile Include="ListViewExtensions.cs" />
     <Compile Include="Models\DeliveryHourRange.cs" />
+    <Compile Include="Models\OrderSchedule.cs" />
     <Compile Include="Models\SaladComponent.cs" />
     <Compile Include="Models\SaladComponentGroup.cs" />
     <Compile Include="Models\SavedSalad.cs" />
@@ -168,6 +170,15 @@
     <AndroidResource Include="Resources\layout\PageSelectDeliveryHour.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\PageSelectDeliveryAddress.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\RowOrderScheduleCalendar.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\TabOrderSchedule.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\ActivityStart.axml">
@@ -215,7 +226,9 @@
       <Version>24.2.1.0</Version>
     </XamarinComponentReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\OrderScheduleCellStyle.xml" />
+  </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\EditTextStyle.xml" />
   </ItemGroup>

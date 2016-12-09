@@ -27,6 +27,7 @@ namespace Saladio.Activities
             SelectSalad = 0,
             SelectDeliveryDate,
             SelectDeliveryHour,
+            SelectDeliveryAddress,
             Total
         }
 
@@ -71,7 +72,6 @@ namespace Saladio.Activities
 
         private ManualViewPager mWizardContainer;
         private Button mBtnWizard;
-        private View mCurrentPage;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -139,6 +139,24 @@ namespace Saladio.Activities
                         transaction.Commit();
                     }
                     break;
+                case WizardPage.SelectDeliveryHour:
+                    using (SaladioContext context = new SaladioContext())
+                    {
+                        ListView lstSelectDeliveryHour = view.FindViewById<ListView>(Resource.Id.lstSelectDeliveryHour);
+
+                        ItemSelectorAdapter adapter = new ItemSelectorAdapter(this, context.DeliveryHours.Select(x => x.From + " - " + x.To).ToList());
+                        lstSelectDeliveryHour.Adapter = adapter;
+                    }
+                    break;
+                case WizardPage.SelectDeliveryAddress:
+                    using (SaladioContext context = new SaladioContext())
+                    {
+                        ListView lstSelectDeliveryAddress = view.FindViewById<ListView>(Resource.Id.lstSelectDeliveryAddress);
+
+                        ItemSelectorAdapter adapter = new ItemSelectorAdapter(this, context.DeliveryAddresses);
+                        lstSelectDeliveryAddress.Adapter = adapter;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -152,6 +170,10 @@ namespace Saladio.Activities
                     return Resources.GetString(Resource.String.SelectSaladToSchedule);
                 case WizardPage.SelectDeliveryDate:
                     return Resources.GetString(Resource.String.SelectSaladDeliveryDate);
+                case WizardPage.SelectDeliveryHour:
+                    return Resources.GetString(Resource.String.SelectSaladDeliveryHour);
+                case WizardPage.SelectDeliveryAddress:
+                    return Resources.GetString(Resource.String.SelectDeliveryAddress);
                 default:
                     throw new ArgumentException("invalid requested page: " + page.ToString(), "page");
             }
@@ -163,6 +185,12 @@ namespace Saladio.Activities
             {
                 case WizardPage.SelectSalad:
                     SwitchToPage(WizardPage.SelectDeliveryDate);
+                    break;
+                case WizardPage.SelectDeliveryDate:
+                    SwitchToPage(WizardPage.SelectDeliveryHour);
+                    break;
+                case WizardPage.SelectDeliveryHour:
+                    SwitchToPage(WizardPage.SelectDeliveryAddress);
                     break;
                 default:
                     throw new ArgumentException("invalid requested page: " + page.ToString(), "page");
@@ -177,6 +205,10 @@ namespace Saladio.Activities
                     return Resource.Layout.PageSelectSalad;
                 case WizardPage.SelectDeliveryDate:
                     return Resource.Layout.PageSelectDeliveryDate;
+                case WizardPage.SelectDeliveryHour:
+                    return Resource.Layout.PageSelectDeliveryHour;
+                case WizardPage.SelectDeliveryAddress:
+                    return Resource.Layout.PageSelectDeliveryAddress;
                 default:
                     throw new ArgumentException("invalid requested page: " + page.ToString(), "page");
             }

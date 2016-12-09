@@ -5,6 +5,7 @@
   <string name="TabCustomSalad">انتخاب اجزای سالاد</string>
   <string name="TabClassicSalads">سالادهای کلاسیک</string>
   <string name="TabSavedSalads">سالادهای من</string>
+  <string name="TabOrderSchedule">تقویم وعده‌ها</string>
   <string name="TabAbout">درباره ما</string>
   
   <string name="Welcome1">سالادهای ما یک وعده غذای کامل است...</string>
@@ -49,7 +50,8 @@
 
   <string name="SelectSaladToSchedule">سالاد خودتو انتخاب کن</string>
   <string name="SelectSaladDeliveryDate">تاریخ تحویل سالاد رو مشخص کن</string>
-  <string name="SelectSaladDeliveryHour">تاریخ تحویل سالاد رو مشخص کن</string>
+  <string name="SelectSaladDeliveryHour">چه ساعتی ارسال شود؟</string>
+  <string name="SelectDeliveryAddress">به کدام آدرس ارسال شود؟</string>
 
   <string name="PersianMonth1">فروردین</string>
   <string name="PersianMonth2">اردیبهشت</string>
@@ -63,4 +65,12 @@
   <string name="PersianMonth10">دی</string>
   <string name="PersianMonth11">بهمن</string>
   <string name="PersianMonth12">اسفند</string>
+
+  <string name="PersianSunday">یکشنبه</string>
+  <string name="PersianMonday">دوشنبه</string>
+  <string name="PersianTuesday">سه‌شنبه</string>
+  <string name="PersianWednesday">چهارشنبه</string>
+  <string name="PersianThursday">پنج‌شنبه</string>
+  <string name="PersianFriday">جمعه</string>
+  <string name="PersianSaturday">شنبه</string>
 </resources>

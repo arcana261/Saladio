@@ -50,4 +50,6 @@
   <dimen name="SavedSaladGroupTitleRadius">8dp</dimen>
   <dimen name="SavedSaladGroupTitleHorizontalPadding">10dp</dimen>
   <dimen name="SavedSaladGroupTitleVerticalPadding">7dp</dimen>
+
+  <dimen name="RowOrderScheduleCalendarHeight">40dp</dimen>
 </resources>

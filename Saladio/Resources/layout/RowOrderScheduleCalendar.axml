@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/RowOrderScheduleCalendarHeight"
+    android:weightSum="3"
+    android:gravity="right">
+    <LinearLayout
+        android:id="@+id/layoutDinnerIcons"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:gravity="left"
+        android:orientation="horizontal"/>
+    <LinearLayout
+        android:id="@+id/layoutLaunchIcons"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:background="@drawable/OrderScheduleCellStyle" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:gravity="right"
+        android:background="@drawable/OrderScheduleCellStyle">
+        <TextView
+            android:id="@+id/txtDayOfWeek"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Monday" />
+        <TextView
+            android:id="@+id/txtDayOfMonth"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="10" />
+        <TextView
+            android:id="@+id/txtMonth"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="December" />
+    </LinearLayout>
+</LinearLayout>

@@ -16,6 +16,13 @@ namespace Saladio.Adapters
     {
         private Context mContext;
         private IList<string> mItems;
+        private int? mSelectedPosition;
+
+        public ItemSelectorAdapter(Context context, IList<string> items)
+        {
+            mContext = context;
+            mItems = items;
+        }
 
         public override string this[int position]
         {
@@ -48,11 +55,44 @@ namespace Saladio.Adapters
             }
 
             RadioButton radioItemSelected = row.FindViewById<RadioButton>(Resource.Id.radioItemSelected);
+            TextView radioItemText = row.FindViewById<TextView>(Resource.Id.radioItemText);
             string item = this[position];
 
-            radioItemSelected.Text = item;
+            radioItemText.Text = item;
+            radioItemText.Tag = radioItemSelected;
+            radioItemText.Click -= RadioItemText_Click;
+            radioItemText.Click += RadioItemText_Click;
+
+            radioItemSelected.Tag = position;
+            radioItemSelected.CheckedChange -= RadioItemSelected_CheckedChange;
+            if (mSelectedPosition.HasValue && mSelectedPosition.Value == position)
+            {
+                radioItemSelected.Checked = true;
+            }
+            else
+            {
+                radioItemSelected.Checked = false;
+            }
+            radioItemSelected.CheckedChange += RadioItemSelected_CheckedChange;
 
             return row;
+        }
+
+        private void RadioItemSelected_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
+        {
+            RadioButton radioItemSelected = (RadioButton)sender;
+            int position = (int)radioItemSelected.Tag;
+
+            mSelectedPosition = position;
+            NotifyDataSetChanged();
+        }
+
+        private void RadioItemText_Click(object sender, EventArgs e)
+        {
+            TextView radioItemText = (TextView)sender;
+            RadioButton radioItemSelected = (RadioButton)radioItemText.Tag;
+
+            radioItemSelected.Checked = true;
         }
     }
 }

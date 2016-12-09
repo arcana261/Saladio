@@ -19,4 +19,14 @@
     <item>@string/PersianMonth11</item>
     <item>@string/PersianMonth12</item>
   </string-array>
+
+  <string-array name="PersianWeekDays">
+    <item>@string/PersianSunday</item>
+    <item>@string/PersianMonday</item>
+    <item>@string/PersianTuesday</item>
+    <item>@string/PersianWednesday</item>
+    <item>@string/PersianThursday</item>
+    <item>@string/PersianFriday</item>
+    <item>@string/PersianSaturday</item>
+  </string-array>
 </resources>
