@@ -33,4 +33,6 @@
   <color name="SavedSaladGroupTitleBackground">@color/SaladioPrimary</color>
   <color name="SavedSaladGroupTitleForeground">@android:color/white</color>
   <color name="SavedSaladSelected">@android:color/darker_gray</color>
+
+  <color name="CalendarTitleBackground">@color/SaladioPrimary</color>
 </resources>

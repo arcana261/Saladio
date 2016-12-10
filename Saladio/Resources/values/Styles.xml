@@ -9,8 +9,8 @@
   </style>
 
   <style name="PlusMinusButton" parent="@style/SaladioButton">
-    <item name="android:width">@dimen/PlusMinusButtonSize</item>
-    <item name="android:height">@dimen/PlusMinusButtonSize</item>
+    <item name="android:width">@dimen/PlusMinusButtonOuterSize</item>
+    <item name="android:height">@dimen/PlusMinusButtonOuterSize</item>
     <item name="android:background">@drawable/PlusMinusButtonStyle</item>
   </style>
 
@@ -47,5 +47,13 @@
   <style name="SavedSaladTitle" parent="@style/SaladioTextView">
     <item name="android:textStyle">bold</item>
   </style>
-  
+
+  <style name="CalendarItem" parent="@style/SaladioTextView">
+    <item name="android:gravity">center</item>
+    <item name="android:paddingTop">@dimen/CalendarItemVerticalPadding</item>
+    <item name="android:paddingBottom">@dimen/CalendarItemVerticalPadding</item>
+  </style>
+  <style name="CalendarWeekHeader" parent="@style/CalendarItem">
+    <item name="android:textSize">@dimen/CelendarWeekHeaderFontSize</item>
+  </style>
 </resources>

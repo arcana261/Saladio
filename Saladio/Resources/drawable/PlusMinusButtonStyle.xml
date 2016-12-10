@@ -1,12 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
   <item android:state_pressed="false">
-    <shape android:shape="oval">
-      <size android:width="@dimen/PlusMinusButtonSize" android:height="@dimen/PlusMinusButtonSize" />
-      <solid android:color="@color/PlusMinusButtonNormal" />
-      <padding android:left="@dimen/PlusMinusButtonPadding" android:top="@dimen/PlusMinusButtonPadding"
-               android:right="@dimen/PlusMinusButtonPadding" android:bottom="@dimen/PlusMinusButtonPadding" />
-    </shape>
+    <item>
+      <shape android:shape="oval">
+        <size android:width="@dimen/PlusMinusButtonSize" android:height="@dimen/PlusMinusButtonSize" />
+        <solid android:color="@color/PlusMinusButtonNormal" />
+        <padding android:left="@dimen/PlusMinusButtonPadding" android:top="@dimen/PlusMinusButtonPadding"
+                 android:right="@dimen/PlusMinusButtonPadding" android:bottom="@dimen/PlusMinusButtonPadding" />
+      </shape>
+    </item>
   </item>
   <item android:state_pressed="true">
     <shape android:shape="oval">
@@ -16,5 +18,23 @@
       <padding android:left="@dimen/PlusMinusButtonPadding" android:top="@dimen/PlusMinusButtonPadding"
                android:right="@dimen/PlusMinusButtonPadding" android:bottom="@dimen/PlusMinusButtonPadding" />
     </shape>
+  </item>
+  <item>
+    <layer-list>
+      <item>
+        <shape android:shape="rectangle">
+          <size android:width="@dimen/PlusMinusButtonOuterSize" android:height="@dimen/PlusMinusButtonOuterSize" />
+          <solid android:color="@color/SaladioBackground" />
+        </shape>
+      </item>
+      <item>
+        <shape android:shape="oval">
+          <size android:width="@dimen/PlusMinusButtonSize" android:height="@dimen/PlusMinusButtonSize" />
+          <solid android:color="@color/PlusMinusButtonNormal" />
+          <padding android:left="@dimen/PlusMinusButtonPadding" android:top="@dimen/PlusMinusButtonPadding"
+                   android:right="@dimen/PlusMinusButtonPadding" android:bottom="@dimen/PlusMinusButtonPadding" />
+        </shape>
+      </item>
+    </layer-list>
   </item>
 </selector>

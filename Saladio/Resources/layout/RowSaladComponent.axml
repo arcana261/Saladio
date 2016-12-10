@@ -11,8 +11,8 @@
         <Button
             android:id="@+id/btnMinus"
             style="@style/PlusMinusButton"
-            android:layout_width="@dimen/PlusMinusButtonSize"
-            android:layout_height="@dimen/PlusMinusButtonSize"
+            android:layout_width="@dimen/PlusMinusButtonOuterSize"
+            android:layout_height="@dimen/PlusMinusButtonOuterSize"
             android:text="-" />
         <TextView
             android:id="@+id/txtQuantity"
@@ -24,8 +24,8 @@
         <Button
             android:id="@+id/btnPlus"
             style="@style/PlusMinusButton"
-            android:layout_width="@dimen/PlusMinusButtonSize"
-            android:layout_height="@dimen/PlusMinusButtonSize"
+            android:layout_width="@dimen/PlusMinusButtonOuterSize"
+            android:layout_height="@dimen/PlusMinusButtonOuterSize"
             android:text="+" />
         <TextView
             android:id="@+id/txtSaladComponent"

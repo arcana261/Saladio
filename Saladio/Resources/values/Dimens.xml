@@ -37,6 +37,7 @@
   <dimen name="SaladComponentGroupTitleHorizontalPadding">10dp</dimen>
 
   <dimen name="PlusMinusButtonSize">30dip</dimen>
+  <dimen name="PlusMinusButtonOuterSize">40dip</dimen>
   <dimen name="PlusMinusButtonPadding">5dip</dimen>
   <dimen name="PlusMinusButtonStroke">1dp</dimen>
 
@@ -52,4 +53,7 @@
   <dimen name="SavedSaladGroupTitleVerticalPadding">7dp</dimen>
 
   <dimen name="RowOrderScheduleCalendarHeight">40dp</dimen>
+
+  <dimen name="CalendarItemVerticalPadding">15dp</dimen>
+  <dimen name="CelendarWeekHeaderFontSize">10sp</dimen>
 </resources>

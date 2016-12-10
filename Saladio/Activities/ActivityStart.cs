@@ -6,6 +6,7 @@ using Android.Views;
 using Java.Lang;
 using System;
 using Saladio.Components;
+using Saladio.Fragments;
 
 namespace Saladio.Activities
 {
@@ -97,7 +98,28 @@ namespace Saladio.Activities
 
         private void OnInitializePage(WizardPage page, View view)
         {
-            
+            switch (page)
+            {
+                case WizardPage.SignUpDetails:
+                    {
+                        EditText etBirthDate = view.FindViewById<EditText>(Resource.Id.etBirthDate);
+
+                        etBirthDate.FocusChange += (sender, args) =>
+                        {
+                            if (args.HasFocus)
+                            {
+                                using (FragmentTransaction transaction = FragmentManager.BeginTransaction())
+                                {
+                                    DialogCalendar dialog = new DialogCalendar();
+                                    dialog.Show(transaction, "dialogCalendar");
+                                }
+                            }
+                        };
+                    }
+                    break;
+                default:
+                    break;
+            }   
         }
 
         private string GetPageButtonText(WizardPage page)

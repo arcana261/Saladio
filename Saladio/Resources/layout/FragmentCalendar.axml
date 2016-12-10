@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/CalendarTitleBackground"
+        android:paddingTop="@dimen/VerticalMargin"
+        android:paddingBottom="@dimen/VerticalMargin"
+        android:paddingLeft="@dimen/HorizontalMargin"
+        android:paddingRight="@dimen/HorizontalMargin">
+        <Button
+            android:id="@+id/btnCalendarPrevMonth"
+            style="@style/PlusMinusButton"
+            android:layout_width="@dimen/PlusMinusButtonOuterSize"
+            android:layout_height="@dimen/PlusMinusButtonOuterSize"
+            android:layout_alignParentLeft="true"
+            android:text="↶" />
+        <TextView
+            android:id="@+id/txtCalendarCurrentMonth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/btnCalendarPrevMonth"
+            android:layout_toLeftOf="@+id/btnCalendarNextMonth"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="December, 2016" />
+        <Button
+            android:id="@+id/btnCalendarNextMonth"
+            style="@style/PlusMinusButton"
+            android:layout_width="@dimen/PlusMinusButtonOuterSize"
+            android:layout_height="@dimen/PlusMinusButtonOuterSize"
+            android:layout_alignParentRight="true"
+            android:text="↷" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="7"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/CalendarWeekHeader"
+                android:text="@string/PersianFriday" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ListDividerStroke"
+                android:background="@color/ListDividerStroke"
+                android:layout_marginTop="@dimen/DividerMargin"
+                android:layout_marginBottom="@dimen/DividerMargin" />
+            <TextView
+                android:id="@+id/txtRow1Column1"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow2Column1"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow3Column1"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow4Column1"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow5Column1"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/CalendarWeekHeader"
+                android:text="@string/PersianThursday" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ListDividerStroke"
+                android:background="@color/ListDividerStroke"
+                android:layout_marginTop="@dimen/DividerMargin"
+                android:layout_marginBottom="@dimen/DividerMargin" />
+            <TextView
+                android:id="@+id/txtRow1Column2"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow2Column2"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow3Column2"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow4Column2"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow5Column2"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/CalendarWeekHeader"
+                android:text="@string/PersianWednesday" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ListDividerStroke"
+                android:background="@color/ListDividerStroke"
+                android:layout_marginTop="@dimen/DividerMargin"
+                android:layout_marginBottom="@dimen/DividerMargin" />
+            <TextView
+                android:id="@+id/txtRow1Column3"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow2Column3"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow3Column3"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow4Column3"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow5Column3"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/CalendarWeekHeader"
+                android:text="@string/PersianTuesday" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ListDividerStroke"
+                android:background="@color/ListDividerStroke"
+                android:layout_marginTop="@dimen/DividerMargin"
+                android:layout_marginBottom="@dimen/DividerMargin" />
+            <TextView
+                android:id="@+id/txtRow1Column4"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow2Column4"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow3Column4"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow4Column4"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow5Column4"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/CalendarWeekHeader"
+                android:text="@string/PersianMonday" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ListDividerStroke"
+                android:background="@color/ListDividerStroke"
+                android:layout_marginTop="@dimen/DividerMargin"
+                android:layout_marginBottom="@dimen/DividerMargin" />
+            <TextView
+                android:id="@+id/txtRow1Column5"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow2Column5"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow3Column5"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow4Column5"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow5Column5"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/CalendarWeekHeader"
+                android:text="@string/PersianSunday" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ListDividerStroke"
+                android:background="@color/ListDividerStroke"
+                android:layout_marginTop="@dimen/DividerMargin"
+                android:layout_marginBottom="@dimen/DividerMargin" />
+            <TextView
+                android:id="@+id/txtRow1Column6"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow2Column6"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow3Column6"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow4Column6"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow5Column6"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/CalendarWeekHeader"
+                android:text="@string/PersianSaturday" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ListDividerStroke"
+                android:background="@color/ListDividerStroke"
+                android:layout_marginTop="@dimen/DividerMargin"
+                android:layout_marginBottom="@dimen/DividerMargin" />
+            <TextView
+                android:id="@+id/txtRow1Column7"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow2Column7"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow3Column7"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow4Column7"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow5Column7"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
