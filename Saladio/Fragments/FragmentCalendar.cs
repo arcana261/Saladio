@@ -21,8 +21,8 @@ namespace Saladio.Fragments
     {
         private TextView[][] mItems; //[row][column]
         private TextView mTxtCalendarCurrentMonth;
-        private int mCurrentYear;
-        private int mCurrentMonth;
+        private int mCurrentYear = -1;
+        private int mCurrentMonth = -1;
         private int mCurrentDay = -1;
         private TextView mCurrentSelectedCell;
         private Button mBtnCalendarNextMonth;
@@ -336,8 +336,8 @@ namespace Saladio.Fragments
             PersianCalendar persianCalendar = new PersianCalendar();
             DateTime now = DateTime.Now;
 
-            int year = persianCalendar.GetYear(now);
-            int month = persianCalendar.GetMonth(now);
+            int year = mCurrentYear >= 0 ? mCurrentYear : persianCalendar.GetYear(now);
+            int month = mCurrentMonth >= 0 ? mCurrentMonth : persianCalendar.GetMonth(now);
 
             PaintMonth(year, month);
         }

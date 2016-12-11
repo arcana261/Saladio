@@ -104,7 +104,6 @@
     <Compile Include="Fragments\CalendarDateSelectedEventArgs.cs" />
     <Compile Include="Fragments\DialogCalendar.cs" />
     <Compile Include="Fragments\FragmentCalendar.cs" />
-    <Compile Include="Fragments\FragmentCalendarPicker.cs" />
     <Compile Include="Fragments\FragmentDatePicker.cs" />
     <Compile Include="ListViewExtensions.cs" />
     <Compile Include="Models\DeliveryHourRange.cs" />
@@ -201,9 +200,6 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\DialogCalendar.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\FragmentCalendarPicker.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
