@@ -112,6 +112,7 @@
     <Compile Include="Components\Impl\SlidingTabScrollView.cs" />
     <Compile Include="Components\SlidingTabsFragment.cs" />
     <Compile Include="Components\Impl\SlidingTabStrip.cs" />
+    <Compile Include="StringExtensions.cs" />
     <Compile Include="Utility\ExpandCollapseAnimation.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -279,6 +280,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ActionBarButtonStyle.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\CalendarCellSelectedStyle.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

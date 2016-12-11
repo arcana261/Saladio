@@ -12,7 +12,7 @@
         android:paddingLeft="@dimen/HorizontalMargin"
         android:paddingRight="@dimen/HorizontalMargin">
         <Button
-            android:id="@+id/btnCalendarPrevMonth"
+            android:id="@+id/btnCalendarNextMonth"
             style="@style/PlusMinusButton"
             android:layout_width="@dimen/PlusMinusButtonOuterSize"
             android:layout_height="@dimen/PlusMinusButtonOuterSize"
@@ -22,13 +22,13 @@
             android:id="@+id/txtCalendarCurrentMonth"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/btnCalendarPrevMonth"
-            android:layout_toLeftOf="@+id/btnCalendarNextMonth"
+            android:layout_toLeftOf="@+id/btnCalendarPrevMonth"
+            android:layout_toRightOf="@+id/btnCalendarNextMonth"
             android:layout_centerVertical="true"
             android:gravity="center"
             android:text="December, 2016" />
         <Button
-            android:id="@+id/btnCalendarNextMonth"
+            android:id="@+id/btnCalendarPrevMonth"
             style="@style/PlusMinusButton"
             android:layout_width="@dimen/PlusMinusButtonOuterSize"
             android:layout_height="@dimen/PlusMinusButtonOuterSize"
@@ -86,6 +86,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="5" />
+            <TextView
+                android:id="@+id/txtRow6Column1"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -129,6 +135,12 @@
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow5Column2"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow6Column2"
                 style="@style/CalendarItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -180,6 +192,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="5" />
+            <TextView
+                android:id="@+id/txtRow6Column3"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -223,6 +241,12 @@
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow5Column4"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow6Column4"
                 style="@style/CalendarItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -274,6 +298,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="5" />
+            <TextView
+                android:id="@+id/txtRow6Column5"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -321,6 +351,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="5" />
+            <TextView
+                android:id="@+id/txtRow6Column6"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -364,6 +400,12 @@
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow5Column7"
+                style="@style/CalendarItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5" />
+            <TextView
+                android:id="@+id/txtRow6Column7"
                 style="@style/CalendarItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

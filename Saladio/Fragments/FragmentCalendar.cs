@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +10,10 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using System.Globalization;
+using Android.Support.V4.Content;
+using Android.Graphics;
+using Android.Graphics.Drawables;
+using System;
 
 namespace Saladio.Fragments
 {
@@ -20,8 +23,11 @@ namespace Saladio.Fragments
         private TextView mTxtCalendarCurrentMonth;
         private int mCurrentYear;
         private int mCurrentMonth;
+        private int mCurrentDay = -1;
+        private TextView mCurrentSelectedCell;
         private Button mBtnCalendarNextMonth;
         private Button mBtnCalendarPrevMonth;
+        private Dictionary<int, TextView> mDayToCell;
 
         private int GetWeekDayColumn(DayOfWeek dayOfWeek)
         {
@@ -73,24 +79,101 @@ namespace Saladio.Fragments
             return mItems[row][column];
         }
 
+        private Color ToRgb(int color)
+        {
+            return Color.Rgb(Color.GetRedComponent(color), Color.GetGreenComponent(color), Color.GetBlueComponent(color));
+        }
+
+        private Drawable ToDrawable(Color color)
+        {
+            return new ColorDrawable(color);
+        }
+
+        private Drawable ToRgbDrawable(int color)
+        {
+            return ToDrawable(ToRgb(color));
+        }
+
+        private void SetTag(TextView item, int day, bool status)
+        {
+            if (!status)
+            {
+                item.Tag = "disabled";
+            }
+            else
+            {
+                item.Tag = day.ToString();
+            }
+        }
+
+        private void SetTagEnabled(TextView item, int day)
+        {
+            SetTag(item, day, true);
+        }
+
+        private void SetTagDisabled(TextView item)
+        {
+            SetTag(item, -1, false);
+        }
+
+        private bool IsTagEnabled(TextView item)
+        {
+            return !((string)item.Tag).Equals("disabled");
+        }
+
+        private int GetTaggedDay(TextView item)
+        {
+            string value = (string)item.Tag;
+
+            if (value.Equals("disabled"))
+            {
+                return -1;
+            }
+
+            return int.Parse(value);
+        }
+
         private void PaintMonth(int year, int month)
         {
+            Color colorEnabled = ToRgb(ContextCompat.GetColor(Context, Resource.Color.CalendarItemEnabled));
+            Color colorDisabled = ToRgb(ContextCompat.GetColor(Context, Resource.Color.CalendarItemDisabled));
+
             PersianCalendar persianCalendar = new PersianCalendar();
             DateTime date = persianCalendar.ToDateTime(year, month, 1, 1, 1, 1, 1);
 
             int daysOfMonth = persianCalendar.GetDaysInMonth(year, month);
+            int prevDaysOfMonth;
+
+            if (month == 1)
+            {
+                prevDaysOfMonth = persianCalendar.GetDaysInMonth(year - 1, 12);
+            }
+            else
+            {
+                prevDaysOfMonth = persianCalendar.GetDaysInMonth(year, month - 1);
+            }
 
             int row = 0;
             int column = GetWeekDayColumn(persianCalendar.GetDayOfWeek(date));
 
-            for (int i = ResetColumn(); i != column; i = IncrementColumn(i))
+            for (int i = DecrementColumn(column); i >= 0; i = DecrementColumn(i))
             {
-                GetItem(row, i).Text = "-";
+                TextView item = GetItem(row, i);
+                item.Text = prevDaysOfMonth.ToString().ToPersianNumbers();
+                item.SetTextColor(colorDisabled);
+                SetTagDisabled(item);
+
+                prevDaysOfMonth = prevDaysOfMonth - 1;
             }
 
+            mDayToCell = new Dictionary<int, TextView>();
             for (int i = 1; i <= daysOfMonth; i++)
             {
-                GetItem(row, column).Text = i.ToString();
+                TextView item = GetItem(row, column);
+                item.Text = i.ToString().ToPersianNumbers();
+                item.SetTextColor(colorEnabled);
+                SetTagEnabled(item, i);
+                mDayToCell.Add(i, item);
 
                 column = IncrementColumn(column);
                 if (column < 0)
@@ -100,16 +183,63 @@ namespace Saladio.Fragments
                 }
             }
 
-            while (column >= 0)
+            if (row == mItems.Length - 1 && column != ResetColumn())
             {
-                GetItem(row, column).Text = "-";
-                column = IncrementColumn(column);
+                ChangeLastRowViewState(ViewStates.Visible);
+            }
+            else
+            {
+                ChangeLastRowViewState(ViewStates.Gone);
             }
 
-            mTxtCalendarCurrentMonth.Text = Resources.GetStringArray(Resource.Array.PersianMonths)[month - 1] + " " + year;
+            int nextMonth = 1;
+            while (column >= 0)
+            {
+                TextView item = GetItem(row, column);
+                item.Text = nextMonth.ToString().ToPersianNumbers();
+                item.SetTextColor(colorDisabled);
+                SetTagDisabled(item);
+
+                column = IncrementColumn(column);
+                nextMonth = nextMonth + 1;
+            }
+
+            mTxtCalendarCurrentMonth.Text = Resources.GetStringArray(Resource.Array.PersianMonths)[month - 1] + " " + (year.ToString().ToPersianNumbers());
 
             mCurrentYear = year;
             mCurrentMonth = month;
+
+            if (mCurrentDay >= 0)
+            {
+                if (mCurrentDay > daysOfMonth)
+                {
+                    if (mCurrentSelectedCell != null)
+                    {
+                        DeselectCell(mCurrentSelectedCell);
+                        mCurrentSelectedCell = null;
+                    }
+                    mCurrentDay = -1;
+                }
+                else
+                {
+                    TextView item = mDayToCell[mCurrentDay];
+                    OnCellSelected(item, mCurrentDay);
+                }
+            }
+            else if (mCurrentSelectedCell != null)
+            {
+                DeselectCell(mCurrentSelectedCell);
+                mCurrentSelectedCell = null;
+            }
+        }
+
+        private void ChangeLastRowViewState(ViewStates viewState)
+        {
+            int index = mItems.Length - 1;
+            for (int i = 0; i < mItems[index].Length; i++)
+            {
+                mItems[index][i].Visibility = viewState;
+            }
         }
 
         public override void OnViewCreated(View view, Bundle savedInstanceState)
@@ -120,7 +250,7 @@ namespace Saladio.Fragments
             mBtnCalendarNextMonth = view.FindViewById<Button>(Resource.Id.btnCalendarNextMonth);
             mBtnCalendarPrevMonth = view.FindViewById<Button>(Resource.Id.btnCalendarPrevMonth);
 
-            mItems = new TextView[5][];
+            mItems = new TextView[6][];
             for (int i = 0; i < mItems.Length; i++)
             {
                 mItems[i] = new TextView[7];
@@ -166,6 +296,22 @@ namespace Saladio.Fragments
             mItems[4][5] = view.FindViewById<TextView>(Resource.Id.txtRow5Column6);
             mItems[4][6] = view.FindViewById<TextView>(Resource.Id.txtRow5Column7);
 
+            mItems[5][0] = view.FindViewById<TextView>(Resource.Id.txtRow6Column1);
+            mItems[5][1] = view.FindViewById<TextView>(Resource.Id.txtRow6Column2);
+            mItems[5][2] = view.FindViewById<TextView>(Resource.Id.txtRow6Column3);
+            mItems[5][3] = view.FindViewById<TextView>(Resource.Id.txtRow6Column4);
+            mItems[5][4] = view.FindViewById<TextView>(Resource.Id.txtRow6Column5);
+            mItems[5][5] = view.FindViewById<TextView>(Resource.Id.txtRow6Column6);
+            mItems[5][6] = view.FindViewById<TextView>(Resource.Id.txtRow6Column7);
+
+            foreach (var row in mItems)
+            {
+                foreach (var cell in row)
+                {
+                    cell.Click += Cell_Click;
+                }
+            }
+
             mBtnCalendarNextMonth.Click += BtnCalendarNextMonth_Click;
             mBtnCalendarPrevMonth.Click += BtnCalendarPrevMonth_Click;
 
@@ -176,6 +322,35 @@ namespace Saladio.Fragments
             int month = persianCalendar.GetMonth(now);
 
             PaintMonth(year, month);
+        }
+
+        private void DeselectCell(TextView item)
+        {
+            item.Background = null;
+        }
+
+        private void OnCellSelected(TextView item, int day)
+        {
+            if (mCurrentSelectedCell != null)
+            {
+                DeselectCell(mCurrentSelectedCell);
+            }
+
+            item.Background = ContextCompat.GetDrawable(Context, Resource.Drawable.CalendarCellSelectedStyle);
+
+            mCurrentSelectedCell = item;
+            mCurrentDay = day;
+        }
+
+        private void Cell_Click(object sender, EventArgs e)
+        {
+            TextView item = (TextView)sender;
+            int day = GetTaggedDay(item);
+
+            if (day >= 0)
+            {
+                OnCellSelected(item, day);    
+            }
         }
 
         private void BtnCalendarPrevMonth_Click(object sender, EventArgs e)
@@ -207,6 +382,85 @@ namespace Saladio.Fragments
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             return inflater.Inflate(Resource.Layout.FragmentCalendar, container, false);
+        }
+
+        public bool HasValue
+        {
+            get
+            {
+                return mCurrentDay >= 0;
+            }
+        }
+
+        public int? SelectedYear
+        {
+            get
+            {
+                if (mCurrentDay >= 0)
+                {
+                    return mCurrentYear;
+                }
+
+                return null;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    PaintMonth((int)value, mCurrentMonth);
+                }
+            }
+        }
+
+        public int? SelectedMonth
+        {
+            get
+            {
+                if (mCurrentDay >= 0)
+                {
+                    return mCurrentMonth;
+                }
+
+                return null;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    PaintMonth(mCurrentYear, (int)value);
+                }
+            }
+        }
+
+        public int? SelectedDay
+        {
+            get
+            {
+                if (mCurrentDay >= 0)
+                {
+                    return mCurrentDay;
+                }
+
+                return null;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    if (mCurrentSelectedCell != null)
+                    {
+                        DeselectCell(mCurrentSelectedCell);
+                        mCurrentSelectedCell = null;
+                    }
+
+                    mCurrentDay = -1;
+                }
+                else
+                {
+                    mCurrentDay = (int)value;
+                    PaintMonth(mCurrentYear, mCurrentMonth);
+                }
+            }
         }
     }
 }

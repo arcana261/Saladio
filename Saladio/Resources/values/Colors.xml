@@ -35,4 +35,7 @@
   <color name="SavedSaladSelected">@android:color/darker_gray</color>
 
   <color name="CalendarTitleBackground">@color/SaladioPrimary</color>
+  <color name="CalendarItemEnabled">@android:color/black</color>
+  <color name="CalendarItemDisabled">@android:color/darker_gray</color>
+  <color name="CalendarItemSelected">@color/SaladioPrimary</color>
 </resources>
