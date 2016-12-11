@@ -29,6 +29,9 @@ namespace Saladio.Fragments
         private Button mBtnCalendarPrevMonth;
         private Dictionary<int, TextView> mDayToCell;
 
+        public event EventHandler<CalendarDateSelectedEventArgs> CalendarDateSelected;
+        public event EventHandler<CalendarDateClearedEventArgs> CalendarDateCleared;
+
         private int GetWeekDayColumn(DayOfWeek dayOfWeek)
         {
             switch (dayOfWeek)
@@ -217,6 +220,7 @@ namespace Saladio.Fragments
                     {
                         DeselectCell(mCurrentSelectedCell);
                         mCurrentSelectedCell = null;
+                        CalendarDateCleared?.Invoke(this, new CalendarDateClearedEventArgs());
                     }
                     mCurrentDay = -1;
                 }
@@ -349,7 +353,9 @@ namespace Saladio.Fragments
 
             if (day >= 0)
             {
-                OnCellSelected(item, day);    
+                OnCellSelected(item, day);
+
+                CalendarDateSelected?.Invoke(this, new CalendarDateSelectedEventArgs(mCurrentYear, mCurrentMonth, mCurrentDay));
             }
         }
 

@@ -38,4 +38,5 @@
   <color name="CalendarItemEnabled">@android:color/black</color>
   <color name="CalendarItemDisabled">@android:color/darker_gray</color>
   <color name="CalendarItemSelected">@color/SaladioPrimary</color>
+  <color name="CalendarDialogActionBackground">@color/SaladioPrimary</color>
 </resources>

@@ -97,6 +97,10 @@
     <Compile Include="Components\RtlActivity.cs" />
     <Compile Include="Components\SlidingTabsAdapter.cs" />
     <Compile Include="Contexts\SaladioContext.cs" />
+    <Compile Include="Fragments\CalendarDateCanceledEventArgs.cs" />
+    <Compile Include="Fragments\CalendarDateClearedEventArgs.cs" />
+    <Compile Include="Fragments\CalendarDatePickedEventArgs.cs" />
+    <Compile Include="Fragments\CalendarDateSelectedEventArgs.cs" />
     <Compile Include="Fragments\DialogCalendar.cs" />
     <Compile Include="Fragments\FragmentCalendar.cs" />
     <Compile Include="Fragments\FragmentDatePicker.cs" />

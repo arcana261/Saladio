@@ -1,11 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:minWidth="300dp"
-                android:minHeight="400dp">
-  <FrameLayout 
-    android:id="@+id/frameCalendarContainer"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:minWidth="300dp"
+    android:minHeight="400dp">
+    <FrameLayout
+        android:id="@+id/frameCalendarContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/HorizontalMargin"
+        android:paddingRight="@dimen/HorizontalMargin"
+        android:paddingTop="@dimen/VerticalMargin"
+        android:paddingBottom="@dimen/VerticalMargin"
+        android:layout_below="@+id/frameCalendarContainer"
+        android:background="@color/CalendarDialogActionBackground">
+        <Button
+            android:id="@+id/btnOk"
+            style="@style/PlusMinusButton"
+            android:layout_width="@dimen/PlusMinusButtonOuterSize"
+            android:layout_height="@dimen/PlusMinusButtonOuterSize"
+            android:layout_alignParentLeft="true"
+            android:text="✓" />
+        <Button
+            android:id="@+id/btnCancel"
+            style="@style/PlusMinusButton"
+            android:layout_width="@dimen/PlusMinusButtonOuterSize"
+            android:layout_height="@dimen/PlusMinusButtonOuterSize"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/frameCalendarContainer"
+            android:text="✕" />
+    </RelativeLayout>
 </RelativeLayout>
