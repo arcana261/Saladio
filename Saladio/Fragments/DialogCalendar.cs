@@ -17,6 +17,7 @@ namespace Saladio.Fragments
         private FragmentCalendar mFragmentCalendar;
         private Button mBtnOk;
         private Button mBtnCancel;
+        private bool mDismissLock = false;
 
         public event EventHandler<CalendarDatePickedEventArgs> CalendarDatePicked;
         public event EventHandler<CalendarDateCanceledEventArgs> CalendarDateCanceled;
@@ -203,6 +204,7 @@ namespace Saladio.Fragments
         private void BtnCancel_Click(object sender, EventArgs e)
         {
             CalendarDateCanceled?.Invoke(this, new CalendarDateCanceledEventArgs());
+            mDismissLock = true;
             Dismiss();
         }
 
@@ -211,7 +213,18 @@ namespace Saladio.Fragments
             if (mFragmentCalendar.HasValue)
             {
                 CalendarDatePicked?.Invoke(this, new CalendarDatePickedEventArgs(mFragmentCalendar.SelectedYear.Value, mFragmentCalendar.SelectedMonth.Value, mFragmentCalendar.SelectedDay.Value));
+                mDismissLock = true;
                 Dismiss();
+            }
+        }
+
+        public override void OnDismiss(IDialogInterface dialog)
+        {
+            base.OnDismiss(dialog);
+
+            if (!mDismissLock)
+            {
+                CalendarDateCanceled?.Invoke(this, new CalendarDateCanceledEventArgs());
             }
         }
 

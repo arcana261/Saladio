@@ -29,8 +29,22 @@ namespace Saladio.Fragments
         private Button mBtnCalendarPrevMonth;
         private Dictionary<int, TextView> mDayToCell;
 
+        private int mTodayYear;
+        private int mTodayMonth;
+        private int mTodayDay;
+
         public event EventHandler<CalendarDateSelectedEventArgs> CalendarDateSelected;
         public event EventHandler<CalendarDateClearedEventArgs> CalendarDateCleared;
+
+        public FragmentCalendar()
+        {
+            PersianCalendar persianCalendar = new PersianCalendar();
+            DateTime now = DateTime.Now;
+
+            mTodayYear = persianCalendar.GetYear(now);
+            mTodayMonth = persianCalendar.GetMonth(now);
+            mTodayDay = persianCalendar.GetDayOfMonth(now);
+        }
 
         private int GetWeekDayColumn(DayOfWeek dayOfWeek)
         {
@@ -87,16 +101,6 @@ namespace Saladio.Fragments
             return Color.Rgb(Color.GetRedComponent(color), Color.GetGreenComponent(color), Color.GetBlueComponent(color));
         }
 
-        private Drawable ToDrawable(Color color)
-        {
-            return new ColorDrawable(color);
-        }
-
-        private Drawable ToRgbDrawable(int color)
-        {
-            return ToDrawable(ToRgb(color));
-        }
-
         private void SetTag(TextView item, int day, bool status)
         {
             if (!status)
@@ -140,6 +144,7 @@ namespace Saladio.Fragments
         {
             Color colorEnabled = ToRgb(ContextCompat.GetColor(Context, Resource.Color.CalendarItemEnabled));
             Color colorDisabled = ToRgb(ContextCompat.GetColor(Context, Resource.Color.CalendarItemDisabled));
+            bool isTodayMonth = year == mTodayYear && month == mTodayMonth;
 
             PersianCalendar persianCalendar = new PersianCalendar();
             DateTime date = persianCalendar.ToDateTime(year, month, 1, 1, 1, 1, 1);
@@ -177,6 +182,15 @@ namespace Saladio.Fragments
                 item.SetTextColor(colorEnabled);
                 SetTagEnabled(item, i);
                 mDayToCell.Add(i, item);
+
+                if (isTodayMonth && i == mTodayDay)
+                {
+                    item.Background = ContextCompat.GetDrawable(Context, Resource.Drawable.CalendarCellTodayStyle);
+                }
+                else
+                {
+                    item.Background = null;
+                }
 
                 column = IncrementColumn(column);
                 if (column < 0)
@@ -330,7 +344,16 @@ namespace Saladio.Fragments
 
         private void DeselectCell(TextView item)
         {
-            item.Background = null;
+            if (mCurrentYear == mTodayYear && mCurrentMonth == mTodayMonth && GetTaggedDay(item) == mTodayDay)
+            {
+                item.Background = ContextCompat.GetDrawable(Context, Resource.Drawable.CalendarCellTodayStyle);
+            }
+            else
+            {
+                item.Background = null;
+            }
+
+            item.SetTextColor(ToRgb(ContextCompat.GetColor(Context, Resource.Color.CalendarItemDeselectedForeground)));
         }
 
         private void OnCellSelected(TextView item, int day)
@@ -341,6 +364,7 @@ namespace Saladio.Fragments
             }
 
             item.Background = ContextCompat.GetDrawable(Context, Resource.Drawable.CalendarCellSelectedStyle);
+            item.SetTextColor(ToRgb(ContextCompat.GetColor(Context, Resource.Color.CalendarItemSelectedForeground)));
 
             mCurrentSelectedCell = item;
             mCurrentDay = day;
@@ -413,7 +437,14 @@ namespace Saladio.Fragments
             {
                 if (value != null)
                 {
-                    PaintMonth((int)value, mCurrentMonth);
+                    if (Context != null)
+                    {
+                        PaintMonth((int)value, mCurrentMonth);
+                    }
+                    else
+                    {
+                        mCurrentYear = (int)value;
+                    }
                 }
             }
         }
@@ -433,7 +464,14 @@ namespace Saladio.Fragments
             {
                 if (value != null)
                 {
-                    PaintMonth(mCurrentYear, (int)value);
+                    if (Context != null)
+                    {
+                        PaintMonth(mCurrentYear, (int)value);
+                    }
+                    else
+                    {
+                        mCurrentMonth = (int)value;
+                    }
                 }
             }
         }
@@ -464,7 +502,11 @@ namespace Saladio.Fragments
                 else
                 {
                     mCurrentDay = (int)value;
-                    PaintMonth(mCurrentYear, mCurrentMonth);
+
+                    if (Context != null)
+                    {
+                        PaintMonth(mCurrentYear, mCurrentMonth);
+                    }
                 }
             }
         }

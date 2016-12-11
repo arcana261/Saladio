@@ -102,19 +102,8 @@ namespace Saladio.Activities
             {
                 case WizardPage.SignUpDetails:
                     {
-                        EditText etBirthDate = view.FindViewById<EditText>(Resource.Id.etBirthDate);
-
-                        etBirthDate.FocusChange += (sender, args) =>
-                        {
-                            if (args.HasFocus)
-                            {
-                                using (FragmentTransaction transaction = FragmentManager.BeginTransaction())
-                                {
-                                    DialogCalendar dialog = new DialogCalendar();
-                                    dialog.Show(transaction, "dialogCalendar");
-                                }
-                            }
-                        };
+                        CalendarPickerEditText etBirthDate = view.FindViewById<CalendarPickerEditText>(Resource.Id.etBirthDate);
+                        etBirthDate.Activity = this;
                     }
                     break;
                 default:

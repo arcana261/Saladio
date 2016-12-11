@@ -93,6 +93,7 @@
     <Compile Include="Adapters\SaladComponentGroupAdapter.cs" />
     <Compile Include="Adapters\SavedSaladGroupAdapter.cs" />
     <Compile Include="Adapters\SavedSaladSelectedEventArgs.cs" />
+    <Compile Include="Components\CalendarPickerEditText.cs" />
     <Compile Include="Components\ManualViewPager.cs" />
     <Compile Include="Components\RtlActivity.cs" />
     <Compile Include="Components\SlidingTabsAdapter.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Fragments\CalendarDateSelectedEventArgs.cs" />
     <Compile Include="Fragments\DialogCalendar.cs" />
     <Compile Include="Fragments\FragmentCalendar.cs" />
+    <Compile Include="Fragments\FragmentCalendarPicker.cs" />
     <Compile Include="Fragments\FragmentDatePicker.cs" />
     <Compile Include="ListViewExtensions.cs" />
     <Compile Include="Models\DeliveryHourRange.cs" />
@@ -201,6 +203,9 @@
     <AndroidResource Include="Resources\layout\DialogCalendar.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\FragmentCalendarPicker.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\ActivityStart.axml">
@@ -287,6 +292,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\CalendarCellSelectedStyle.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\CalendarCellTodayStyle.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

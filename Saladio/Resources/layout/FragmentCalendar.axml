@@ -26,6 +26,7 @@
             android:layout_toRightOf="@+id/btnCalendarNextMonth"
             android:layout_centerVertical="true"
             android:gravity="center"
+            android:textColor="@color/CalendarTitleForeground"
             android:text="December, 2016" />
         <Button
             android:id="@+id/btnCalendarPrevMonth"

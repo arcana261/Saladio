@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
   <color name="transparent">#00000000</color>
-  <color name="SaladioBackground">@android:color/white</color>
-  <color name="SaladioActionBarTitle">@android:color/white</color>
+  <color name="SaladioBackground">@color/SaladioTernary</color>
+  <color name="SaladioForeground">@color/SaladioTernaryNegated</color>
+  <color name="SaladioActionBarTitle">@color/SaladioTernary</color>
   <color name="SaladioActionBarButtonSolid">@color/SaladioSecondary</color>
   <color name="SaladioActionBarButtonGradient">@color/SaladioSecondaryLight</color>
 
@@ -13,6 +14,9 @@
 
   <color name="SaladioSecondary">#FF9933</color>
   <color name="SaladioSecondaryLight">#FFD3AD</color>
+  
+  <color name="SaladioTernary">@android:color/white</color>
+  <color name="SaladioTernaryNegated">@android:color/black</color>
   
   <color name="ButtonSolidColor">@color/SaladioPrimary</color>
   <color name="ButtonGradientColor">@color/SaladioPrimaryDark</color>
@@ -35,8 +39,12 @@
   <color name="SavedSaladSelected">@android:color/darker_gray</color>
 
   <color name="CalendarTitleBackground">@color/SaladioPrimary</color>
+  <color name="CalendarTitleForeground">@color/SaladioTernary</color>
+  <color name="CalendarItemToday">@color/SaladioPrimaryDimmedLight</color>
   <color name="CalendarItemEnabled">@android:color/black</color>
   <color name="CalendarItemDisabled">@android:color/darker_gray</color>
   <color name="CalendarItemSelected">@color/SaladioPrimary</color>
+  <color name="CalendarItemSelectedForeground">@color/SaladioTernary</color>
+  <color name="CalendarItemDeselectedForeground">@color/SaladioForeground</color>
   <color name="CalendarDialogActionBackground">@color/SaladioPrimary</color>
 </resources>
