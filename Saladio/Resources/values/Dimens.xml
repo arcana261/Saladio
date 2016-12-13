@@ -22,8 +22,8 @@
   <dimen name="EditTextPaddingBottom">6dp</dimen>
   
   <dimen name="ScreenBottomMargin">30dp</dimen>
-  <dimen name="ScreenLeftMargin">20dp</dimen>
-  <dimen name="ScreenRightMargin">20dp</dimen>
+  <dimen name="ScreenLeftMargin">10dp</dimen>
+  <dimen name="ScreenRightMargin">10dp</dimen>
   <dimen name="ScreenTopMargin">30dp</dimen>
 
   <dimen name="VerticalMargin">15dp</dimen>

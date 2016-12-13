@@ -16,5 +16,6 @@ namespace Saladio.Models
     {
         public int From { get; set; }
         public int To { get; set; }
+        public string Catagory { get; set; }
     }
 }

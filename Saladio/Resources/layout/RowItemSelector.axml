@@ -1,17 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="right">
+    android:orientation="vertical"
+    android:id="@+id/layoutContainer">
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
     <TextView
         android:id="@+id/radioItemText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/radioItemSelected"
+        android:layout_centerVertical="true"
         android:text="Select Me" />
     <RadioButton
         android:id="@+id/radioItemSelected"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:text="" />
+  </RelativeLayout>
+
+  <View
+    android:id="@+id/divider"
+    style="@style/SaladioListDivider"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/ListDividerStroke"
+    android:layout_marginTop="@dimen/DividerMargin"
+    android:layout_marginBottom="@dimen/DividerMargin" />
 </LinearLayout>

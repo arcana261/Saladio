@@ -56,7 +56,10 @@ namespace Saladio.Adapters
 
             RadioButton radioItemSelected = row.FindViewById<RadioButton>(Resource.Id.radioItemSelected);
             TextView radioItemText = row.FindViewById<TextView>(Resource.Id.radioItemText);
+            LinearLayout layoutContainer = row.FindViewById<LinearLayout>(Resource.Id.layoutContainer);
             string item = this[position];
+
+            layoutContainer.RemoveView(layoutContainer.FindViewById<View>(Resource.Id.divider));
 
             radioItemText.Text = item;
             radioItemText.Tag = radioItemSelected;

@@ -162,42 +162,72 @@ namespace Saladio.Contexts
             {
                 if (mDeliveryHours == null)
                 {
+                    const string morningDelivery = "صرف ناهار";
+                    const string dinnerDelivery = "صرف شام";
+
                     mDeliveryHours = new List<DeliveryHourRange>();
 
                     mDeliveryHours.Add(new DeliveryHourRange()
                     {
-                        From = 10,
-                        To = 12
+                        From = 11,
+                        To = 12,
+                        Catagory = morningDelivery
                     });
 
                     mDeliveryHours.Add(new DeliveryHourRange()
                     {
                         From = 12,
-                        To = 14
+                        To = 13,
+                        Catagory = morningDelivery
+                    });
+
+                    mDeliveryHours.Add(new DeliveryHourRange()
+                    {
+                        From = 13,
+                        To = 14,
+                        Catagory = morningDelivery
                     });
 
                     mDeliveryHours.Add(new DeliveryHourRange()
                     {
                         From = 14,
-                        To = 16
-                    });
-
-                    mDeliveryHours.Add(new DeliveryHourRange()
-                    {
-                        From = 16,
-                        To = 18
+                        To = 15,
+                        Catagory = morningDelivery
                     });
 
                     mDeliveryHours.Add(new DeliveryHourRange()
                     {
                         From = 18,
-                        To = 20
+                        To = 19,
+                        Catagory = dinnerDelivery
+                    });
+
+                    mDeliveryHours.Add(new DeliveryHourRange()
+                    {
+                        From = 19,
+                        To = 20,
+                        Catagory = dinnerDelivery
                     });
 
                     mDeliveryHours.Add(new DeliveryHourRange()
                     {
                         From = 20,
-                        To = 22
+                        To = 21,
+                        Catagory = dinnerDelivery
+                    });
+
+                    mDeliveryHours.Add(new DeliveryHourRange()
+                    {
+                        From = 21,
+                        To = 22,
+                        Catagory = dinnerDelivery
+                    });
+
+                    mDeliveryHours.Add(new DeliveryHourRange()
+                    {
+                        From = 22,
+                        To = 23,
+                        Catagory = dinnerDelivery
                     });
                 }
             

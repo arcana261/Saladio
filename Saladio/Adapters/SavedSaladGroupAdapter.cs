@@ -167,9 +167,13 @@ namespace Saladio.Adapters
 
                 TextView txtSaladTitle = subRow.FindViewById<TextView>(Resource.Id.txtSaladTitle);
                 TextView txtSaladDescription = subRow.FindViewById<TextView>(Resource.Id.txtSaladDescription);
+                TextView txtSaladCallorie = subRow.FindViewById<TextView>(Resource.Id.txtSaladCalorie);
+                TextView txtSaladPrice = subRow.FindViewById<TextView>(Resource.Id.txtSaladPrice);
 
                 txtSaladTitle.Text = savedSalad.Name;
                 txtSaladDescription.Text = savedSalad.Ingredients;
+                txtSaladCallorie.Text = savedSalad.Callorie.ToString().ToPersianNumbers();
+                txtSaladPrice.Text = savedSalad.Price.ToString().ToPersianNumbers();
 
                 subRow.Tag = position.ToString() + ":" + i;
                 subRow.Click += SubRow_Click;

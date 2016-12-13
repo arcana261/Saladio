@@ -88,6 +88,7 @@
     <Compile Include="Activities\ActivityOrderScheduled.cs" />
     <Compile Include="Activities\ActivityStart.cs" />
     <Compile Include="ActivityExtensions.cs" />
+    <Compile Include="Adapters\GroupedItemSelectorAdapter.cs" />
     <Compile Include="Adapters\ItemSelectorAdapter.cs" />
     <Compile Include="Adapters\OrderScheduleCalendarAdapter.cs" />
     <Compile Include="Adapters\SaladComponentGroupAdapter.cs" />
@@ -200,6 +201,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\DialogCalendar.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\TitledActionBar.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\RowItemSelectorGroup.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

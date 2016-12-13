@@ -72,6 +72,12 @@ namespace Saladio.Activities
 
         private ManualViewPager mWizardContainer;
         private Button mBtnWizard;
+        private TextView mTxtActionBarTitle;
+
+        private void SetTitle(string title)
+        {
+            mTxtActionBarTitle.Text = title;
+        }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -81,7 +87,8 @@ namespace Saladio.Activities
             SetContentView(Resource.Layout.ActivityOrderScheduled);
 
             ActionBar.SetDisplayOptions(ActionBarDisplayOptions.ShowCustom, ActionBarDisplayOptions.ShowCustom);
-            ActionBar.SetCustomView(Resource.Layout.ActionBar);
+            ActionBar.SetCustomView(Resource.Layout.TitledActionBar);
+            mTxtActionBarTitle = ActionBar.CustomView.FindViewById<TextView>(Resource.Id.txtActionBarTitle);
 
             mWizardContainer = FindViewById<ManualViewPager>(Resource.Id.wizardContainer);
             mBtnWizard = FindViewById<Button>(Resource.Id.btnWizard);
@@ -133,9 +140,9 @@ namespace Saladio.Activities
                 case WizardPage.SelectDeliveryDate:
                     using (FragmentTransaction transaction = FragmentManager.BeginTransaction())
                     {
-                        FragmentDatePicker datePicker = new FragmentDatePicker();
+                        FragmentCalendar calendar = new FragmentCalendar();
 
-                        transaction.Replace(Resource.Id.layoutDatePickerContainer, datePicker);
+                        transaction.Replace(Resource.Id.layoutDatePickerContainer, calendar);
                         transaction.Commit();
                     }
                     break;
@@ -144,7 +151,8 @@ namespace Saladio.Activities
                     {
                         ListView lstSelectDeliveryHour = view.FindViewById<ListView>(Resource.Id.lstSelectDeliveryHour);
 
-                        ItemSelectorAdapter adapter = new ItemSelectorAdapter(this, context.DeliveryHours.Select(x => x.From + " - " + x.To).ToList());
+                        GroupedItemSelectorAdapter adapter = new GroupedItemSelectorAdapter(this,
+                            context.DeliveryHours.Select(x => new KeyValuePair<string, string>(x.Catagory, x.From + " - " + x.To)).ToList());
                         lstSelectDeliveryHour.Adapter = adapter;
                     }
                     break;
@@ -162,7 +170,7 @@ namespace Saladio.Activities
             }
         }
 
-        private string GetPageButtonText(WizardPage page)
+        private string GetPageTitle(WizardPage page)
         {
             switch (page)
             {
@@ -174,6 +182,20 @@ namespace Saladio.Activities
                     return Resources.GetString(Resource.String.SelectSaladDeliveryHour);
                 case WizardPage.SelectDeliveryAddress:
                     return Resources.GetString(Resource.String.SelectDeliveryAddress);
+                default:
+                    throw new ArgumentException("invalid requested page: " + page.ToString(), "page");
+            }
+        }
+
+        private string GetPageButtonText(WizardPage page)
+        {
+            switch (page)
+            {
+                case WizardPage.SelectSalad:
+                case WizardPage.SelectDeliveryDate:
+                case WizardPage.SelectDeliveryHour:
+                case WizardPage.SelectDeliveryAddress:
+                    return Resources.GetString(Resource.String.BtnNext);
                 default:
                     throw new ArgumentException("invalid requested page: " + page.ToString(), "page");
             }
@@ -218,6 +240,7 @@ namespace Saladio.Activities
         {
             mWizardContainer.SetCurrentItem((int)page, true);
             string text = GetPageButtonText(page);
+            string title = GetPageTitle(page);
 
             if (text != null)
             {
@@ -227,6 +250,15 @@ namespace Saladio.Activities
             else
             {
                 mBtnWizard.Visibility = ViewStates.Gone;
+            }
+
+            if (title != null)
+            {
+                SetTitle(title);
+            }
+            else
+            {
+                SetTitle(Resources.GetString(Resource.String.ApplicationName));
             }
         }
 

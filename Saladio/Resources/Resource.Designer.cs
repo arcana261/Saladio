@@ -393,8 +393,8 @@ namespace Saladio
 			// aapt resource value: 0x7f0a0005
 			public const int btnCancel = 2131361797;
 			
-			// aapt resource value: 0x7f0a0051
-			public const int btnMinus = 2131361873;
+			// aapt resource value: 0x7f0a0054
+			public const int btnMinus = 2131361876;
 			
 			// aapt resource value: 0x7f0a0004
 			public const int btnOk = 2131361796;
@@ -402,8 +402,8 @@ namespace Saladio
 			// aapt resource value: 0x7f0a0038
 			public const int btnOrderScheduledSalad = 2131361848;
 			
-			// aapt resource value: 0x7f0a0053
-			public const int btnPlus = 2131361875;
+			// aapt resource value: 0x7f0a0056
+			public const int btnPlus = 2131361878;
 			
 			// aapt resource value: 0x7f0a0002
 			public const int btnWizard = 2131361794;
@@ -411,8 +411,8 @@ namespace Saladio
 			// aapt resource value: 0x7f0a0000
 			public const int contentFragment = 2131361792;
 			
-			// aapt resource value: 0x7f0a0055
-			public const int divider = 2131361877;
+			// aapt resource value: 0x7f0a004c
+			public const int divider = 2131361868;
 			
 			// aapt resource value: 0x7f0a0047
 			public const int etAddress1 = 2131361863;
@@ -444,41 +444,44 @@ namespace Saladio
 			// aapt resource value: 0x7f0a0003
 			public const int frameCalendarContainer = 2131361795;
 			
-			// aapt resource value: 0x7f0a0063
-			public const int iconLogo = 2131361891;
+			// aapt resource value: 0x7f0a0066
+			public const int iconLogo = 2131361894;
 			
-			// aapt resource value: 0x7f0a0058
-			public const int imgSalad = 2131361880;
+			// aapt resource value: 0x7f0a005a
+			public const int imgSalad = 2131361882;
 			
-			// aapt resource value: 0x7f0a0050
-			public const int layoutContainer = 2131361872;
+			// aapt resource value: 0x7f0a004e
+			public const int layoutChoices = 2131361870;
+			
+			// aapt resource value: 0x7f0a0049
+			public const int layoutContainer = 2131361865;
 			
 			// aapt resource value: 0x7f0a003c
 			public const int layoutDatePickerContainer = 2131361852;
 			
-			// aapt resource value: 0x7f0a004b
-			public const int layoutDinnerIcons = 2131361867;
+			// aapt resource value: 0x7f0a004f
+			public const int layoutDinnerIcons = 2131361871;
 			
-			// aapt resource value: 0x7f0a004c
-			public const int layoutLaunchIcons = 2131361868;
+			// aapt resource value: 0x7f0a0050
+			public const int layoutLaunchIcons = 2131361872;
 			
-			// aapt resource value: 0x7f0a0057
-			public const int layoutSaladComponents = 2131361879;
-			
-			// aapt resource value: 0x7f0a005e
-			public const int layoutSavedSalads = 2131361886;
-			
-			// aapt resource value: 0x7f0a005f
-			public const int lstClassicSalads = 2131361887;
+			// aapt resource value: 0x7f0a0059
+			public const int layoutSaladComponents = 2131361881;
 			
 			// aapt resource value: 0x7f0a0060
-			public const int lstCustomSalad = 2131361888;
+			public const int layoutSavedSalads = 2131361888;
 			
 			// aapt resource value: 0x7f0a0061
-			public const int lstOrderSchedule = 2131361889;
+			public const int lstClassicSalads = 2131361889;
 			
 			// aapt resource value: 0x7f0a0062
-			public const int lstSavedSalads = 2131361890;
+			public const int lstCustomSalad = 2131361890;
+			
+			// aapt resource value: 0x7f0a0063
+			public const int lstOrderSchedule = 2131361891;
+			
+			// aapt resource value: 0x7f0a0064
+			public const int lstSavedSalads = 2131361892;
 			
 			// aapt resource value: 0x7f0a003b
 			public const int lstSelectDeliveryAddress = 2131361851;
@@ -489,11 +492,11 @@ namespace Saladio
 			// aapt resource value: 0x7f0a003e
 			public const int lstSelectSalad = 2131361854;
 			
-			// aapt resource value: 0x7f0a004a
-			public const int radioItemSelected = 2131361866;
+			// aapt resource value: 0x7f0a004b
+			public const int radioItemSelected = 2131361867;
 			
-			// aapt resource value: 0x7f0a0049
-			public const int radioItemText = 2131361865;
+			// aapt resource value: 0x7f0a004a
+			public const int radioItemText = 2131361866;
 			
 			// aapt resource value: 0x7f0a0036
 			public const int slidingTabs = 2131361846;
@@ -510,14 +513,20 @@ namespace Saladio
 			// aapt resource value: 0x7f0a0033
 			public const int spinYear = 2131361843;
 			
+			// aapt resource value: 0x7f0a0065
+			public const int txtActionBarTitle = 2131361893;
+			
 			// aapt resource value: 0x7f0a0007
 			public const int txtCalendarCurrentMonth = 2131361799;
 			
-			// aapt resource value: 0x7f0a004e
-			public const int txtDayOfMonth = 2131361870;
+			// aapt resource value: 0x7f0a0052
+			public const int txtDayOfMonth = 2131361874;
+			
+			// aapt resource value: 0x7f0a0051
+			public const int txtDayOfWeek = 2131361873;
 			
 			// aapt resource value: 0x7f0a004d
-			public const int txtDayOfWeek = 2131361869;
+			public const int txtGroupTitle = 2131361869;
 			
 			// aapt resource value: 0x7f0a0039
 			public const int txtItemSubTitle = 2131361849;
@@ -525,11 +534,11 @@ namespace Saladio
 			// aapt resource value: 0x7f0a003a
 			public const int txtItemTitle = 2131361850;
 			
-			// aapt resource value: 0x7f0a004f
-			public const int txtMonth = 2131361871;
+			// aapt resource value: 0x7f0a0053
+			public const int txtMonth = 2131361875;
 			
-			// aapt resource value: 0x7f0a0052
-			public const int txtQuantity = 2131361874;
+			// aapt resource value: 0x7f0a0055
+			public const int txtQuantity = 2131361877;
 			
 			// aapt resource value: 0x7f0a0009
 			public const int txtRow1Column1 = 2131361801;
@@ -657,26 +666,26 @@ namespace Saladio
 			// aapt resource value: 0x7f0a0032
 			public const int txtRow6Column7 = 2131361842;
 			
-			// aapt resource value: 0x7f0a005b
-			public const int txtSaladCalorie = 2131361883;
+			// aapt resource value: 0x7f0a005d
+			public const int txtSaladCalorie = 2131361885;
 			
-			// aapt resource value: 0x7f0a0054
-			public const int txtSaladComponent = 2131361876;
+			// aapt resource value: 0x7f0a0057
+			public const int txtSaladComponent = 2131361879;
 			
-			// aapt resource value: 0x7f0a0056
-			public const int txtSaladComponentGroup = 2131361878;
-			
-			// aapt resource value: 0x7f0a005a
-			public const int txtSaladDescription = 2131361882;
+			// aapt resource value: 0x7f0a0058
+			public const int txtSaladComponentGroup = 2131361880;
 			
 			// aapt resource value: 0x7f0a005c
-			public const int txtSaladPrice = 2131361884;
+			public const int txtSaladDescription = 2131361884;
 			
-			// aapt resource value: 0x7f0a0059
-			public const int txtSaladTitle = 2131361881;
+			// aapt resource value: 0x7f0a005e
+			public const int txtSaladPrice = 2131361886;
 			
-			// aapt resource value: 0x7f0a005d
-			public const int txtSavedSaladGroup = 2131361885;
+			// aapt resource value: 0x7f0a005b
+			public const int txtSaladTitle = 2131361883;
+			
+			// aapt resource value: 0x7f0a005f
+			public const int txtSavedSaladGroup = 2131361887;
 			
 			// aapt resource value: 0x7f0a0037
 			public const int viewPager = 2131361847;
@@ -752,34 +761,40 @@ namespace Saladio
 			public const int RowItemSelector = 2130903057;
 			
 			// aapt resource value: 0x7f030012
-			public const int RowOrderScheduleCalendar = 2130903058;
+			public const int RowItemSelectorGroup = 2130903058;
 			
 			// aapt resource value: 0x7f030013
-			public const int RowSaladComponent = 2130903059;
+			public const int RowOrderScheduleCalendar = 2130903059;
 			
 			// aapt resource value: 0x7f030014
-			public const int RowSaladComponentGroup = 2130903060;
+			public const int RowSaladComponent = 2130903060;
 			
 			// aapt resource value: 0x7f030015
-			public const int RowSavedSalad = 2130903061;
+			public const int RowSaladComponentGroup = 2130903061;
 			
 			// aapt resource value: 0x7f030016
-			public const int RowSavedSaladGroup = 2130903062;
+			public const int RowSavedSalad = 2130903062;
 			
 			// aapt resource value: 0x7f030017
-			public const int TabAbout = 2130903063;
+			public const int RowSavedSaladGroup = 2130903063;
 			
 			// aapt resource value: 0x7f030018
-			public const int TabClassicSalads = 2130903064;
+			public const int TabAbout = 2130903064;
 			
 			// aapt resource value: 0x7f030019
-			public const int TabOrderCustomSalad = 2130903065;
+			public const int TabClassicSalads = 2130903065;
 			
 			// aapt resource value: 0x7f03001a
-			public const int TabOrderSchedule = 2130903066;
+			public const int TabOrderCustomSalad = 2130903066;
 			
 			// aapt resource value: 0x7f03001b
-			public const int TabSavedSalads = 2130903067;
+			public const int TabOrderSchedule = 2130903067;
+			
+			// aapt resource value: 0x7f03001c
+			public const int TabSavedSalads = 2130903068;
+			
+			// aapt resource value: 0x7f03001d
+			public const int TitledActionBar = 2130903069;
 			
 			static Layout()
 			{
@@ -1003,59 +1018,62 @@ namespace Saladio
 		public partial class Style
 		{
 			
-			// aapt resource value: 0x7f080008
-			public const int CalendarItem = 2131230728;
-			
 			// aapt resource value: 0x7f080009
-			public const int CalendarWeekHeader = 2131230729;
+			public const int CalendarItem = 2131230729;
 			
-			// aapt resource value: 0x7f080004
-			public const int CustomSaladInformation = 2131230724;
+			// aapt resource value: 0x7f08000a
+			public const int CalendarWeekHeader = 2131230730;
 			
 			// aapt resource value: 0x7f080005
-			public const int CustomSaladInformationBar = 2131230725;
+			public const int CustomSaladInformation = 2131230725;
+			
+			// aapt resource value: 0x7f080006
+			public const int CustomSaladInformationBar = 2131230726;
 			
 			// aapt resource value: 0x7f080001
-			public const int PlusMinusButton = 2131230721;
+			public const int ItemSelectorGroupTitle = 2131230721;
+			
+			// aapt resource value: 0x7f080002
+			public const int PlusMinusButton = 2131230722;
 			
 			// aapt resource value: 0x7f080000
 			public const int SaladComponentGroupTitle = 2131230720;
 			
-			// aapt resource value: 0x7f08000b
-			public const int SaladioActionBar = 2131230731;
+			// aapt resource value: 0x7f08000c
+			public const int SaladioActionBar = 2131230732;
+			
+			// aapt resource value: 0x7f080012
+			public const int SaladioActionBarButton = 2131230738;
 			
 			// aapt resource value: 0x7f080011
-			public const int SaladioActionBarButton = 2131230737;
-			
-			// aapt resource value: 0x7f080010
-			public const int SaladioActionBarTitle = 2131230736;
-			
-			// aapt resource value: 0x7f08000c
-			public const int SaladioButton = 2131230732;
+			public const int SaladioActionBarTitle = 2131230737;
 			
 			// aapt resource value: 0x7f08000d
-			public const int SaladioEditText = 2131230733;
-			
-			// aapt resource value: 0x7f080002
-			public const int SaladioListDivider = 2131230722;
-			
-			// aapt resource value: 0x7f08000f
-			public const int SaladioRadioButton = 2131230735;
+			public const int SaladioButton = 2131230733;
 			
 			// aapt resource value: 0x7f08000e
-			public const int SaladioTextView = 2131230734;
-			
-			// aapt resource value: 0x7f08000a
-			public const int SaladioTheme = 2131230730;
-			
-			// aapt resource value: 0x7f080006
-			public const int SavedSaladGroupTitle = 2131230726;
-			
-			// aapt resource value: 0x7f080007
-			public const int SavedSaladTitle = 2131230727;
+			public const int SaladioEditText = 2131230734;
 			
 			// aapt resource value: 0x7f080003
-			public const int VerticalListDivider = 2131230723;
+			public const int SaladioListDivider = 2131230723;
+			
+			// aapt resource value: 0x7f080010
+			public const int SaladioRadioButton = 2131230736;
+			
+			// aapt resource value: 0x7f08000f
+			public const int SaladioTextView = 2131230735;
+			
+			// aapt resource value: 0x7f08000b
+			public const int SaladioTheme = 2131230731;
+			
+			// aapt resource value: 0x7f080007
+			public const int SavedSaladGroupTitle = 2131230727;
+			
+			// aapt resource value: 0x7f080008
+			public const int SavedSaladTitle = 2131230728;
+			
+			// aapt resource value: 0x7f080004
+			public const int VerticalListDivider = 2131230724;
 			
 			static Style()
 			{
