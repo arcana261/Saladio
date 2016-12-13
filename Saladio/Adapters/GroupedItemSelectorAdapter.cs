@@ -90,7 +90,7 @@ namespace Saladio.Adapters
                 radioItemText.Tag = radioItemSelected;
 
                 radioItemSelected.Tag = position.ToString() + "-" + index.ToString();
-                radioItemSelected.Click -= RadioItemSelected_Click;
+                radioItemSelected.CheckedChange -= RadioItemSelected_CheckedChange;
                 if (mSelectedPosition.HasValue && mSelectedPosition.Value == position && mSelectedIndex.HasValue && mSelectedIndex.Value == index)
                 {
                     radioItemSelected.Checked = true;
@@ -99,7 +99,7 @@ namespace Saladio.Adapters
                 {
                     radioItemSelected.Checked = false;
                 }
-                radioItemSelected.Click += RadioItemSelected_Click;
+                radioItemSelected.CheckedChange += RadioItemSelected_CheckedChange;
 
                 layoutChoices.AddView(subRow);
 
@@ -118,25 +118,28 @@ namespace Saladio.Adapters
             return row;
         }
 
+        private void RadioItemSelected_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
+        {
+            if (e.IsChecked)
+            {
+                RadioButton radioItemSelected = (RadioButton)sender;
+                string[] properties = ((string)radioItemSelected.Tag).Split('-');
+                int position = int.Parse(properties[0]);
+                int index = int.Parse(properties[1]);
+
+                mSelectedPosition = position;
+                mSelectedIndex = index;
+
+                NotifyDataSetChanged();
+            }
+        }
+
         private void RadioItemText_Click(object sender, EventArgs e)
         {
             TextView radioItemText = (TextView)sender;
             RadioButton radioItemSelected = (RadioButton)radioItemText.Tag;
 
             radioItemSelected.Checked = true;
-        }
-
-        private void RadioItemSelected_Click(object sender, EventArgs e)
-        {
-            RadioButton radioItemSelected = (RadioButton)sender;
-            string[] properties = ((string)radioItemSelected.Tag).Split('-');
-            int position = int.Parse(properties[0]);
-            int index = int.Parse(properties[1]);
-
-            mSelectedPosition = position;
-            mSelectedIndex = index;
-
-            NotifyDataSetChanged();
         }
     }
 }

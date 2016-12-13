@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -152,7 +152,7 @@ namespace Saladio.Activities
                         ListView lstSelectDeliveryHour = view.FindViewById<ListView>(Resource.Id.lstSelectDeliveryHour);
 
                         GroupedItemSelectorAdapter adapter = new GroupedItemSelectorAdapter(this,
-                            context.DeliveryHours.Select(x => new KeyValuePair<string, string>(x.Catagory, x.From + " - " + x.To)).ToList());
+                            context.DeliveryHours.Select(x => new KeyValuePair<string, string>(x.Catagory, "ساعت " + x.From.ToString().ToPersianNumbers() + " الی " + x.To.ToString().ToPersianNumbers())).ToList());
                         lstSelectDeliveryHour.Adapter = adapter;
                     }
                     break;

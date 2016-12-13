@@ -23,6 +23,7 @@
   
   <color name="EditTextBackground">#FFF</color>
   <color name="EditTextStroke">@color/SaladioPrimaryDark</color>
+  <color name="EditTextLightStroke">@color/SaladioPrimaryLight</color>
 
   <color name="SaladComponentGroupStroke">@color/SaladioPrimaryDark</color>
 

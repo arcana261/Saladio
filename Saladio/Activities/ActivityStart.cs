@@ -7,6 +7,7 @@ using Java.Lang;
 using System;
 using Saladio.Components;
 using Saladio.Fragments;
+using Android.Content.Res;
 
 namespace Saladio.Activities
 {
@@ -62,7 +63,30 @@ namespace Saladio.Activities
 
         private ManualViewPager mWizardContainer;
         private Button mBtnWizard;
-        private View mCurrentPage;
+        private WizardPage mCurrentPage;
+
+        private View welcomePortraitContainer1;
+        private View welcomePortraitContainer2;
+        private View welcomeLandscapeContainer;
+
+        private TextView radioFemaleText;
+        private RadioButton radioFemaleSelected;
+        private TextView radioMaleText;
+        private RadioButton radioMaleSelected;
+
+        private void SwitchPortrait()
+        {
+            welcomePortraitContainer1.Visibility = ViewStates.Visible;
+            welcomePortraitContainer2.Visibility = ViewStates.Visible;
+            welcomeLandscapeContainer.Visibility = ViewStates.Gone;
+        }
+
+        private void SwitchLandscape()
+        {
+            welcomeLandscapeContainer.Visibility = ViewStates.Visible;
+            welcomePortraitContainer1.Visibility = ViewStates.Gone;
+            welcomePortraitContainer2.Visibility = ViewStates.Gone;
+        }
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -100,15 +124,73 @@ namespace Saladio.Activities
         {
             switch (page)
             {
+                case WizardPage.Welcome:
+                    {
+                        welcomePortraitContainer1 = view.FindViewById<View>(Resource.Id.welcomePortraitContainer1);
+                        welcomePortraitContainer2 = view.FindViewById<View>(Resource.Id.welcomePortraitContainer2);
+                        welcomeLandscapeContainer = view.FindViewById<View>(Resource.Id.welcomeLandscapeContainer);
+
+                        if (Resources.Configuration.Orientation == Android.Content.Res.Orientation.Landscape)
+                        {
+                            SwitchLandscape();
+                        }
+                        else
+                        {
+                            SwitchPortrait();
+                        }
+                    }
+                    break;
                 case WizardPage.SignUpDetails:
                     {
                         CalendarPickerEditText etBirthDate = view.FindViewById<CalendarPickerEditText>(Resource.Id.etBirthDate);
                         etBirthDate.Activity = this;
+
+                        radioFemaleText = view.FindViewById<TextView>(Resource.Id.radioFemaleText);
+                        radioFemaleSelected = view.FindViewById<RadioButton>(Resource.Id.radioFemaleSelected);
+
+                        radioMaleText = view.FindViewById<TextView>(Resource.Id.radioMaleText);
+                        radioMaleSelected = view.FindViewById<RadioButton>(Resource.Id.radioMaleSelected);
+
+                        radioFemaleText.Click -= RadioFemaleText_Click;
+                        radioFemaleSelected.CheckedChange -= RadioFemaleSelected_CheckedChange;
+                        radioFemaleText.Click += RadioFemaleText_Click;
+                        radioFemaleSelected.CheckedChange += RadioFemaleSelected_CheckedChange;
+
+                        radioMaleText.Click -= RadioMaleText_Click;
+                        radioMaleSelected.CheckedChange -= RadioMaleSelected_CheckedChange;
+                        radioMaleText.Click += RadioMaleText_Click;
+                        radioMaleSelected.CheckedChange += RadioMaleSelected_CheckedChange;
                     }
                     break;
                 default:
                     break;
             }   
+        }
+
+        private void RadioMaleSelected_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
+        {
+            if (e.IsChecked)
+            {
+                radioFemaleSelected.Checked = false;
+            }
+        }
+
+        private void RadioMaleText_Click(object sender, EventArgs e)
+        {
+            radioMaleSelected.Checked = true;
+        }
+
+        private void RadioFemaleSelected_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
+        {
+            if (e.IsChecked)
+            {
+                radioMaleSelected.Checked = false;
+            }
+        }
+
+        private void RadioFemaleText_Click(object sender, EventArgs e)
+        {
+            radioFemaleSelected.Checked = true;
         }
 
         private string GetPageButtonText(WizardPage page)
@@ -162,11 +244,29 @@ namespace Saladio.Activities
         {
             mWizardContainer.SetCurrentItem((int)page, true);
             mBtnWizard.Text = GetPageButtonText(page);
+            mCurrentPage = page;
         }
 
         private void BtnWizard_Click(object sender, EventArgs e)
         {
             OnWizardButtonClicked((WizardPage)mWizardContainer.CurrentItem, mWizardContainer.GetChildAt(mWizardContainer.CurrentItem));
+        }
+
+        public override void OnConfigurationChanged(Configuration newConfig)
+        {
+            base.OnConfigurationChanged(newConfig);
+
+            if (mCurrentPage == WizardPage.Welcome)
+            {
+                if (newConfig.Orientation == Android.Content.Res.Orientation.Landscape)
+                {
+                    SwitchLandscape();
+                }
+                else
+                {
+                    SwitchPortrait();
+                }
+            }
         }
     }
 }

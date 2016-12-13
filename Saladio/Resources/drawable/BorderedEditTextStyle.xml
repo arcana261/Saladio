@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:state_focused="false">
+    <shape>
+      <gradient android:startColor="@color/EditTextBackground" android:endColor="@color/EditTextBackground"/>
+      <stroke android:width="@dimen/EditTextFocusedStroke" android:color="@color/EditTextLightStroke"/>
+      <corners android:radius="@dimen/EditTextRadius"/>
+      <padding android:left="@dimen/EditTextPaddingLeft" android:top="@dimen/EditTextPaddingTop" android:right="@dimen/EditTextPaddingRight" android:bottom="@dimen/EditTextPaddingBottom" />
+    </shape>
+  </item>
+  <item android:state_focused="true">
+    <shape>
+      <gradient android:startColor="@color/EditTextBackground" android:endColor="@color/EditTextBackground"/>
+      <stroke android:width="@dimen/EditTextFocusedStroke" android:color="@color/EditTextStroke"/>
+      <corners android:radius="@dimen/EditTextRadius"/>
+      <padding android:right="@dimen/EditTextPaddingRight"/>
+    </shape>
+  </item>
+</selector>

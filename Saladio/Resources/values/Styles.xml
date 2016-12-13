@@ -15,6 +15,10 @@
   <style name="ItemSelectorGroupTitle" parent="@style/SavedSaladGroupTitle">
   </style>
 
+  <style name="BorderedEditText" parent="@style/SaladioEditText">
+    <item name="android:background">@drawable/BorderedEditTextStyle</item>
+  </style>
+
   <style name="PlusMinusButton" parent="@style/SaladioButton">
     <item name="android:width">@dimen/PlusMinusButtonOuterSize</item>
     <item name="android:height">@dimen/PlusMinusButtonOuterSize</item>

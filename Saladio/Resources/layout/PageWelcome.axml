@@ -5,9 +5,11 @@
     android:layout_height="match_parent"
     android:weightSum="100">
     <RelativeLayout
+        android:id="@+id/welcomePortraitContainer1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="30"
+        android:visibility="gone"
         android:layout_marginBottom="@dimen/VerticalMargin">
         <ImageView
             android:layout_width="wrap_content"
@@ -18,9 +20,11 @@
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/welcomePortraitContainer2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="15"
+        android:visibility="gone"
         android:layout_marginTop="@dimen/VerticalMargin"
         android:layout_marginBottom="@dimen/VerticalMargin">
         <ImageView
@@ -31,6 +35,40 @@
             android:scaleType="centerCrop"
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/welcomeLandscapeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="35"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_marginBottom="@dimen/VerticalMargin"
+        android:layout_marginTop="@dimen/VerticalMargin">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/pic_pie_salad"
+                android:adjustViewBounds="true"
+                android:layout_centerInParent="true"
+                android:scaleType="centerCrop" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/pic_salad_1"
+                android:adjustViewBounds="true"
+                android:layout_centerInParent="true"
+                android:scaleType="centerCrop" />
+        </RelativeLayout>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

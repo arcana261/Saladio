@@ -17,6 +17,8 @@
   <string name="FormInputPasswordHint">رمز عبور</string>
   <string name="FormInputPhoneHint">تلفن همراه</string>
   <string name="FormDescriptionEmail">&#8226; آدرس ایمیل به عنوان نام کاربری شما در سیستم می باشد. </string>
+  <string name="FromDescriptionWeight">&#8226; وزن شما برای محاسبه میزان کالری مورد نیاز و تطابق آن با سالادها پرسیده می شود. در صورتی که تمایل به ورود وزن خود ندارید، این اطلاعات بر اساس اطلاعات پیش‌فرض محاسبه خواهند شد.
+  </string>
 
   <string name="FormInputFirstNameHint">نام</string>
   <string name="FormInputLastNameHint">نام خانوادگی</string>
@@ -26,8 +28,9 @@
   <string name="FormInputAddress1">آدرس ۱</string>
   <string name="FormInputAddress2">آدرس ۲</string>
 
-  <string name="Male">مرد</string>
-  <string name="Female">زن</string>
+  <string name="Male">آقا</string>
+  <string name="Female">خانم</string>
+  <string name="Gender">جنسیت:</string>
 
   <string name="Bullet">&#8226;</string>
   
