@@ -56,4 +56,6 @@
 
   <dimen name="CalendarItemVerticalPadding">15dp</dimen>
   <dimen name="CelendarWeekHeaderFontSize">10sp</dimen>
+
+  <dimen name="SaladInformationTitleSize">20sp</dimen>
 </resources>

@@ -1,0 +1,60 @@
+
+using Android.App;
+using Android.OS;
+using Android.Views;
+using Android.Widget;
+using Saladio.Adapters;
+using Saladio.Contexts;
+using Saladio.Models;
+
+namespace Saladio.Fragments
+{
+    public class DialogSaladInformation : DialogFragment
+    {
+        private SavedSalad mSavedSalad;
+        private TextView mTxtSaladTitle;
+        private SaladComponentGroupAdapter mComponentAdapter;
+        private ListView mLstSaladComponents;
+
+        public DialogSaladInformation(SavedSalad savedSalad)
+        {
+            mSavedSalad = savedSalad;
+        }
+
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        {
+            base.OnCreateView(inflater, container, savedInstanceState);
+
+            return inflater.Inflate(Resource.Layout.DialogSaladInformation, container, false);
+        }
+
+        public bool IsEditable
+        {
+            get
+            {
+                return mComponentAdapter.IsEditable;
+            }
+            set
+            {
+                mComponentAdapter.IsEditable = value;
+            }
+        }
+
+        public override void OnViewCreated(View view, Bundle savedInstanceState)
+        {
+            base.OnViewCreated(view, savedInstanceState);
+
+            using (SaladioContext saladioContext = new SaladioContext())
+            {
+                mComponentAdapter = new SaladComponentGroupAdapter(Context, saladioContext.SaladComponentGroups);
+            }
+
+            mTxtSaladTitle = view.FindViewById<TextView>(Resource.Id.txtSaladTitle);
+            mLstSaladComponents = view.FindViewById<ListView>(Resource.Id.lstSaladComponents);
+
+            mLstSaladComponents.Adapter = mComponentAdapter;
+
+            mTxtSaladTitle.Text = mSavedSalad.Name;
+        }
+    }
+}

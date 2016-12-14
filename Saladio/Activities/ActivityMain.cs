@@ -15,6 +15,7 @@ using Saladio.Contexts;
 using Saladio.Models;
 using System.Globalization;
 using Saladio.Utility;
+using Saladio.Fragments;
 
 namespace Saladio.Activities
 {
@@ -94,7 +95,18 @@ namespace Saladio.Activities
                             View view = LayoutInflater.From(mActivity).Inflate(Resource.Layout.TabClassicSalads, container, false);
                             ListView lstClassicSalads = view.FindViewById<ListView>(Resource.Id.lstClassicSalads);
 
-                            lstClassicSalads.Adapter = new SavedSaladGroupAdapter(mActivity, saladioContext.ClassicSaladGroups);
+                            SavedSaladGroupAdapter adapter = new SavedSaladGroupAdapter(mActivity, saladioContext.ClassicSaladGroups);
+                            lstClassicSalads.Adapter = adapter;
+
+                            adapter.SavedSaladSelected += (sender, args) =>
+                            {
+                                using (FragmentTransaction transaction = mActivity.FragmentManager.BeginTransaction())
+                                {
+                                    DialogSaladInformation dialog = new DialogSaladInformation(args.SavedSalad);
+                                    dialog.IsEditable = false;
+                                    dialog.Show(transaction, "classicSaladInformation");
+                                }
+                            };
 
                             return view;
                         }
@@ -109,6 +121,17 @@ namespace Saladio.Activities
                             adapter.InitiallyClosed.Add(1);
 
                             lstSavedSalads.Adapter = adapter;
+
+                            adapter.SavedSaladSelected += (sender, args) =>
+                            {
+                                using (FragmentTransaction transaction = mActivity.FragmentManager.BeginTransaction())
+                                {
+                                    DialogSaladInformation dialog = new DialogSaladInformation(args.SavedSalad);
+                                    dialog.IsEditable = true;
+
+                                    dialog.Show(transaction, "classicSaladInformation");
+                                }
+                            };
 
                             return view;
                         }

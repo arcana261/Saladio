@@ -105,6 +105,7 @@
     <Compile Include="Fragments\CalendarDatePickedEventArgs.cs" />
     <Compile Include="Fragments\CalendarDateSelectedEventArgs.cs" />
     <Compile Include="Fragments\DialogCalendar.cs" />
+    <Compile Include="Fragments\DialogSaladInformation.cs" />
     <Compile Include="Fragments\FragmentCalendar.cs" />
     <Compile Include="Fragments\FragmentDatePicker.cs" />
     <Compile Include="ListViewExtensions.cs" />
@@ -209,6 +210,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\RowItemSelectorGroup.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\DialogSaladInformation.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

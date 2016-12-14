@@ -2,116 +2,111 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-  <LinearLayout
-      android:orientation="vertical"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent">
-    <EditText
-        android:id="@+id/etFirstName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:nextFocusDown="@+id/etLastName"
-        android:hint="@string/FormInputFirstNameHint" />
-    <EditText
-        android:id="@+id/etLastName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:nextFocusDown="@+id/spGender"
-        android:hint="@string/FormInputLastNameHint"
-        android:layout_marginTop="@dimen/VerticalMargin" />
-
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="right"
-        android:weightSum="5"
-        android:layout_marginTop="@dimen/VerticalMargin">
-      <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content">
+        android:layout_height="match_parent">
+        <EditText
+            android:id="@+id/etFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:nextFocusDown="@+id/etLastName"
+            android:hint="@string/FormInputFirstNameHint" />
+        <EditText
+            android:id="@+id/etLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:nextFocusDown="@+id/spGender"
+            android:hint="@string/FormInputLastNameHint"
+            android:layout_marginTop="@dimen/VerticalMargin" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="right"
+            android:weightSum="5"
+            android:layout_marginTop="@dimen/VerticalMargin">
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/radioMaleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/radioMaleSelected"
+                    android:layout_centerVertical="true"
+                    android:text="@string/Male" />
+                <RadioButton
+                    android:id="@+id/radioMaleSelected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:nextFocusDown="@+id/etBirthDate"
+                    android:text="" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/radioFemaleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/radioFemaleSelected"
+                    android:layout_centerVertical="true"
+                    android:text="@string/Female" />
+                <RadioButton
+                    android:id="@+id/radioFemaleSelected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:nextFocusDown="@+id/etBirthDate"
+                    android:checked="true"
+                    android:text="" />
+            </RelativeLayout>
+        </LinearLayout>
+        <Saladio.Components.CalendarPickerEditText
+            android:id="@+id/etBirthDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:nextFocusDown="@+id/etWeight"
+            android:hint="@string/FormInputBirthDateHint"
+            android:layout_marginTop="@dimen/VerticalMargin" />
+        <EditText
+            android:id="@+id/etWeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:nextFocusDown="@+id/etAddress1"
+            android:hint="@string/FormInputWeightHint"
+            android:layout_marginTop="@dimen/VerticalMargin" />
         <TextView
-            android:id="@+id/radioMaleText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/radioMaleSelected"
-            android:layout_centerVertical="true"
-            android:text="@string/Male" />
-        <RadioButton
-            android:id="@+id/radioMaleSelected"
-            android:layout_width="wrap_content"
+            android:textSize="@dimen/FormDescriptionTextSize"
+            android:layout_marginTop="@dimen/VerticalMargin"
+            android:text="@string/FromDescriptionWeight" />
+        <EditText
+            android:id="@+id/etAddress1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:nextFocusDown="@+id/etBirthDate"
-            android:text="" />
-      </RelativeLayout>
-
-      <RelativeLayout
-          android:layout_width="0dp"
-          android:layout_weight="1"
-          android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/radioFemaleText"
-            android:layout_width="wrap_content"
+            android:inputType="text"
+            android:nextFocusDown="@+id/etAddress2"
+            android:hint="@string/FormInputAddress1"
+            android:layout_marginTop="@dimen/VerticalMargin" />
+        <EditText
+            android:id="@+id/etAddress2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/radioFemaleSelected"
-            android:layout_centerVertical="true"
-            android:text="@string/Female" />
-        <RadioButton
-            android:id="@+id/radioFemaleSelected"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:nextFocusDown="@+id/etBirthDate"
-            android:checked="true"
-            android:text="" />
-      </RelativeLayout>
+            android:inputType="text"
+            android:nextFocusDown="@+id/btnWizard"
+            android:hint="@string/FormInputAddress2"
+            android:layout_marginTop="@dimen/VerticalMargin" />
     </LinearLayout>
-
-    <Saladio.Components.CalendarPickerEditText
-        android:id="@+id/etBirthDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:nextFocusDown="@+id/etWeight"
-        android:hint="@string/FormInputBirthDateHint"
-        android:layout_marginTop="@dimen/VerticalMargin" />
-    <EditText
-        android:id="@+id/etWeight"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:nextFocusDown="@+id/etAddress1"
-        android:hint="@string/FormInputWeightHint"
-        android:layout_marginTop="@dimen/VerticalMargin" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/FormDescriptionTextSize"
-        android:layout_marginTop="@dimen/VerticalMargin"
-        android:text="@string/FromDescriptionWeight" />
-    
-    <EditText
-        android:id="@+id/etAddress1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:nextFocusDown="@+id/etAddress2"
-        android:hint="@string/FormInputAddress1"
-        android:layout_marginTop="@dimen/VerticalMargin" />
-    <EditText
-        android:id="@+id/etAddress2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:nextFocusDown="@+id/btnWizard"
-        android:hint="@string/FormInputAddress2"
-        android:layout_marginTop="@dimen/VerticalMargin" />
-  </LinearLayout>
 </ScrollView>

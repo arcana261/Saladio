@@ -6,12 +6,12 @@
     android:paddingRight="@dimen/ScreenRightMargin"
     android:paddingBottom="@dimen/ScreenBottomMargin"
     android:paddingTop="@dimen/VerticalMargin">
-        <ListView
-            android:id="@+id/lstOrderSchedule"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" 
-            android:layout_alignParentTop="true"
-            android:layout_above="@+id/layoutCalendarWidgetSet"/>
+    <ListView
+        android:id="@+id/lstOrderSchedule"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/layoutCalendarWidgetSet" />
     <RelativeLayout
         android:id="@+id/layoutCalendarWidgetSet"
         android:layout_width="match_parent"

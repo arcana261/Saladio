@@ -67,4 +67,9 @@
   <style name="CalendarWeekHeader" parent="@style/CalendarItem">
     <item name="android:textSize">@dimen/CelendarWeekHeaderFontSize</item>
   </style>
+
+  <style name="SaladInformationTitle" parent="@style/SaladioEditText">
+    <item name="android:textSize">@dimen/SaladInformationTitleSize</item>
+    <item name="android:textStyle">bold</item>
+  </style>
 </resources>

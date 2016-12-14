@@ -17,11 +17,13 @@ namespace Saladio.Adapters
     {
         private Context mContext;
         private IList<SaladComponentGroup> mGroups;
+        private bool mEditable;
 
         public SaladComponentGroupAdapter(Context context, IList<SaladComponentGroup> groups)
         {
             mContext = context;
             mGroups = groups;
+            mEditable = true;
         }
 
         public override SaladComponentGroup this[int position]
@@ -43,6 +45,19 @@ namespace Saladio.Adapters
         public override long GetItemId(int position)
         {
             return position;
+        }
+
+        public bool IsEditable
+        {
+            get
+            {
+                return mEditable;
+            }
+            set
+            {
+                mEditable = value;
+                NotifyDataSetChanged();
+            }
         }
 
         public override View GetView(int position, View convertView, ViewGroup parent)
@@ -73,6 +88,19 @@ namespace Saladio.Adapters
                 lastSubRow = subRow;
 
                 TextView txtSaladComponent = subRow.FindViewById<TextView>(Resource.Id.txtSaladComponent);
+                Button btnPlus = subRow.FindViewById<Button>(Resource.Id.btnPlus);
+                Button btnMinus = subRow.FindViewById<Button>(Resource.Id.btnMinus);
+
+                if (mEditable)
+                {
+                    btnPlus.Visibility = ViewStates.Visible;
+                    btnMinus.Visibility = ViewStates.Visible;
+                }
+                else
+                {
+                    btnPlus.Visibility = ViewStates.Invisible;
+                    btnMinus.Visibility = ViewStates.Invisible;
+                }
 
                 txtSaladComponent.Text = saladComponent.Name;
 

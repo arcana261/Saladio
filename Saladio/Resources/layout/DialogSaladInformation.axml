@@ -3,14 +3,45 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:minWidth="300dp"
+    android:minHeight="400dp"
     android:paddingLeft="@dimen/ScreenLeftMargin"
     android:paddingRight="@dimen/ScreenRightMargin"
     android:paddingBottom="@dimen/ScreenBottomMargin"
     android:paddingTop="@dimen/VerticalMargin">
     <RelativeLayout
-        style="@style/CustomSaladInformationBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/layoutSaladInformation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/imgSaladPicture"
+            android:gravity="right">
+            <TextView
+                style="@style/SaladInformationTitle"
+                android:id="@+id/txtSaladTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Title" />
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/imgSaladPicture"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/pic_salad_1"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true" />
+    </RelativeLayout>
+    <RelativeLayout
+        style="@style/CustomSaladInformationBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/VerticalMargin">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -128,30 +159,10 @@
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
-    <ScrollView
+    <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <ListView
-                android:id="@+id/lstCustomSalad"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/VerticalMargin"
-                android:divider="@null" />
-            <EditText
-                style="@style/BorderedEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/VerticalMargin"
-                android:hint="@string/CustomSaladMoreDetails" />
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/VerticalMargin"
-                android:text="@string/CustomSaladSave" />
-        </LinearLayout>
-    </ScrollView>
+        android:layout_height="wrap_content"
+        android:divider="@null"
+        android:id="@+id/lstSaladComponents"
+        android:layout_marginTop="@dimen/VerticalMargin" />
 </LinearLayout>
