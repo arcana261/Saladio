@@ -250,105 +250,70 @@ namespace Saladio.Contexts
             }
         }
 
-        public IList<OrderSchedule> OrderSchedules
+        public IList<OrderSchedule> GetOrderSchedules(int year, int month)
         {
-            get
+            if (mOrderSchedules == null)
             {
-                if (mOrderSchedules == null)
+                mOrderSchedules = new List<OrderSchedule>();
+                mOrderSchedules.Add(new OrderSchedule
                 {
-                    mOrderSchedules = new List<OrderSchedule>();
-                    mOrderSchedules.Add(new OrderSchedule
-                    {
-                        Year = 1395,
-                        Month = 9,
-                        Day = 1,
-                        LaunchCount = 1,
-                        DinnerCount = 0
-                    });
-                    mOrderSchedules.Add(new OrderSchedule
-                    {
-                        Year = 1395,
-                        Month = 9,
-                        Day = 2,
-                        LaunchCount = 1,
-                        DinnerCount = 0
-                    });
-                    mOrderSchedules.Add(new OrderSchedule
-                    {
-                        Year = 1395,
-                        Month = 9,
-                        Day = 3,
-                        LaunchCount = 0,
-                        DinnerCount = 1
-                    });
-                    mOrderSchedules.Add(new OrderSchedule
-                    {
-                        Year = 1395,
-                        Month = 9,
-                        Day = 4,
-                        LaunchCount = 1,
-                        DinnerCount = 0
-                    });
-                    mOrderSchedules.Add(new OrderSchedule
-                    {
-                        Year = 1395,
-                        Month = 9,
-                        Day = 5,
-                        LaunchCount = 1,
-                        DinnerCount = 0
-                    });
-                    mOrderSchedules.Add(new OrderSchedule
-                    {
-                        Year = 1395,
-                        Month = 9,
-                        Day = 6,
-                        LaunchCount = 0,
-                        DinnerCount = 1
-                    });
-                    mOrderSchedules.Add(new OrderSchedule
-                    {
-                        Year = 1395,
-                        Month = 9,
-                        Day = 8,
-                        LaunchCount = 0,
-                        DinnerCount = 2
-                    });
-
-                    PersianCalendar persianCalendar = new PersianCalendar();
-
-                    IList<KeyValuePair<int, int>> yearMonths = mOrderSchedules.Select(x => new KeyValuePair<int, int>(x.Year, x.Month)).Distinct().ToList();
-                    foreach (KeyValuePair<int,int> yearMonth in yearMonths)
-                    {
-                        Dictionary<int, int> currentDays = mOrderSchedules.Where(x => x.Year == yearMonth.Key && x.Month == yearMonth.Value).Select(x => x.Day).ToDictionary(x => x);
-                        DateTime date = persianCalendar.ToDateTime(yearMonth.Key, yearMonth.Value, 1, 1, 1, 1, 1);
-                        int daysOfMonth = persianCalendar.GetDayOfMonth(date);
-                        IList<int> remainingDays = new List<int>();
-
-                        for (int i = 1; i <= daysOfMonth; i++)
-                        {
-                            remainingDays.Add(i);
-                        }
-
-                        remainingDays = remainingDays.Where(x => !currentDays.ContainsKey(x)).ToList();
-
-                        foreach (int day in remainingDays)
-                        {
-                            mOrderSchedules.Add(new OrderSchedule()
-                            {
-                                Year = yearMonth.Key,
-                                Month = yearMonth.Value,
-                                Day = day,
-                                LaunchCount = 0,
-                                DinnerCount = 0
-                            });
-                        }
-
-                        mOrderSchedules = mOrderSchedules.OrderBy(x => x.Year).ThenBy(x => x.Month).ThenBy(x => x.Day).ToList();
-                    }
-                }
-
-                return mOrderSchedules;
+                    Year = 1395,
+                    Month = 9,
+                    Day = 1,
+                    LaunchCount = 1,
+                    DinnerCount = 0
+                });
+                mOrderSchedules.Add(new OrderSchedule
+                {
+                    Year = 1395,
+                    Month = 9,
+                    Day = 2,
+                    LaunchCount = 1,
+                    DinnerCount = 0
+                });
+                mOrderSchedules.Add(new OrderSchedule
+                {
+                    Year = 1395,
+                    Month = 9,
+                    Day = 3,
+                    LaunchCount = 0,
+                    DinnerCount = 1
+                });
+                mOrderSchedules.Add(new OrderSchedule
+                {
+                    Year = 1395,
+                    Month = 9,
+                    Day = 4,
+                    LaunchCount = 1,
+                    DinnerCount = 0
+                });
+                mOrderSchedules.Add(new OrderSchedule
+                {
+                    Year = 1395,
+                    Month = 9,
+                    Day = 5,
+                    LaunchCount = 1,
+                    DinnerCount = 0
+                });
+                mOrderSchedules.Add(new OrderSchedule
+                {
+                    Year = 1395,
+                    Month = 9,
+                    Day = 6,
+                    LaunchCount = 0,
+                    DinnerCount = 1
+                });
+                mOrderSchedules.Add(new OrderSchedule
+                {
+                    Year = 1395,
+                    Month = 9,
+                    Day = 8,
+                    LaunchCount = 0,
+                    DinnerCount = 2
+                });
             }
+
+            return mOrderSchedules.Where(x => x.Year == year && x.Month == month).ToList();
         }
 
         #region IDisposable Support

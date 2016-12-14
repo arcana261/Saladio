@@ -26,6 +26,8 @@ namespace Saladio.Adapters
             mOrderSchedules = orderSchedules;
         }
 
+        public event EventHandler<OrderScheduleNewOrderEventArgs> NewOrder;
+
         public override OrderSchedule this[int position]
         {
             get
@@ -75,29 +77,71 @@ namespace Saladio.Adapters
             layoutLaunchIcons.RemoveAllViews();
             layoutDinnerIcons.RemoveAllViews();
 
-            for (int i = 0; i < item.LaunchCount; i++)
+            if (item.LaunchCount > 0)
             {
-                layoutLaunchIcons.AddView(NewImage());
+                for (int i = 0; i < item.LaunchCount; i++)
+                {
+                    layoutLaunchIcons.AddView(NewImage(item));
+                }
+            }
+            else
+            {
+                layoutLaunchIcons.AddView(NewBlackWhiteImage(item));
             }
 
-            for (int i = 0; i < item.DinnerCount; i++)
+            if (item.DinnerCount > 0)
             {
-                layoutDinnerIcons.AddView(NewImage());
+                for (int i = 0; i < item.DinnerCount; i++)
+                {
+                    layoutDinnerIcons.AddView(NewImage(item));
+                }
+            }
+            else
+            {
+                layoutDinnerIcons.AddView(NewBlackWhiteImage(item));
             }
 
             return row;
         }
 
-        private ImageView NewImage()
+        private ImageView NewImage(int resId)
         {
             ImageView ret = new ImageView(mContext);
 
             ret.LayoutParameters = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
-            ret.SetImageBitmap(BitmapFactory.DecodeResource(mContext.Resources, Resource.Drawable.ic_pie_salad_64));
+            ret.SetImageBitmap(BitmapFactory.DecodeResource(mContext.Resources, resId));
             ret.SetAdjustViewBounds(true);
             ret.SetScaleType(ImageView.ScaleType.CenterCrop);
 
             return ret;
+        }
+
+        private ImageView NewImage(OrderSchedule order)
+        {
+            ImageView ret = NewImage(Resource.Drawable.ic_pie_salad_64);
+
+            return ret;
+        }
+
+        private ImageView NewBlackWhiteImage(OrderSchedule order)
+        {
+            ImageView ret = NewImage(Resource.Drawable.ic_pie_salad_blackwhite_64);
+
+            ret.Tag = order.Year + ":" + order.Month + ":" + order.Day;
+            ret.Click += BlackWhiteImage_Click;
+
+            return ret;
+        }
+
+        private void BlackWhiteImage_Click(object sender, EventArgs e)
+        {
+            ImageView imageView = (ImageView)sender;
+            string[] tag = ((string)imageView.Tag).Split(':');
+            int year = int.Parse(tag[0]);
+            int month = int.Parse(tag[1]);
+            int day = int.Parse(tag[2]);
+
+            NewOrder?.Invoke(this, new OrderScheduleNewOrderEventArgs(year, month, day));
         }
     }
 }

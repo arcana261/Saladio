@@ -1,10 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-  <ListView
-      android:id="@+id/lstOrderSchedule"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content" />
-</LinearLayout>
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/ScreenLeftMargin"
+    android:paddingRight="@dimen/ScreenRightMargin"
+    android:paddingBottom="@dimen/ScreenBottomMargin"
+    android:paddingTop="@dimen/VerticalMargin">
+        <ListView
+            android:id="@+id/lstOrderSchedule"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/layoutCalendarWidgetSet"/>
+    <RelativeLayout
+        android:id="@+id/layoutCalendarWidgetSet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/CalendarTitleBackground"
+        android:paddingTop="@dimen/VerticalMargin"
+        android:paddingBottom="@dimen/VerticalMargin"
+        android:paddingLeft="@dimen/HorizontalMargin"
+        android:paddingRight="@dimen/HorizontalMargin"
+        android:layout_alignParentBottom="true">
+        <Button
+            android:id="@+id/btnCalendarNextMonth"
+            style="@style/PlusMinusButton"
+            android:layout_width="@dimen/PlusMinusButtonOuterSize"
+            android:layout_height="@dimen/PlusMinusButtonOuterSize"
+            android:layout_alignParentLeft="true"
+            android:text="↶" />
+        <TextView
+            android:id="@+id/txtCalendarCurrentMonth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/btnCalendarPrevMonth"
+            android:layout_toRightOf="@+id/btnCalendarNextMonth"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:textColor="@color/CalendarTitleForeground"
+            android:text="December, 2016" />
+        <Button
+            android:id="@+id/btnCalendarPrevMonth"
+            style="@style/PlusMinusButton"
+            android:layout_width="@dimen/PlusMinusButtonOuterSize"
+            android:layout_height="@dimen/PlusMinusButtonOuterSize"
+            android:layout_alignParentRight="true"
+            android:text="↷" />
+    </RelativeLayout>
+</RelativeLayout>

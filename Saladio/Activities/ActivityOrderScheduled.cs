@@ -22,6 +22,17 @@ namespace Saladio.Activities
     [Activity(Label = "@string/ApplicationName")]
     public class ActivityOrderScheduled : Activity
     {
+        private int? mDeliveryYear;
+        private int? mDeliveryMonth;
+        private int? mDeliveryDay;
+
+        public ActivityOrderScheduled()
+        {
+            mDeliveryYear = null;
+            mDeliveryMonth = null;
+            mDeliveryDay = null;
+        }
+
         private enum WizardPage
         {
             SelectSalad = 0,
@@ -87,7 +98,7 @@ namespace Saladio.Activities
             SetContentView(Resource.Layout.ActivityOrderScheduled);
 
             ActionBar.SetDisplayOptions(ActionBarDisplayOptions.ShowCustom, ActionBarDisplayOptions.ShowCustom);
-            ActionBar.SetCustomView(Resource.Layout.TitledActionBar);
+            ActionBar.SetCustomView(Resource.Layout.ActionBarTitled);
             mTxtActionBarTitle = ActionBar.CustomView.FindViewById<TextView>(Resource.Id.txtActionBarTitle);
 
             mWizardContainer = FindViewById<ManualViewPager>(Resource.Id.wizardContainer);
@@ -96,6 +107,24 @@ namespace Saladio.Activities
             mWizardContainer.Adapter = new WizardPagerAdapter(OnInitializePage, GetPageLayout);
 
             mBtnWizard.Click += BtnWizard_Click;
+
+            Intent intent = Intent;
+
+            if (intent.HasExtra("year"))
+            {
+                mDeliveryYear = intent.GetIntExtra("year", -1);
+            }
+
+            if (intent.HasExtra("month"))
+            {
+                mDeliveryMonth = intent.GetIntExtra("month", -1);
+            }
+
+            if (intent.HasExtra("day"))
+            {
+                mDeliveryDay = intent.GetIntExtra("day", -1);
+            }
+
             SwitchToPage(WizardPage.SelectSalad);
         }
 
@@ -206,7 +235,14 @@ namespace Saladio.Activities
             switch (page)
             {
                 case WizardPage.SelectSalad:
-                    SwitchToPage(WizardPage.SelectDeliveryDate);
+                    if (mDeliveryDay == null || mDeliveryMonth == null || mDeliveryYear == null)
+                    {
+                        SwitchToPage(WizardPage.SelectDeliveryDate);
+                    }
+                    else
+                    {
+                        SwitchToPage(WizardPage.SelectDeliveryHour);
+                    }
                     break;
                 case WizardPage.SelectDeliveryDate:
                     SwitchToPage(WizardPage.SelectDeliveryHour);

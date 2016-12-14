@@ -91,6 +91,7 @@
     <Compile Include="Adapters\GroupedItemSelectorAdapter.cs" />
     <Compile Include="Adapters\ItemSelectorAdapter.cs" />
     <Compile Include="Adapters\OrderScheduleCalendarAdapter.cs" />
+    <Compile Include="Adapters\OrderScheduleNewOrderEventArgs.cs" />
     <Compile Include="Adapters\SaladComponentGroupAdapter.cs" />
     <Compile Include="Adapters\SavedSaladGroupAdapter.cs" />
     <Compile Include="Adapters\SavedSaladSelectedEventArgs.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Components\Impl\SlidingTabStrip.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="Utility\ExpandCollapseAnimation.cs" />
+    <Compile Include="Utility\Range.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
@@ -164,7 +166,7 @@
     <AndroidResource Include="Resources\layout\TabSavedSalads.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\MainActionBar.axml">
+    <AndroidResource Include="Resources\layout\ActionBarMain.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ActionBar.axml">
@@ -203,7 +205,7 @@
     <AndroidResource Include="Resources\layout\DialogCalendar.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\TitledActionBar.axml">
+    <AndroidResource Include="Resources\layout\ActionBarTitled.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\RowItemSelectorGroup.axml">
@@ -303,6 +305,9 @@
     <AndroidResource Include="Resources\drawable\BorderedEditTextStyle.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_pie_salad_blackwhite_64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

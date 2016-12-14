@@ -12,6 +12,9 @@ using Android.Widget;
 using Saladio.Components;
 using Saladio.Adapters;
 using Saladio.Contexts;
+using Saladio.Models;
+using System.Globalization;
+using Saladio.Utility;
 
 namespace Saladio.Activities
 {
@@ -110,14 +113,78 @@ namespace Saladio.Activities
                             return view;
                         }
                     case MainTabs.OrderSchedule:
-                        using (SaladioContext saladioContext = new SaladioContext()) 
                         {
+                            PersianCalendar persianCalendar = new PersianCalendar();
+                            DateTime now = DateTime.Now;
+                            int currentMonth = persianCalendar.GetMonth(now);
+                            int currentYear = persianCalendar.GetYear(now);
+
                             View view = LayoutInflater.From(mActivity).Inflate(Resource.Layout.TabOrderSchedule, container, false);
                             ListView lstOrderSchedule = view.FindViewById<ListView>(Resource.Id.lstOrderSchedule);
+                            Button btnCalendarNextMonth = view.FindViewById<Button>(Resource.Id.btnCalendarNextMonth);
+                            Button btnCalendarPrevMonth = view.FindViewById<Button>(Resource.Id.btnCalendarPrevMonth);
+                            TextView txtCalendarCurrentMonth = view.FindViewById<TextView>(Resource.Id.txtCalendarCurrentMonth);
 
-                            OrderScheduleCalendarAdapter adapter = new OrderScheduleCalendarAdapter(mActivity, saladioContext.OrderSchedules);
-                            lstOrderSchedule.Adapter = adapter;
-                            //lstOrderSchedule.SetListViewHeightBasedOnChildren();
+                            string[] monthNames = mActivity.Resources.GetStringArray(Resource.Array.PersianMonths);
+
+                            Action<int, int> updateList = new Action<int, int>((year, month) =>
+                            {
+                                using (SaladioContext saladioContext = new SaladioContext())
+                                {
+                                    IList<OrderSchedule> orders = saladioContext.GetOrderSchedules(year, month);
+                                    Dictionary<int, OrderSchedule> days = orders.ToDictionary(x => x.Day);
+                                    int daysOfMonth = persianCalendar.GetDaysInMonth(year, month);
+                                    orders = Range.New(1, daysOfMonth + 1).Select(x => days.ContainsKey(x) ? days[x] : new OrderSchedule()
+                                    {
+                                        Day = x,
+                                        Month = month,
+                                        Year = year,
+                                        DinnerCount = 0,
+                                        LaunchCount = 0
+                                    }).ToList();
+
+                                    OrderScheduleCalendarAdapter adapter = new OrderScheduleCalendarAdapter(mActivity, orders);
+                                    lstOrderSchedule.Adapter = adapter;
+
+                                    adapter.NewOrder += (sender, args) =>
+                                    {
+                                        Intent intent = new Intent(mActivity, typeof(ActivityOrderScheduled));
+                                        intent.PutExtra("year", args.Year);
+                                        intent.PutExtra("month", args.Month);
+                                        intent.PutExtra("day", args.Day);
+
+                                        mActivity.StartActivity(intent);
+                                    };
+
+                                    txtCalendarCurrentMonth.Text = year.ToString().ToPersianNumbers() + " " + monthNames[month - 1];
+                                }
+                            });
+
+                            btnCalendarNextMonth.Click += (sender, args) =>
+                            {
+                                currentMonth = currentMonth + 1;
+                                if (currentMonth > 12)
+                                {
+                                    currentMonth = 1;
+                                    currentYear = currentYear + 1;
+                                }
+
+                                updateList(currentYear, currentMonth);
+                            };
+
+                            btnCalendarPrevMonth.Click += (sender, args) =>
+                            {
+                                currentMonth = currentMonth - 1;
+                                if (currentMonth < 1)
+                                {
+                                    currentMonth = 12;
+                                    currentYear = currentYear - 1;
+                                }
+
+                                updateList(currentYear, currentMonth);
+                            };
+
+                            updateList(currentYear, currentMonth);
 
                             return view;
                         }
@@ -133,7 +200,7 @@ namespace Saladio.Activities
             SetContentView(Resource.Layout.ActivityMain);
 
             ActionBar.SetDisplayOptions(ActionBarDisplayOptions.ShowCustom, ActionBarDisplayOptions.ShowCustom);
-            ActionBar.SetCustomView(Resource.Layout.MainActionBar);
+            ActionBar.SetCustomView(Resource.Layout.ActionBarMain);
 
             Button actionBarOrderScheduled = ActionBar.CustomView.FindViewById<Button>(Resource.Id.btnOrderScheduledSalad);
             actionBarOrderScheduled.Click += ActionBarOrderScheduled_Click;
@@ -161,7 +228,7 @@ namespace Saladio.Activities
         }
 
         public override bool OnPrepareOptionsMenu(IMenu menu)
-        { 
+        {
             menu.FindItem(Resource.Id.iconLogo).SetEnabled(false);
 
             return base.OnPrepareOptionsMenu(menu);
