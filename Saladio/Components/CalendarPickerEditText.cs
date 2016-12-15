@@ -49,8 +49,15 @@ namespace Saladio.Components
 
         public Activity Activity
         {
-            get;
-            set;
+            get
+            {
+                if (Context is Activity)
+                {
+                    return (Activity)Context;
+                }
+
+                return null;
+            }
         }
 
         private void OpenDialog()

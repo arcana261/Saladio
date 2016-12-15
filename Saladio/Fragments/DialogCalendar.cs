@@ -24,6 +24,15 @@ namespace Saladio.Fragments
         public event EventHandler<CalendarDateSelectedEventArgs> CalendarDateSelected;
         public event EventHandler<CalendarDateClearedEventArgs> CalendarDateCleared;
 
+        // Fragment.Context was added in API Level 23 (6.0 Marshmellow)
+        public new Context Context
+        {
+            get
+            {
+                return Activity;
+            }
+        }
+
         public int? mYear;
         public int? mMonth;
         public int? mDay;
@@ -60,12 +69,17 @@ namespace Saladio.Fragments
         {
             base.OnViewCreated(view, savedInstanceState);
 
-            using (FragmentTransaction transaction = this.ChildFragmentManager.BeginTransaction())
-            {
-                mFragmentCalendar = new FragmentCalendar();
+            mFragmentCalendar = FragmentManager.FindFragmentByTag<FragmentCalendar>("dialogCalendarCalendarFragment");
 
-                transaction.Replace(Resource.Id.frameCalendarContainer, mFragmentCalendar);
-                transaction.Commit();
+            if (mFragmentCalendar == null)
+            {
+                using (FragmentTransaction transaction = this.ChildFragmentManager.BeginTransaction())
+                {
+                    mFragmentCalendar = new FragmentCalendar();
+
+                    transaction.Add(Resource.Id.frameCalendarContainer, mFragmentCalendar, "dialogCalendarCalendarFragment");
+                    transaction.Commit();
+                }
             }
 
             mBtnOk = view.FindViewById<Button>(Resource.Id.btnOk);

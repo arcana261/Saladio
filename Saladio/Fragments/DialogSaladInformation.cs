@@ -15,6 +15,7 @@ namespace Saladio.Fragments
         private TextView mTxtSaladTitle;
         private SaladComponentGroupAdapter mComponentAdapter;
         private ListView mLstSaladComponents;
+        private bool? mIsEditableInit;
 
         public DialogSaladInformation(SavedSalad savedSalad)
         {
@@ -36,7 +37,14 @@ namespace Saladio.Fragments
             }
             set
             {
-                mComponentAdapter.IsEditable = value;
+                if (mComponentAdapter != null)
+                {
+                    mComponentAdapter.IsEditable = value;
+                }
+                else
+                {
+                    mIsEditableInit = value;
+                }
             }
         }
 
@@ -47,6 +55,10 @@ namespace Saladio.Fragments
             using (SaladioContext saladioContext = new SaladioContext())
             {
                 mComponentAdapter = new SaladComponentGroupAdapter(Context, saladioContext.SaladComponentGroups);
+                if (mIsEditableInit != null)
+                {
+                    mComponentAdapter.IsEditable = mIsEditableInit.Value;
+                }
             }
 
             mTxtSaladTitle = view.FindViewById<TextView>(Resource.Id.txtSaladTitle);

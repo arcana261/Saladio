@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/CalendarWeekHeader"
                 android:text="@string/PersianFriday" />
@@ -60,37 +60,37 @@
             <TextView
                 android:id="@+id/txtRow1Column1"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow2Column1"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow3Column1"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow4Column1"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow5Column1"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow6Column1"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
         </LinearLayout>
@@ -100,7 +100,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/CalendarWeekHeader"
                 android:text="@string/PersianThursday" />
@@ -113,37 +113,37 @@
             <TextView
                 android:id="@+id/txtRow1Column2"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow2Column2"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow3Column2"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow4Column2"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow5Column2"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow6Column2"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
         </LinearLayout>
@@ -153,7 +153,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/CalendarWeekHeader"
                 android:text="@string/PersianWednesday" />
@@ -166,37 +166,37 @@
             <TextView
                 android:id="@+id/txtRow1Column3"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow2Column3"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow3Column3"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow4Column3"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow5Column3"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow6Column3"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
         </LinearLayout>
@@ -206,7 +206,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/CalendarWeekHeader"
                 android:text="@string/PersianTuesday" />
@@ -219,37 +219,37 @@
             <TextView
                 android:id="@+id/txtRow1Column4"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow2Column4"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow3Column4"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow4Column4"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow5Column4"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow6Column4"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
         </LinearLayout>
@@ -259,7 +259,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/CalendarWeekHeader"
                 android:text="@string/PersianMonday" />
@@ -272,37 +272,37 @@
             <TextView
                 android:id="@+id/txtRow1Column5"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow2Column5"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow3Column5"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow4Column5"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow5Column5"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow6Column5"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
         </LinearLayout>
@@ -312,7 +312,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/CalendarWeekHeader"
                 android:text="@string/PersianSunday" />
@@ -325,37 +325,37 @@
             <TextView
                 android:id="@+id/txtRow1Column6"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow2Column6"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow3Column6"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow4Column6"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow5Column6"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow6Column6"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
         </LinearLayout>
@@ -365,7 +365,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/CalendarWeekHeader"
                 android:text="@string/PersianSaturday" />
@@ -378,37 +378,37 @@
             <TextView
                 android:id="@+id/txtRow1Column7"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow2Column7"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow3Column7"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow4Column7"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow5Column7"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
             <TextView
                 android:id="@+id/txtRow6Column7"
                 style="@style/CalendarItem"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
         </LinearLayout>

@@ -36,6 +36,15 @@ namespace Saladio.Fragments
         public event EventHandler<CalendarDateSelectedEventArgs> CalendarDateSelected;
         public event EventHandler<CalendarDateClearedEventArgs> CalendarDateCleared;
 
+        // Fragment.Context was added in API Level 23 (6.0 Marshmellow)
+        public new Context Context
+        {
+            get
+            {
+                return Activity;
+            }
+        }
+
         public FragmentCalendar()
         {
             PersianCalendar persianCalendar = new PersianCalendar();
@@ -44,6 +53,20 @@ namespace Saladio.Fragments
             mTodayYear = persianCalendar.GetYear(now);
             mTodayMonth = persianCalendar.GetMonth(now);
             mTodayDay = persianCalendar.GetDayOfMonth(now);
+        }
+
+        public override void OnSaveInstanceState(Bundle outState)
+        {
+            base.OnSaveInstanceState(outState);
+
+            outState.PutInt("currentYear", mCurrentYear);
+            outState.PutInt("currentMonth", mCurrentMonth);
+            outState.PutInt("currentDay", mCurrentDay);
+        }
+
+        public override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
         }
 
         private int GetWeekDayColumn(DayOfWeek dayOfWeek)
@@ -264,6 +287,13 @@ namespace Saladio.Fragments
         {
             base.OnViewCreated(view, savedInstanceState);
 
+            if (savedInstanceState != null)
+            {
+                mCurrentYear = savedInstanceState.GetInt("currentYear");
+                mCurrentMonth = savedInstanceState.GetInt("currentMonth");
+                mCurrentDay = savedInstanceState.GetInt("currentDay");
+            }
+
             mTxtCalendarCurrentMonth = view.FindViewById<TextView>(Resource.Id.txtCalendarCurrentMonth);
             mBtnCalendarNextMonth = view.FindViewById<Button>(Resource.Id.btnCalendarNextMonth);
             mBtnCalendarPrevMonth = view.FindViewById<Button>(Resource.Id.btnCalendarPrevMonth);
@@ -333,11 +363,17 @@ namespace Saladio.Fragments
             mBtnCalendarNextMonth.Click += BtnCalendarNextMonth_Click;
             mBtnCalendarPrevMonth.Click += BtnCalendarPrevMonth_Click;
 
-            PersianCalendar persianCalendar = new PersianCalendar();
-            DateTime now = DateTime.Now;
+            int year = mCurrentYear;
+            int month = mCurrentMonth;
 
-            int year = mCurrentYear >= 0 ? mCurrentYear : persianCalendar.GetYear(now);
-            int month = mCurrentMonth >= 0 ? mCurrentMonth : persianCalendar.GetMonth(now);
+            if (year < 0 || month < 0)
+            {
+                PersianCalendar persianCalendar = new PersianCalendar();
+                DateTime now = DateTime.Now;
+
+                year = mCurrentYear >= 0 ? mCurrentYear : persianCalendar.GetYear(now);
+                month = mCurrentMonth >= 0 ? mCurrentMonth : persianCalendar.GetMonth(now);
+            }
 
             PaintMonth(year, month);
         }

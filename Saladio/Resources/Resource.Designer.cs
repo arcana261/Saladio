@@ -214,6 +214,9 @@ namespace Saladio
 			// aapt resource value: 0x7f060006
 			public const int ButtonStrokeWidth = 2131099654;
 			
+			// aapt resource value: 0x7f06002c
+			public const int CalendarItemSize = 2131099692;
+			
 			// aapt resource value: 0x7f06002a
 			public const int CalendarItemVerticalPadding = 2131099690;
 			
@@ -286,8 +289,8 @@ namespace Saladio
 			// aapt resource value: 0x7f06001b
 			public const int SaladComponentGroupTitleVerticalPadding = 2131099675;
 			
-			// aapt resource value: 0x7f06002c
-			public const int SaladInformationTitleSize = 2131099692;
+			// aapt resource value: 0x7f06002d
+			public const int SaladInformationTitleSize = 2131099693;
 			
 			// aapt resource value: 0x7f060003
 			public const int SaladioActionBarButtonHeight = 2131099651;

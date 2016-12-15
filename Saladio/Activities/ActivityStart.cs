@@ -143,7 +143,6 @@ namespace Saladio.Activities
                 case WizardPage.SignUpDetails:
                     {
                         CalendarPickerEditText etBirthDate = view.FindViewById<CalendarPickerEditText>(Resource.Id.etBirthDate);
-                        etBirthDate.Activity = this;
 
                         radioFemaleText = view.FindViewById<TextView>(Resource.Id.radioFemaleText);
                         radioFemaleSelected = view.FindViewById<RadioButton>(Resource.Id.radioFemaleSelected);

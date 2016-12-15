@@ -63,6 +63,8 @@
     <item name="android:gravity">center</item>
     <item name="android:paddingTop">@dimen/CalendarItemVerticalPadding</item>
     <item name="android:paddingBottom">@dimen/CalendarItemVerticalPadding</item>
+    <item name="android:width">@dimen/CalendarItemSize</item>
+    <item name="android:height">@dimen/CalendarItemSize</item>
   </style>
   <style name="CalendarWeekHeader" parent="@style/CalendarItem">
     <item name="android:textSize">@dimen/CelendarWeekHeaderFontSize</item>
