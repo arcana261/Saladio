@@ -6,6 +6,7 @@
     <item name="android:editTextStyle">@style/SaladioEditText</item>
     <item name="android:textViewStyle">@style/SaladioTextView</item>
     <item name="android:radioButtonStyle">@style/SaladioRadioButton</item>
+    <item name="android:progressBarStyle">@style/SaladioProgressBar</item>
   </style>
 
   <style name="SaladioActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
@@ -43,5 +44,8 @@
     <item name="android:textColor">@color/SaladioActionBarTitle</item>
     <item name="android:textSize">@dimen/SaladioActionBarTitle</item>
     <item name="android:minHeight">@dimen/SaladioActionBarButtonHeight</item>
+  </style>
+  
+  <style name="SaladioProgressBar" parent="@android:style/Widget.Holo.Light.ProgressBar">
   </style>
 </resources>

@@ -8,11 +8,17 @@ using System;
 using Saladio.Components;
 using Saladio.Fragments;
 using Android.Content.Res;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using IO.Swagger.Api;
+using Saladio.Config;
+using IO.Swagger.Client;
+using System.Threading.Tasks;
 
 namespace Saladio.Activities
 {
     [Activity(Label = "@string/ApplicationName", MainLauncher = true)]
-    public class StartActivity : Activity
+    public class StartActivity : SharedActivity
     {
         private class WizardPagerAdapter : PagerAdapter
         {
@@ -64,6 +70,7 @@ namespace Saladio.Activities
         private ManualViewPager mWizardContainer;
         private Button mBtnWizard;
         private WizardPage mCurrentPage;
+        private IList<WizardPage> mWizardHistory = new List<WizardPage>();
 
         private View welcomePortraitContainer1;
         private View welcomePortraitContainer2;
@@ -104,7 +111,19 @@ namespace Saladio.Activities
             mWizardContainer.Adapter = new WizardPagerAdapter(OnInitializePage, GetPageLayout);
 
             mBtnWizard.Click += BtnWizard_Click;
+
             SwitchToPage(WizardPage.Welcome);
+        }
+
+        public override void OnBackPressed()
+        {
+            if (mWizardHistory.Count < 2)
+            {
+                base.OnBackPressed();
+            }
+
+            mWizardHistory.RemoveAt(mWizardHistory.Count - 1);
+            SwitchToPage(mWizardHistory[mWizardHistory.Count - 1], false);
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -211,13 +230,159 @@ namespace Saladio.Activities
             switch (page)
             {
                 case WizardPage.Welcome:
-                    SwitchToPage(WizardPage.SignUp);
+                    {
+                        Task.Factory.StartNew(() =>
+                        {
+                            try
+                            {
+                                using (var handle = OpenLoading())
+                                {
+                                    if (SharedConfig.IsRegistrationValid)
+                                    {
+                                        RunOnUiThread(() =>
+                                        {
+                                            StartActivity(typeof(ActivityMain));
+                                            Finish();
+                                        });
+                                    }
+                                    else
+                                    {
+                                        RunOnUiThread(() =>
+                                        {
+                                            SwitchToPage(WizardPage.SignUp);
+                                        });
+                                    }
+                                }
+                            }
+                            catch(System.Exception e)
+                            {
+                                RunOnUiThread(() =>
+                                {
+                                    ShowMessageDialogForException(e);
+                                });
+                            }
+                        });
+                    }
                     break;
                 case WizardPage.SignUp:
-                    SwitchToPage(WizardPage.SignUpDetails);
+                    {
+                        EditText etEmail = FindViewById<EditText>(Resource.Id.etEmail);
+                        EditText etPassword = FindViewById<EditText>(Resource.Id.etPassword);
+                        EditText etPasswordConfirmation = FindViewById<EditText>(Resource.Id.etPasswordConfirmation);
+                        EditText etPhone = FindViewById<EditText>(Resource.Id.etPhone);
+
+                        Regex emailMatcher = new Regex("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
+                        Regex phoneNumberMatcher = new Regex("^(\\+?989\\d{2}|09\\d{2})\\d{7}$");
+
+                        if (!emailMatcher.IsMatch(etEmail.Text))
+                        {
+                            ShowMessageDialog(Resource.String.ToastInvalidEmail);
+                            break;
+                        }
+
+                        if (!etPassword.Text.Equals(etPasswordConfirmation.Text))
+                        {
+                            ShowMessageDialog(Resource.String.ToastPasswordsDoNotMatch);
+                            break;
+                        }
+
+                        if (etPassword.Text.Length < 8)
+                        {
+                            ShowMessageDialog(Resource.String.ToastPasswordMinLength);
+                            break;
+                        }
+
+                        if (!phoneNumberMatcher.IsMatch(etPhone.Text))
+                        {
+                            ShowMessageDialog(Resource.String.ToastInvalidPhoneNumber);
+                            break;
+                        }
+                        
+                        SwitchToPage(WizardPage.SignUpDetails);
+                    }
                     break;
                 case WizardPage.SignUpDetails:
-                    StartActivity(typeof(ActivityMain));
+                    {
+                        EditText etEmail = FindViewById<EditText>(Resource.Id.etEmail);
+                        EditText etPassword = FindViewById<EditText>(Resource.Id.etPassword);
+                        EditText etPasswordConfirmation = FindViewById<EditText>(Resource.Id.etPasswordConfirmation);
+                        EditText etPhone = FindViewById<EditText>(Resource.Id.etPhone);
+
+                        EditText etFirstName = FindViewById<EditText>(Resource.Id.etFirstName);
+                        EditText etLastName = FindViewById<EditText>(Resource.Id.etLastName);
+                        RadioButton radioMaleSelected = FindViewById<RadioButton>(Resource.Id.radioMaleSelected);
+                        RadioButton radioFemaleSelected = FindViewById<RadioButton>(Resource.Id.radioFemaleSelected);
+                        CalendarPickerEditText etBirthDate = FindViewById<CalendarPickerEditText>(Resource.Id.etBirthDate);
+                        EditText etWeight = FindViewById<EditText>(Resource.Id.etWeight);
+                        EditText etAddress1 = FindViewById<EditText>(Resource.Id.etAddress1);
+                        EditText etAddress2 = FindViewById<EditText>(Resource.Id.etAddress2);
+
+                        if (string.IsNullOrEmpty(etFirstName.Text))
+                        {
+                            ShowMessageDialog(Resource.String.ToastFirstNameEmpty);
+                            break;
+                        }
+
+                        if (string.IsNullOrEmpty(etLastName.Text))
+                        {
+                            ShowMessageDialog(Resource.String.ToastLastNameEmpty);
+                            break;
+                        }
+
+                        if (string.IsNullOrEmpty(etAddress1.Text) && string.IsNullOrEmpty(etAddress2.Text))
+                        {
+                            ShowMessageDialog(Resource.String.ToastAddressEmpty);
+                            break;
+                        }
+
+                        if (string.IsNullOrEmpty(etBirthDate.Text))
+                        {
+                            ShowMessageDialog(Resource.String.ToastBirthDateEmpty);
+                            break;
+                        }
+
+                        List<string> addresses = new List<string>();
+                        if (!string.IsNullOrEmpty(etAddress1.Text))
+                        {
+                            addresses.Add(etAddress1.Text);
+                        }
+                        if (!string.IsNullOrEmpty(etAddress2.Text))
+                        {
+                            addresses.Add(etAddress2.Text);
+                        }
+
+                        try
+                        {
+                            UsersApi api = new UsersApi(SharedConfig.UnAuthorizedApiConfig);
+                            var res = api.Signup(new IO.Swagger.Model.User(null, etEmail.Text, etPhone.Text,
+                                etPassword.Text, etFirstName.Text, etLastName.Text,
+                                new IO.Swagger.Model.PersianDate(etBirthDate.SelectedYear, etBirthDate.SelectedMonth, etBirthDate.SelectedDay),
+                                radioMaleSelected.Checked ? IO.Swagger.Model.User.GenderEnum.Male : IO.Swagger.Model.User.GenderEnum.Female,
+                                !string.IsNullOrEmpty(etWeight.Text) ? (decimal?)decimal.Parse(etWeight.Text) : null, addresses));
+
+                            SharedConfig.UserName = res.UserName;
+                            SharedConfig.Password = etPassword.Text;
+                        }
+                        catch(ApiException e)
+                        {
+                            if (e.ErrorCode == 409)
+                            {
+                                ShowMessageDialog(Resource.String.ToastDuplicateEmail);
+                                break;
+                            }
+
+                            ShowMessageDialogForException(e);
+                            break;
+                        }
+                        catch(System.Exception e)
+                        {
+                            ShowMessageDialogForException(e);
+                            break;
+                        }
+
+                        StartActivity(typeof(ActivityMain));
+                        Finish();
+                    }
                     break;
                 default:
                     throw new ArgumentException("invalid requested page: " + page.ToString(), "page");
@@ -239,11 +404,16 @@ namespace Saladio.Activities
             }
         }
 
-        private void SwitchToPage(WizardPage page)
+        private void SwitchToPage(WizardPage page, bool stack = true)
         {
             mWizardContainer.SetCurrentItem((int)page, true);
             mBtnWizard.Text = GetPageButtonText(page);
             mCurrentPage = page;
+
+            if (stack)
+            {
+                mWizardHistory.Add(page);
+            }
         }
 
         private void BtnWizard_Click(object sender, EventArgs e)
@@ -251,7 +421,7 @@ namespace Saladio.Activities
             OnWizardButtonClicked((WizardPage)mWizardContainer.CurrentItem, mWizardContainer.GetChildAt(mWizardContainer.CurrentItem));
         }
 
-        public override void OnConfigurationChanged(Configuration newConfig)
+        public override void OnConfigurationChanged(Android.Content.Res.Configuration newConfig)
         {
             base.OnConfigurationChanged(newConfig);
 

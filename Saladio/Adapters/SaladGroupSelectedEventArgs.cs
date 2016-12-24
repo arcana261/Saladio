@@ -13,11 +13,11 @@ using Saladio.Models;
 
 namespace Saladio.Adapters
 {
-    public class SavedSaladSelectedEventArgs : EventArgs
+    public class SaladGroupSelectedEventArgs : EventArgs
     {
-        public SavedSalad SavedSalad { get; private set; }
+        public SaladListItem SavedSalad { get; private set; }
         
-        public SavedSaladSelectedEventArgs(SavedSalad savedSalad)
+        public SaladGroupSelectedEventArgs(SaladListItem savedSalad)
         {
             this.SavedSalad = savedSalad;
         }

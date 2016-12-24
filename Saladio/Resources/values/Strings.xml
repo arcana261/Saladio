@@ -15,6 +15,7 @@
 
   <string name="FormInputEmailHint">آدرس ایمیل</string>
   <string name="FormInputPasswordHint">رمز عبور</string>
+  <string name="FormInputPasswordConfirmationHint">ورود مجدد رمز عبور</string>
   <string name="FormInputPhoneHint">تلفن همراه</string>
   <string name="FormDescriptionEmail">&#8226; آدرس ایمیل به عنوان نام کاربری شما در سیستم می باشد. </string>
   <string name="FromDescriptionWeight">&#8226; وزن شما برای محاسبه میزان کالری مورد نیاز و تطابق آن با سالادها پرسیده می شود. در صورتی که تمایل به ورود وزن خود ندارید، این اطلاعات بر اساس اطلاعات پیش‌فرض محاسبه خواهند شد.
@@ -76,4 +77,22 @@
   <string name="PersianThursday">پنج‌شنبه</string>
   <string name="PersianFriday">جمعه</string>
   <string name="PersianSaturday">شنبه</string>
+
+  <string name="ToastPasswordsDoNotMatch">رمزهای عبور یکسان نیستند</string>
+  <string name="ToastInvalidEmail">ایمیل وارد شده صحیح نیست</string>
+  <string name="ToastInvalidPhoneNumber">شماره تلفن وارد شده صحیح نیست</string>
+  <string name="ToastPasswordMinLength">رمز عبور بایستی حداقل ۸ کاراکتر باشد</string>
+  <string name="ToastFirstNameEmpty">لطفا نام کوچک خود را وارد نمایید</string>
+  <string name="ToastLastNameEmpty">لطفا نام خانوادگی خود را وارد نمایید</string>
+  <string name="ToastAddressEmpty">لطفا حداقل یک آدرس جهت ارسال سفارش وارد نمایید</string>
+  <string name="ToastBirthDateEmpty">لطفا تاریخ تولد خود را انتخاب کنید</string>
+  <string name="ToastApiError">خطا در اتصال به سرور. لطفا مجددا امتحان نمایید</string>
+  <string name="ToastApiErrorInternalServerError">خطای داخلی سرور. لطفا مجددا امتحان نمایید</string>
+  <string name="ToastApiErrorNotFound">منابع خواسته شده در سرور موجود نیست</string>
+  <string name="ToastApiErrorConflict">منابع خواسته شده در سرور وجود دارند</string>
+  <string name="ToastApiErrorBadRequest">فرمت اطلاعات ارسالی به سرور صحیح نیست</string>
+  <string name="ToastApiErrorForbidden">حقوق دسترسی کافی برای فراخوانی درخواست وجود ندارد</string>
+  <string name="ToastErrorUnknown">خطای نامشخص</string>
+  <string name="ToastDuplicateEmail">ایمیل وارد شده تکراری است</string>
+  <string name="ToastLoading">در حال بارگزاری...</string>
 </resources>

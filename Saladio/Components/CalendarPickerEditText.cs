@@ -146,6 +146,45 @@ namespace Saladio.Components
             }
         }
 
+        public int? SelectedYear
+        {
+            get
+            {
+                return mYear;
+            }
+            set
+            {
+                mYear = value;
+                FormatText();
+            }
+        }
+
+        public int? SelectedMonth
+        {
+            get
+            {
+                return mMonth;
+            }
+            set
+            {
+                mMonth = value;
+                FormatText();
+            }
+        }
+
+        public int? SelectedDay
+        {
+            get
+            {
+                return mDay;
+            }
+            set
+            {
+                mDay = value;
+                FormatText();
+            }
+        }
+
         private void DialogCalendar_CalendarDatePicked(object sender, CalendarDatePickedEventArgs e)
         {
             mYear = e.Year;

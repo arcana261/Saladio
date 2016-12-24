@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:minWidth="300dp"
+    android:paddingLeft="@dimen/HorizontalMargin"
+    android:paddingRight="@dimen/HorizontalMargin"
+    android:paddingTop="@dimen/VerticalMargin"
+    android:paddingBottom="@dimen/VerticalMargin">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/txtMessage"
+            style="@style/SaladioTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="msg" />
+        <Button
+            android:id="@+id/btnOk"
+            style="@style/PlusMinusButton"
+            android:layout_width="@dimen/PlusMinusButtonOuterSize"
+            android:layout_height="@dimen/PlusMinusButtonOuterSize"
+            android:layout_marginTop="@dimen/VerticalMargin"
+            android:text="✓" />
+    </LinearLayout>
+</RelativeLayout>

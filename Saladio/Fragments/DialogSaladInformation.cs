@@ -11,13 +11,13 @@ namespace Saladio.Fragments
 {
     public class DialogSaladInformation : DialogFragment
     {
-        private SavedSalad mSavedSalad;
+        private SaladListItem mSavedSalad;
         private TextView mTxtSaladTitle;
         private SaladComponentGroupAdapter mComponentAdapter;
         private ListView mLstSaladComponents;
         private bool? mIsEditableInit;
 
-        public DialogSaladInformation(SavedSalad savedSalad)
+        public DialogSaladInformation(SaladListItem savedSalad)
         {
             mSavedSalad = savedSalad;
         }

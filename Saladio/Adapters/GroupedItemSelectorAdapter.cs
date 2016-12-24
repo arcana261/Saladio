@@ -21,14 +21,24 @@ namespace Saladio.Adapters
         private int? mSelectedPosition;
         private int? mSelectedIndex;
 
-        public GroupedItemSelectorAdapter(Context context, List<KeyValuePair<string, string>> data)
+        public GroupedItemSelectorAdapter(Context context, List<KeyValuePair<string, string>> data, IComparer<string> groupComparer)
         {
             mContext = context;
             mData = data;
 
             mGroups = data.Select(x => x.Key).Distinct().ToList();
+            if (groupComparer != null)
+            {
+                mGroups.Sort(groupComparer);
+            }
+
             mGroupItems = mGroups.Select(x => new KeyValuePair<string, IList<string>>(x, data.Where(y => y.Key.Equals(x)).Select(y => y.Value).ToList()))
                 .ToDictionary(x => x.Key, x => x.Value);
+        }
+
+        public GroupedItemSelectorAdapter(Context context, List<KeyValuePair<string, string>> data)
+            : this(context, data, null)
+        {
         }
 
         public override int Count

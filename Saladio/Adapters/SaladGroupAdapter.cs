@@ -17,23 +17,23 @@ using Android.Graphics;
 
 namespace Saladio.Adapters
 {
-    public class SavedSaladGroupAdapter : BaseAdapter<SavedSaladGroup>
+    public class SaladGroupAdapter : BaseAdapter<SaladListItemGroup>
     {
         private Context mContext;
-        private IList<SavedSaladGroup> mSavedSalads;
+        private IList<SaladListItemGroup> mSavedSalads;
         private ISet<int> mExpandableGroups;
         private ISet<int> mInitiallyClosed;
         private ISet<KeyValuePair<int, int>> mSelectedStateSalads; // (Group Index, Salad Index)
 
-        public SavedSaladGroupAdapter(Context context, IList<SavedSaladGroup> savedSalads)
+        public SaladGroupAdapter(Context context, IList<SaladListItemGroup> savedSalads)
         {
             mContext = context;
             mSavedSalads = savedSalads;
         }
 
-        public event EventHandler<SavedSaladSelectedEventArgs> SavedSaladSelected;
+        public event EventHandler<SaladGroupSelectedEventArgs> SavedSaladSelected;
 
-        public override SavedSaladGroup this[int position]
+        public override SaladListItemGroup this[int position]
         {
             get
             {
@@ -93,12 +93,12 @@ namespace Saladio.Adapters
             }
         }
 
-        private KeyValuePair<int,int> GetIndexAsPair(SavedSalad savedSalad)
+        private KeyValuePair<int,int> GetIndexAsPair(SaladListItem savedSalad)
         {
-            return new KeyValuePair<int, int>(mSavedSalads.IndexOf(savedSalad.Group), savedSalad.Group.Salads.IndexOf(savedSalad));
+            return new KeyValuePair<int, int>(mSavedSalads.IndexOf(savedSalad.Group), savedSalad.Group.Items.IndexOf(savedSalad));
         }
 
-        public void SetSelectedStateSalad(SavedSalad savedSalad, bool enabled)
+        public void SetSelectedStateSalad(SaladListItem savedSalad, bool enabled)
         {
             var index = GetIndexAsPair(savedSalad);
 
@@ -127,7 +127,7 @@ namespace Saladio.Adapters
             }
 
             row.Tag = position;
-            SavedSaladGroup item = this[position];
+            SaladListItemGroup item = this[position];
             TextView txtSavedSaladGroup = row.FindViewById<TextView>(Resource.Id.txtSavedSaladGroup);
             LinearLayout layoutSavedSalads = row.FindViewById<LinearLayout>(Resource.Id.layoutSavedSalads);
 
@@ -154,9 +154,9 @@ namespace Saladio.Adapters
             int dividerMargin = (int)mContext.Resources.GetDimension(Resource.Dimension.DividerMargin);
             View lastSubRow = null;
             layoutSavedSalads.RemoveAllViews();
-            for (int i = 0; i < item.Salads.Count; i++)
+            for (int i = 0; i < item.Items.Count; i++)
             {
-                SavedSalad savedSalad = item.Salads[i];
+                SaladListItem savedSalad = item.Items[i];
 
                 View subRow = LayoutInflater.From(mContext).Inflate(Resource.Layout.RowSavedSalad, layoutSavedSalads, false);
                 if (lastSubRow == null)
@@ -209,9 +209,9 @@ namespace Saladio.Adapters
             int position = int.Parse(parts[0]);
             int itemIndex = int.Parse(parts[1]);
 
-            SavedSalad savedSalad = this[position].Salads[itemIndex];
+            SaladListItem savedSalad = this[position].Items[itemIndex];
 
-            SavedSaladSelected?.Invoke(this, new SavedSaladSelectedEventArgs(savedSalad));
+            SavedSaladSelected?.Invoke(this, new SaladGroupSelectedEventArgs(savedSalad));
         }
 
         private void TxtSavedSaladGroup_Click(object sender, EventArgs e)
@@ -221,7 +221,7 @@ namespace Saladio.Adapters
             LinearLayout layoutSavedSalads = row.FindViewById<LinearLayout>(Resource.Id.layoutSavedSalads);
 
             int position = (int)row.Tag;
-            SavedSaladGroup item = this[position];
+            SaladListItemGroup item = this[position];
 
             if (layoutSavedSalads.Tag == null || ((bool)layoutSavedSalads.Tag) == false)
             {

@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Saladio.Models;
+using IO.Swagger.Model;
 
 namespace Saladio.Adapters
 {
@@ -78,7 +79,7 @@ namespace Saladio.Adapters
             int dividerMargin = (int)mContext.Resources.GetDimension(Resource.Dimension.DividerMargin);
             View lastSubRow = null;
             lstSaladComponents.RemoveAllViews();
-            foreach (SaladComponent saladComponent in item.Components)
+            foreach (IO.Swagger.Model.SaladComponent saladComponent in item.Items)
             {
                 View subRow = LayoutInflater.From(mContext).Inflate(Resource.Layout.RowSaladComponent, lstSaladComponents, false);
                 if (lastSubRow == null)

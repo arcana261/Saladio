@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,11 +16,12 @@ using Saladio.Models;
 using System.Globalization;
 using Saladio.Utility;
 using Saladio.Fragments;
+using System.Threading.Tasks;
 
 namespace Saladio.Activities
 {
     [Activity(Label = "@string/ApplicationName")]
-    public class ActivityMain : Activity
+    public class ActivityMain : SharedActivity
     {
         private enum MainTabs
         {
@@ -34,9 +35,9 @@ namespace Saladio.Activities
 
         private class TabAdapter : SlidingTabsAdapter
         {
-            private Activity mActivity;
+            private SharedActivity mActivity;
 
-            public TabAdapter(Activity activity)
+            public TabAdapter(SharedActivity activity)
             {
                 mActivity = activity;
             }
@@ -77,13 +78,20 @@ namespace Saladio.Activities
                 switch (tab)
                 {
                     case MainTabs.CustomSalad:
-                        using (SaladioContext saladioContext = new SaladioContext())
-                        {
+                        { 
                             View view = LayoutInflater.From(mActivity).Inflate(Resource.Layout.TabOrderCustomSalad, container, false);
                             ListView lstCustomSalad = view.FindViewById<ListView>(Resource.Id.lstCustomSalad);
 
-                            lstCustomSalad.Adapter = new SaladComponentGroupAdapter(mActivity, saladioContext.SaladComponentGroups);
-                            lstCustomSalad.SetListViewHeightBasedOnChildren();
+                            Task.Factory.StartNew(() =>
+                            {
+                                SaladComponentGroupAdapter adapter = new SaladComponentGroupAdapter(mActivity, mActivity.DataContext.SaladComponentGroups);
+
+                                mActivity.RunOnUiThread(() =>
+                                {
+                                    lstCustomSalad.Adapter = adapter;
+                                    lstCustomSalad.SetListViewHeightBasedOnChildren();
+                                });
+                            });
 
                             return view;
                         }
@@ -95,18 +103,29 @@ namespace Saladio.Activities
                             View view = LayoutInflater.From(mActivity).Inflate(Resource.Layout.TabClassicSalads, container, false);
                             ListView lstClassicSalads = view.FindViewById<ListView>(Resource.Id.lstClassicSalads);
 
-                            SavedSaladGroupAdapter adapter = new SavedSaladGroupAdapter(mActivity, saladioContext.ClassicSaladGroups);
-                            lstClassicSalads.Adapter = adapter;
-
-                            adapter.SavedSaladSelected += (sender, args) =>
+                            Task.Factory.StartNew(() =>
                             {
-                                using (FragmentTransaction transaction = mActivity.FragmentManager.BeginTransaction())
+                                using (mActivity.OpenLoadingFromThread())
                                 {
-                                    DialogSaladInformation dialog = new DialogSaladInformation(args.SavedSalad);
-                                    dialog.IsEditable = false;
-                                    dialog.Show(transaction, "classicSaladInformation");
+                                    IList<SaladListItemGroup> groups = SaladListItemGroup.GetGroups(mActivity.DataContext, mActivity.DataContext.ClassicSaladCatagories);
+                                    SaladGroupAdapter adapter = new SaladGroupAdapter(mActivity, groups);
+
+                                    mActivity.RunOnUiThread(() =>
+                                    {
+                                        lstClassicSalads.Adapter = adapter;
+
+                                        adapter.SavedSaladSelected += (sender, args) =>
+                                        {
+                                            using (FragmentTransaction transaction = mActivity.FragmentManager.BeginTransaction())
+                                            {
+                                                DialogSaladInformation dialog = new DialogSaladInformation(args.SavedSalad);
+                                                dialog.IsEditable = false;
+                                                dialog.Show(transaction, "classicSaladInformation");
+                                            }
+                                        };
+                                    });
                                 }
-                            };
+                            });
 
                             return view;
                         }
@@ -116,22 +135,47 @@ namespace Saladio.Activities
                             View view = LayoutInflater.From(mActivity).Inflate(Resource.Layout.TabSavedSalads, container, false);
                             ListView lstSavedSalads = view.FindViewById<ListView>(Resource.Id.lstSavedSalads);
 
-                            SavedSaladGroupAdapter adapter = new SavedSaladGroupAdapter(mActivity, saladioContext.SavedSaladGroups);
-                            adapter.ExpandableGroups.Add(1);
-                            adapter.InitiallyClosed.Add(1);
-
-                            lstSavedSalads.Adapter = adapter;
-
-                            adapter.SavedSaladSelected += (sender, args) =>
+                            Task.Factory.StartNew(() =>
                             {
-                                using (FragmentTransaction transaction = mActivity.FragmentManager.BeginTransaction())
+                                using (mActivity.OpenLoadingFromThread())
                                 {
-                                    DialogSaladInformation dialog = new DialogSaladInformation(args.SavedSalad);
-                                    dialog.IsEditable = true;
+                                    IList<SaladListItemGroup> savedGroups = SaladListItemGroup.GetGroups(mActivity.DataContext, mActivity.DataContext.SavedSalads);
+                                    IList<SaladListItemGroup> classicGroups = SaladListItemGroup.GetGroups(mActivity.DataContext, mActivity.DataContext.ClassicSaladCatagories);
 
-                                    dialog.Show(transaction, "classicSaladInformation");
+                                    SaladListItemGroup flatClassicGroup = new SaladListItemGroup()
+                                    {
+                                        Name = "سالادهای کلاسیک",
+                                        Items = new List<SaladListItem>()
+                                    };
+
+                                    foreach (var group in classicGroups)
+                                    {
+                                        foreach (var item in group.Items)
+                                        {
+                                            flatClassicGroup.Items.Add(item);
+                                        }
+                                    }
+
+                                    savedGroups.Add(flatClassicGroup);
+
+                                    SaladGroupAdapter adapter = new SaladGroupAdapter(mActivity, savedGroups);
+
+                                    mActivity.RunOnUiThread(() =>
+                                    {
+                                        lstSavedSalads.Adapter = adapter;
+
+                                        adapter.SavedSaladSelected += (sender, args) =>
+                                        {
+                                            using (FragmentTransaction transaction = mActivity.FragmentManager.BeginTransaction())
+                                            {
+                                                DialogSaladInformation dialog = new DialogSaladInformation(args.SavedSalad);
+                                                dialog.IsEditable = false;
+                                                dialog.Show(transaction, "classicSaladInformation");
+                                            }
+                                        };
+                                    });
                                 }
-                            };
+                            });
 
                             return view;
                         }

@@ -16,11 +16,12 @@ using Saladio.Adapters;
 using Saladio.Contexts;
 using Saladio.Models;
 using Saladio.Fragments;
+using System.Threading.Tasks;
 
 namespace Saladio.Activities
 {
     [Activity(Label = "@string/ApplicationName")]
-    public class ActivityOrderScheduled : Activity
+    public class ActivityOrderScheduled : SharedActivity
     {
         private int? mDeliveryYear;
         private int? mDeliveryMonth;
@@ -141,7 +142,25 @@ namespace Saladio.Activities
             return base.OnPrepareOptionsMenu(menu);
         }
 
-        private SavedSalad mSelectedSalad;
+        private class DeliveryScheduleGroupComparer : IComparer<string>
+        {
+            public int Compare(string x, string y)
+            {
+                if (!x.Equals(y))
+                {
+                    if (x.Equals("ناهار"))
+                    {
+                        return -1;
+                    }
+
+                    return 1;
+                }
+
+                return 0;
+            }
+        }
+
+        private SaladListItem mSelectedSalad;
 
         private void OnInitializePage(WizardPage page, View view)
         {
@@ -153,17 +172,46 @@ namespace Saladio.Activities
                         ListView lstSelectSalad = view.FindViewById<ListView>(Resource.Id.lstSelectSalad);
                         mSelectedSalad = null;
 
-                        SavedSaladGroupAdapter adapter = new SavedSaladGroupAdapter(this, context.SavedSaladGroups);
-                        adapter.SavedSaladSelected += (sender, args) =>
+                        Task.Factory.StartNew(() =>
                         {
-                            adapter.ClearSelectedStateSalad();
-                            adapter.SetSelectedStateSalad(args.SavedSalad, true);
-                            mSelectedSalad = args.SavedSalad;
+                            using (OpenLoadingFromThread())
+                            {
+                                IList<SaladListItemGroup> savedGroups = SaladListItemGroup.GetGroups(DataContext, DataContext.SavedSalads);
+                                IList<SaladListItemGroup> classicGroups = SaladListItemGroup.GetGroups(DataContext, DataContext.ClassicSaladCatagories);
 
-                            adapter.NotifyDataSetChanged();
-                        };
+                                SaladListItemGroup flatClassicGroup = new SaladListItemGroup()
+                                {
+                                    Name = "سالادهای کلاسیک",
+                                    Items = new List<SaladListItem>()
+                                };
 
-                        lstSelectSalad.Adapter = adapter;
+                                foreach (var group in classicGroups)
+                                {
+                                    foreach (var item in group.Items)
+                                    {
+                                        flatClassicGroup.Items.Add(item);
+                                    }
+                                }
+
+                                savedGroups.Add(flatClassicGroup);
+
+                                SaladGroupAdapter adapter = new SaladGroupAdapter(this, savedGroups);
+
+                                RunOnUiThread(() =>
+                                {
+                                    lstSelectSalad.Adapter = adapter;
+
+                                    adapter.SavedSaladSelected += (sender, args) =>
+                                    {
+                                        adapter.ClearSelectedStateSalad();
+                                        adapter.SetSelectedStateSalad(args.SavedSalad, true);
+                                        mSelectedSalad = args.SavedSalad;
+
+                                        adapter.NotifyDataSetChanged();
+                                    };
+                                });
+                            }
+                        });
                     }
                     break;
                 case WizardPage.SelectDeliveryDate:
@@ -176,13 +224,22 @@ namespace Saladio.Activities
                     }
                     break;
                 case WizardPage.SelectDeliveryHour:
-                    using (SaladioContext context = new SaladioContext())
                     {
                         ListView lstSelectDeliveryHour = view.FindViewById<ListView>(Resource.Id.lstSelectDeliveryHour);
 
-                        GroupedItemSelectorAdapter adapter = new GroupedItemSelectorAdapter(this,
-                            context.DeliveryHours.Select(x => new KeyValuePair<string, string>(x.Catagory, "ساعت " + x.From.ToString().ToPersianNumbers() + " الی " + x.To.ToString().ToPersianNumbers())).ToList());
-                        lstSelectDeliveryHour.Adapter = adapter;
+                        Task.Factory.StartNew(() =>
+                        {
+                            GroupedItemSelectorAdapter adapter = new GroupedItemSelectorAdapter(this,
+                                DataContext.DeliveryHours.Select(x => new KeyValuePair<string, string>(
+                                    x.Catagory.Value == IO.Swagger.Model.DeliverySchedule.CatagoryEnum.Dinner ? "ناهار" : "شام",
+                                    "ساعت " + x.FromHour.ToString().ToPersianNumbers() + " الی " + x.ToHour.ToString().ToPersianNumbers())).ToList(),
+                                new DeliveryScheduleGroupComparer());
+
+                            RunOnUiThread(() =>
+                            {
+                                lstSelectDeliveryHour.Adapter = adapter;
+                            });
+                        });
                     }
                     break;
                 case WizardPage.SelectDeliveryAddress:

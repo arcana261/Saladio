@@ -11,64 +11,151 @@ using Android.Views;
 using Android.Widget;
 using Saladio.Models;
 using System.Globalization;
+using IO.Swagger.Api;
+using Saladio.Utility;
+using Saladio.Activities;
+using IO.Swagger.Model;
+using Saladio.Config;
 
 namespace Saladio.Contexts
 {
     public class SaladioContext : IDisposable
     {
-        private IList<SaladComponentGroup> mGroups;
-        private IList<SavedSaladGroup> mClassicSalads;
-        private IList<SavedSaladGroup> mSavedSalads;
-        private IList<DeliveryHourRange> mDeliveryHours;
-        private IList<string> mDeliveryAddresses;
-        private IList<OrderSchedule> mOrderSchedules;
+        private SharedActivity mOwner;
+        private static IList<SaladComponentGroup> mGroups;
+        private static IList<ClassicSaladCatagory> mClassicSaladCatagories;
+        private static IDictionary<int, IList<ClassicSalad>> mClassicSalads;
+        private static IDictionary<int, SaladComponent> mSaladComponentById;
+        private static IList<SavedSalad> mSavedSalads;
+        private static IList<DeliverySchedule> mDeliveryHours;
+        private static IList<string> mDeliveryAddresses;
+        private static IList<OrderSchedule> mOrderSchedules;
 
         public SaladioContext()
         {
         }
 
-        public IList<SavedSaladGroup> ClassicSaladGroups
+        public SaladioContext(SharedActivity owner)
+        {
+            mOwner = owner;
+        }
+
+        public SharedActivity Owner
         {
             get
             {
-                if (mClassicSalads == null)
+                return mOwner;
+            }
+        }
+
+        public IList<ClassicSalad> GetClassicSaladsByCatagory(ClassicSaladCatagory catagory)
+        {
+            return GetClassicSaladsByCatagory(catagory.Id.Value);
+        }
+
+        public IList<ClassicSalad> GetClassicSaladsByCatagory(int catagoryId)
+        {
+            if (mClassicSalads == null)
+            {
+                mClassicSalads = new Dictionary<int, IList<ClassicSalad>>();
+            }
+
+            if (!mClassicSalads.ContainsKey(catagoryId))
+            {
+                try
                 {
-                    mClassicSalads = new List<SavedSaladGroup>();
-
-                    SavedSaladGroup lettuce = new SavedSaladGroup() { Name = "سالادهای پایه کاهو" };
-                    lettuce.Salads.Add(new SavedSalad()
+                    using (mOwner.OpenLoadingFromThread())
                     {
-                        Name = "سالاد سزار",
-                        Ingredients = "کاهو رسمی، سینه مرغ طعم دار شده، زیتون سیاه، گوجه گیلاسی، سس سزار",
-                        Callorie = 760,
-                        Price = 17000,
-                        Group = lettuce
-                    });
-                    lettuce.Salads.Add(new SavedSalad()
-                    {
-                        Name = "سالاد چاینیز",
-                        Ingredients = "کاهو، سینه مرغ طعم دار شده، کنجد، گوجه گیلاسی، فلفل دلمه ای، سس کره بادام زمینی",
-                        Callorie = 760,
-                        Price = 17000,
-                        Group = lettuce
-                    });
+                        ClassicSaladsApi api = new ClassicSaladsApi(SharedConfig.AuthorizedApiConfig);
+                        IList<ClassicSalad> salads = new List<ClassicSalad>();
 
-                    SavedSaladGroup bandSalads = new SavedSaladGroup() { Name = "باند سالادها" };
-                    bandSalads.Salads.Add(new SavedSalad()
-                    {
-                        Name = "چیکن باند سالاد",
-                        Ingredients = "سینه مرغ، کرفس، بادام زمینی، سس مخصوص",
-                        Callorie = 760,
-                        Price = 17000,
-                        Group = bandSalads
-                    });
+                        PagedApiHelper.FetchAll((start, length) =>
+                        {
+                            var res = api.GetClassicSaladsByCatagory(catagoryId, length, start);
 
-                    mClassicSalads.Add(lettuce);
-                    mClassicSalads.Add(bandSalads);
+                            foreach (var item in res.Data)
+                            {
+                                salads.Add(item);
+                            }
+
+                            return res.RecordsFiltered.Value;
+                        });
+
+                        mClassicSalads[catagoryId] = salads;
+                    }
+                }
+                catch(Exception e)
+                {
+                    mOwner.ShowMessageDialogForExceptionFromThread(e);
+                    return new List<ClassicSalad>();
+                }
+            }
+
+            return mClassicSalads[catagoryId];
+        }
+
+        public IList<ClassicSaladCatagory> ClassicSaladCatagories
+        {
+            get
+            {
+                if (mClassicSaladCatagories == null)
+                {
+                    try
+                    {
+                        using (mOwner.OpenLoadingFromThread())
+                        {
+                            ClassicSaladCatagoriesApi catagoryApi = new ClassicSaladCatagoriesApi(SharedConfig.AuthorizedApiConfig);
+                            mClassicSaladCatagories = new List<ClassicSaladCatagory>();
+
+                            PagedApiHelper.FetchAll((start, length) =>
+                            {
+                                var res = catagoryApi.GetClassicSaladCatagories(length, start);
+
+                                foreach (var item in res.Data)
+                                {
+                                    mClassicSaladCatagories.Add(item);
+                                }
+
+                                return res.RecordsFiltered.Value;
+                            });
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        mOwner.ShowMessageDialogForExceptionFromThread(e);
+                        return new List<ClassicSaladCatagory>();
+                    }
                 }
 
-                return mClassicSalads;
+                return mClassicSaladCatagories;
             }
+        }
+
+        public SaladComponent GetSaladComponentById(int saladComponentId)
+        {
+            if (mSaladComponentById == null)
+            {
+                mSaladComponentById = new Dictionary<int, SaladComponent>();
+            }
+
+            if (!mSaladComponentById.ContainsKey(saladComponentId))
+            {
+                try
+                {
+                    SaladComponentsApi api = new SaladComponentsApi(SharedConfig.AuthorizedApiConfig);
+                    var res = api.GetSaladComponentById(saladComponentId);
+
+                    mSaladComponentById[saladComponentId] = res;
+                    return res;
+                }
+                catch(Exception e)
+                {
+                    mOwner.ShowMessageDialogForExceptionFromThread(e);
+                    return null;
+                }
+            }
+
+            return mSaladComponentById[saladComponentId];
         }
 
         public IList<SaladComponentGroup> SaladComponentGroups
@@ -77,160 +164,111 @@ namespace Saladio.Contexts
             {
                 if (mGroups == null)
                 {
-                    mGroups = new List<SaladComponentGroup>();
+                    try
+                    {
+                        using (var handle = mOwner.OpenLoadingFromThread())
+                        {
+                            SaladComponetGroupsApi api = new SaladComponetGroupsApi(SharedConfig.AuthorizedApiConfig);
+                            mGroups = new List<SaladComponentGroup>();
+                            mSaladComponentById = new Dictionary<int, SaladComponent>();
 
-                    SaladComponentGroup saladBase = new SaladComponentGroup() { Name = "پایه سالاد" };
-                    saladBase.Components.Add(new SaladComponent() { Name = "کاهو پیچ" });
-                    saladBase.Components.Add(new SaladComponent() { Name = "کاهو رسمی" });
-                    saladBase.Components.Add(new SaladComponent() { Name = "اسفناج" });
+                            PagedApiHelper.FetchAll((start, length) =>
+                            {
+                                var res = api.GetSaladComponentGroup(length, start);
+                                foreach (var item in res.Data)
+                                {
+                                    mGroups.Add(item);
 
-                    SaladComponentGroup vegtables = new SaladComponentGroup() { Name = "سبزیجات" };
-                    vegtables.Components.Add(new SaladComponent() { Name = "کلم سفید" });
+                                    foreach (var component in item.Items)
+                                    {
+                                        mSaladComponentById[component.Id.Value] = component;
+                                    }
+                                }
 
-                    SaladComponentGroup cheese = new SaladComponentGroup() { Name = "پنیر" };
-                    cheese.Components.Add(new SaladComponent() { Name = "پنیر پارمسان" });
-
-                    SaladComponentGroup dried = new SaladComponentGroup() { Name = "خشکبار" };
-                    dried.Components.Add(new SaladComponent() { Name = "نان کروتون" });
-
-                    SaladComponentGroup sauce = new SaladComponentGroup() { Name = "سس و ونیگار" };
-                    sauce.Components.Add(new SaladComponent() { Name = "سس سزار" });
-
-                    mGroups.Add(saladBase);
-                    mGroups.Add(vegtables);
-                    mGroups.Add(cheese);
-                    mGroups.Add(dried);
-                    mGroups.Add(sauce);
+                                return res.RecordsFiltered.Value;
+                            });
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        mOwner.ShowMessageDialogForExceptionFromThread(e);
+                        return new List<SaladComponentGroup>();
+                    }
                 }
+
                 return mGroups;
             }
         }
 
-        public IList<SavedSaladGroup> SavedSaladGroups
+        public IList<SavedSalad> SavedSalads
         {
             get
             {
                 if (mSavedSalads == null)
                 {
-                    mSavedSalads = new List<SavedSaladGroup>();
+                    try
+                    {
+                        using (mOwner.OpenLoadingFromThread())
+                        {
+                            SavedSaladsApi api = new SavedSaladsApi(SharedConfig.AuthorizedApiConfig);
+                            mSavedSalads = new List<SavedSalad>();
 
-                    SavedSaladGroup savedSalads = new SavedSaladGroup()
-                    {
-                        Name = "سالادهای انتخابی من"
-                    };
-                    savedSalads.Salads.Add(new SavedSalad()
-                    {
-                        Name = "سالاد پروتئینه 1",
-                        Ingredients = "کاهو رسمی، سینه مرغ طعم دار شده، لوبیای پیمنتو، سویای خشک ، بروکلی، کلم سفید",
-                        Callorie = 760,
-                        Price = 17000,
-                        Group = savedSalads
-                    });
-                    savedSalads.Salads.Add(new SavedSalad()
-                    {
-                        Name = "سالاد پروتئینه 2",
-                        Ingredients = "کاهو رسمی، سینه مرغ طعم دار شده، لوبیای پیمنتو، سویای خشک ، بروکلی، کلم سفید",
-                        Callorie = 760,
-                        Price = 17000,
-                        Group = savedSalads
-                    });
+                            PagedApiHelper.FetchAll((start, length) =>
+                            {
+                                var res = api.GetSavedSaladsByMe(length, start);
 
-                    SavedSaladGroup classicSalads = new SavedSaladGroup()
-                    {
-                        Name = "سالادهای کلاسیک"
-                    };
-                    classicSalads.Salads.Add(new SavedSalad()
-                    {
-                        Name = "چیکن باند سالاد",
-                        Ingredients = "سینه مرغ، کرفس، بادام زمینی، سس مخصوص",
-                        Callorie = 760,
-                        Price = 17000,
-                        Group = classicSalads
-                    });
+                                foreach (var item in res.Data)
+                                {
+                                    mSavedSalads.Add(item);
+                                }
 
-                    mSavedSalads.Add(savedSalads);
-                    mSavedSalads.Add(classicSalads);
+                                return res.RecordsFiltered.Value;
+                            });
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        mOwner.ShowMessageDialogForExceptionFromThread(e);
+                        return new List<SavedSalad>();
+                    }
                 }
 
                 return mSavedSalads;
             }
         }
 
-        public IList<DeliveryHourRange> DeliveryHours
+        public IList<DeliverySchedule> DeliveryHours
         {
             get
             {
                 if (mDeliveryHours == null)
                 {
-                    const string morningDelivery = "صرف ناهار";
-                    const string dinnerDelivery = "صرف شام";
-
-                    mDeliveryHours = new List<DeliveryHourRange>();
-
-                    mDeliveryHours.Add(new DeliveryHourRange()
+                    try
                     {
-                        From = 11,
-                        To = 12,
-                        Catagory = morningDelivery
-                    });
+                        using (var handle = mOwner.OpenLoadingFromThread())
+                        {
+                            DeliverySchedulesApi api = new DeliverySchedulesApi(SharedConfig.AuthorizedApiConfig);
+                            mDeliveryHours = new List<DeliverySchedule>();
 
-                    mDeliveryHours.Add(new DeliveryHourRange()
-                    {
-                        From = 12,
-                        To = 13,
-                        Catagory = morningDelivery
-                    });
+                            PagedApiHelper.FetchAll((start, length) =>
+                            {
+                                var res = api.GetDeliverySchedules(length, null, start);
+                                foreach (var item in res.Data)
+                                {
+                                    mDeliveryHours.Add(item);
+                                }
 
-                    mDeliveryHours.Add(new DeliveryHourRange()
+                                return res.RecordsFiltered.Value;
+                            });
+                        }
+                    }
+                    catch(Exception e)
                     {
-                        From = 13,
-                        To = 14,
-                        Catagory = morningDelivery
-                    });
-
-                    mDeliveryHours.Add(new DeliveryHourRange()
-                    {
-                        From = 14,
-                        To = 15,
-                        Catagory = morningDelivery
-                    });
-
-                    mDeliveryHours.Add(new DeliveryHourRange()
-                    {
-                        From = 18,
-                        To = 19,
-                        Catagory = dinnerDelivery
-                    });
-
-                    mDeliveryHours.Add(new DeliveryHourRange()
-                    {
-                        From = 19,
-                        To = 20,
-                        Catagory = dinnerDelivery
-                    });
-
-                    mDeliveryHours.Add(new DeliveryHourRange()
-                    {
-                        From = 20,
-                        To = 21,
-                        Catagory = dinnerDelivery
-                    });
-
-                    mDeliveryHours.Add(new DeliveryHourRange()
-                    {
-                        From = 21,
-                        To = 22,
-                        Catagory = dinnerDelivery
-                    });
-
-                    mDeliveryHours.Add(new DeliveryHourRange()
-                    {
-                        From = 22,
-                        To = 23,
-                        Catagory = dinnerDelivery
-                    });
+                        mOwner.ShowMessageDialogForExceptionFromThread(e);
+                        return new List<DeliverySchedule>();
+                    }
                 }
-            
+
                 return mDeliveryHours;
             }
         }
@@ -241,9 +279,19 @@ namespace Saladio.Contexts
             {
                 if (mDeliveryAddresses == null)
                 {
-                    mDeliveryAddresses = new List<string>();
-                    mDeliveryAddresses.Add("تهران، ونک، پلاک ۱۷");
-                    mDeliveryAddresses.Add("تهران، ونک، پلاک ۱۷");
+                    try
+                    {
+                        using (var handle = mOwner.OpenLoadingFromThread())
+                        {
+                            UsersApi api = new UsersApi(SharedConfig.AuthorizedApiConfig);
+                            mDeliveryAddresses = api.GetCurrentUser().Addresses;
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        mOwner.ShowMessageDialogForExceptionFromThread(e);
+                        return new List<string>();
+                    }
                 }
 
                 return mDeliveryAddresses;

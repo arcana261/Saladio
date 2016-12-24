@@ -1,0 +1,25 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using Android.App;
+using Android.Content;
+using Android.OS;
+using Android.Runtime;
+using Android.Views;
+using Android.Widget;
+using System.Runtime.CompilerServices;
+using SQLite;
+
+namespace Saladio.Data
+{
+    [Table("KeyValues")]
+    public class KeyValue
+    {
+        [PrimaryKey]
+        public string Key { get; set; }
+        [MaxLength(256)]
+        public string Value { get; set; }
+    }
+}
