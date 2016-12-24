@@ -243,12 +243,18 @@ namespace Saladio.Activities
                     }
                     break;
                 case WizardPage.SelectDeliveryAddress:
-                    using (SaladioContext context = new SaladioContext())
                     {
                         ListView lstSelectDeliveryAddress = view.FindViewById<ListView>(Resource.Id.lstSelectDeliveryAddress);
 
-                        ItemSelectorAdapter adapter = new ItemSelectorAdapter(this, context.DeliveryAddresses);
-                        lstSelectDeliveryAddress.Adapter = adapter;
+                        Task.Factory.StartNew(() =>
+                        {
+                            ItemSelectorAdapter adapter = new ItemSelectorAdapter(this, DataContext.DeliveryAddresses);
+
+                            RunOnUiThread(() =>
+                            {
+                                lstSelectDeliveryAddress.Adapter = adapter;
+                            });
+                        });
                     }
                     break;
                 default:

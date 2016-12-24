@@ -281,10 +281,11 @@ namespace Saladio.Contexts
                 {
                     try
                     {
-                        using (var handle = mOwner.OpenLoadingFromThread())
+                        using (mOwner.OpenLoadingFromThread())
                         {
                             UsersApi api = new UsersApi(SharedConfig.AuthorizedApiConfig);
-                            mDeliveryAddresses = api.GetCurrentUser().Addresses;
+                            var res = api.GetCurrentUser();
+                            mDeliveryAddresses = res.Addresses;
                         }
                     }
                     catch(Exception e)
