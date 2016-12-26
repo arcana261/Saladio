@@ -9,7 +9,6 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Saladio.Models;
 using Saladio.Utility;
 using Android.Graphics.Drawables;
 using Android.Support.V4.Content;

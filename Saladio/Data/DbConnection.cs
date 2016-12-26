@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using System.IO;
 using SQLite;
+using Android.Util;
 
 namespace Saladio.Data
 {
@@ -38,7 +39,14 @@ namespace Saladio.Data
                 if (mConnection == null)
                 {
                     mConnection = new SQLiteConnection(GetDataBasePath());
-                    mConnection.CreateTable<KeyValue>();
+                    try
+                    {
+                        mConnection.CreateTable<KeyValue>();
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Debug("Saladio.DbConnection", e.ToString());
+                    }
 
                     var pairVersion = mConnection.Table<KeyValue>().Where(x => x.Key.Equals("migration-version")).FirstOrDefault();
                     int version = 0;

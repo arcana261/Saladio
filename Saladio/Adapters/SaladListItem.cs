@@ -16,6 +16,7 @@ namespace Saladio.Adapters
 {
     public class SaladListItem
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Ingredients { get; set; }
         public int Callorie { get; set; }
@@ -28,6 +29,7 @@ namespace Saladio.Adapters
             Callorie = (int)salad.Callorie.Value;
             Price = salad.Price.Value;
             Ingredients = salad.Ingredients;
+            Id = salad.Id.Value;
         }
 
         public SaladListItem(SaladioContext context, SavedSalad salad)
@@ -35,6 +37,7 @@ namespace Saladio.Adapters
             Name = salad.Name;
             Callorie = (int)salad.Callorie.Value;
             Price = salad.Price.Value;
+            Id = salad.Id.Value;
 
             StringBuilder ingredientBuilder = new StringBuilder();
             bool first = true;

@@ -14,6 +14,57 @@ namespace Saladio
 {
     public static class StringExtensions
     {
+        public static string ToLatinNumbers(this string value)
+        {
+            StringBuilder ret = new StringBuilder();
+
+            foreach (char ch in value)
+            {
+                char nextChar;
+
+                switch (ch)
+                {
+                    case '۰':
+                        nextChar = '0';
+                        break;
+                    case '۱':
+                        nextChar = '1';
+                        break;
+                    case '۲':
+                        nextChar = '2';
+                        break;
+                    case '۳':
+                        nextChar = '3';
+                        break;
+                    case '۴':
+                        nextChar = '4';
+                        break;
+                    case '۵':
+                        nextChar = '5';
+                        break;
+                    case '۶':
+                        nextChar = '6';
+                        break;
+                    case '۷':
+                        nextChar = '7';
+                        break;
+                    case '۸':
+                        nextChar = '8';
+                        break;
+                    case '۹':
+                        nextChar = '9';
+                        break;
+                    default:
+                        nextChar = ch;
+                        break;
+                }
+
+                ret.Append(nextChar);
+            }
+
+            return ret.ToString();
+        }
+
         public static string ToPersianNumbers(this string value)
         {
             StringBuilder ret = new StringBuilder();

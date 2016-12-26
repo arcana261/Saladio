@@ -15,6 +15,7 @@ using IO.Swagger.Client;
 using Saladio.Contexts;
 using System.Threading.Tasks;
 using System.Threading;
+using Android.Util;
 
 namespace Saladio.Activities
 {
@@ -24,7 +25,7 @@ namespace Saladio.Activities
         private volatile int mLoaderCount = 0;
         private SaladioContext mDataContext = null;
         private object monitor = new object();
-        private volatile int mLoaderOperationId = 0;
+        //private volatile int mLoaderOperationId = 0;
 
         public SaladioContext DataContext
         {
@@ -99,6 +100,19 @@ namespace Saladio.Activities
             }
         }
 
+        public void ShowMessageDialog(int resource, Action onClosed)
+        {
+            using (Android.App.FragmentTransaction transaction = FragmentManager.BeginTransaction())
+            {
+                DialogMessage dialog = new DialogMessage(Resources.GetString(resource));
+                dialog.DialogDismissEvent += (sender, args) =>
+                {
+                    onClosed();
+                };
+                dialog.Show(transaction, "dialogMessage");
+            }
+        }
+
         public void ShowMessageDialogForExceptionFromThread(Exception err)
         {
             RunOnUiThread(() =>
@@ -109,6 +123,8 @@ namespace Saladio.Activities
 
         public void ShowMessageDialogForException(Exception err)
         {
+            Log.Error("Saladio.SharedActivity", err.ToString().Replace("\n", "  \\n  "));
+
             int resource = Resource.String.ToastErrorUnknown;
 
             if (err is ApiException)
@@ -181,7 +197,7 @@ namespace Saladio.Activities
 
 
                 mLoaderCount++;
-                mLoaderOperationId++;
+                //mLoaderOperationId++;
             }
         }
 
@@ -192,34 +208,34 @@ namespace Saladio.Activities
                 if (mDialogLoader != null)
                 {
                     mLoaderCount--;
-                    int id = mLoaderOperationId;
+                    //int id = mLoaderOperationId;
 
-                    if (mLoaderCount < 1)
-                    {
-                        Task.Factory.StartNew(() =>
-                        {
-                            Thread.Sleep(500);
-                            if (!IsDestroyed && !IsFinishing)
-                            {
-                                RunOnUiThread(() =>
-                                {
-                                    lock (monitor)
-                                    {
-                                        if (id == mLoaderOperationId)
-                                        {
-                                            mLoaderOperationId++;
+                    //if (mLoaderCount < 1)
+                    //{
+                    //    Task.Factory.StartNew(() =>
+                    //    {
+                    //        Thread.Sleep(500);
+                    //        if (!IsDestroyed && !IsFinishing)
+                    //        {
+                    //            RunOnUiThread(() =>
+                    //            {
+                    //                lock (monitor)
+                    //                {
+                    //                    if (id == mLoaderOperationId)
+                    //                    {
+                    //                        mLoaderOperationId++;
 
-                                            if (mDialogLoader != null)
-                                            {
+                    //                        if (mDialogLoader != null)
+                    //                        {
                                                 mDialogLoader.Dismiss();
                                                 mDialogLoader = null;
-                                            }
-                                        }
-                                    }
-                                });
-                            }
-                        });
-                    }
+                    //                        }
+                    //                    }
+                    //                }
+                    //            });
+                    //        }
+                    //    });
+                    //}
                 }
             }
         }

@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Saladio.Components;
+using IO.Swagger.Model;
 using Saladio.Adapters;
+using Saladio.Components;
 using Saladio.Contexts;
-using Saladio.Models;
-using System.Globalization;
-using Saladio.Utility;
 using Saladio.Fragments;
+using Saladio.Utility;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Saladio.Activities
@@ -81,17 +79,93 @@ namespace Saladio.Activities
                         { 
                             View view = LayoutInflater.From(mActivity).Inflate(Resource.Layout.TabOrderCustomSalad, container, false);
                             ListView lstCustomSalad = view.FindViewById<ListView>(Resource.Id.lstCustomSalad);
+                            TextView txtTotalSaladPrice = view.FindViewById<TextView>(Resource.Id.txtTotalSaladPrice);
+                            TextView txtTotalSaladWeight = view.FindViewById<TextView>(Resource.Id.txtTotalSaladWeight);
+                            TextView txtTotalSaladCallorie = view.FindViewById<TextView>(Resource.Id.txtTotalSaladCallorie);
+                            EditText etCustomSaladDescription = view.FindViewById<EditText>(Resource.Id.etCustomSaladDescription);
+                            Button btnOrderCustomSalad = view.FindViewById<Button>(Resource.Id.btnOrderCustomSalad);
+                            decimal totalSaladPrice = 0;
+                            decimal totalSaladWeight = 0;
+                            decimal totalSaladCallorie = 0;
+                            SaladComponentGroupAdapter saladComponentAdapter = null;
+                            IList<SaladComponentGroup> saladComponentGroups = null;
 
                             Task.Factory.StartNew(() =>
                             {
-                                SaladComponentGroupAdapter adapter = new SaladComponentGroupAdapter(mActivity, mActivity.DataContext.SaladComponentGroups);
+                                saladComponentGroups = mActivity.DataContext.SaladComponentGroups;
+                                saladComponentAdapter = new SaladComponentGroupAdapter(mActivity, saladComponentGroups);
 
                                 mActivity.RunOnUiThread(() =>
                                 {
-                                    lstCustomSalad.Adapter = adapter;
+                                    lstCustomSalad.Adapter = saladComponentAdapter;
                                     lstCustomSalad.SetListViewHeightBasedOnChildren();
                                 });
+
+                                saladComponentAdapter.SaladComponetButtonPlusClicked += (sender, args) =>
+                                {
+                                    totalSaladPrice += (args.Quantity - args.OldQuantity) * args.SaladComponent.Price.Value;
+                                    totalSaladWeight += (args.Quantity - args.OldQuantity) * args.SaladComponent.Weight.Value;
+                                    totalSaladCallorie += (args.Quantity - args.OldQuantity) * args.SaladComponent.Callorie.Value;
+
+                                    txtTotalSaladPrice.Text = ((int)totalSaladPrice).ToString().ToPersianNumbers();
+                                    txtTotalSaladWeight.Text = ((int)totalSaladWeight).ToString().ToPersianNumbers();
+                                    txtTotalSaladCallorie.Text = ((int)totalSaladCallorie).ToString().ToPersianNumbers();
+                                };
+
+                                saladComponentAdapter.SaladComponetButtonMinusClicked += (sender, args) =>
+                                {
+                                    totalSaladPrice += (args.Quantity - args.OldQuantity) * args.SaladComponent.Price.Value;
+                                    totalSaladWeight += (args.Quantity - args.OldQuantity) * args.SaladComponent.Weight.Value;
+                                    totalSaladCallorie += (args.Quantity - args.OldQuantity) * args.SaladComponent.Callorie.Value;
+
+                                    txtTotalSaladPrice.Text = ((int)totalSaladPrice).ToString().ToPersianNumbers();
+                                    txtTotalSaladWeight.Text = ((int)totalSaladWeight).ToString().ToPersianNumbers();
+                                    txtTotalSaladCallorie.Text = ((int)totalSaladCallorie).ToString().ToPersianNumbers();
+                                };
                             });
+
+                            btnOrderCustomSalad.Click += (sender, args) =>
+                            {
+                                if (totalSaladPrice < 1 || totalSaladWeight < 1 || totalSaladCallorie < 1)
+                                {
+                                    mActivity.ShowMessageDialog(Resource.String.ToastSaladComponentNotSelected);
+                                }
+                                else
+                                {
+                                    Intent intent = new Intent(mActivity, typeof(ActivityOrderScheduled));
+
+                                    List<int> saladComponentIds = new List<int>();
+
+                                    foreach (var saladComponentGroup in saladComponentGroups)
+                                    {
+                                        foreach (var saladComponent in saladComponentGroup.Items)
+                                        {
+                                            int quantity = saladComponentAdapter.GetQuantity(saladComponent);
+
+                                            if (quantity > 0)
+                                            {
+                                                saladComponentIds.Add(saladComponent.Id.Value);
+                                                intent.PutExtra("quantity-" + saladComponent.Id.Value, quantity);
+                                            }
+                                        }
+                                    }
+
+                                    StringBuilder builder = new StringBuilder();
+                                    for (int i = 0; i < saladComponentIds.Count; i++)
+                                    {
+                                        if (i > 0)
+                                        {
+                                            builder.Append(",");
+                                        }
+
+                                        builder.Append(saladComponentIds[i]);
+                                    }
+                                    intent.PutExtra("saladComponentIds", builder.ToString());
+                                    intent.PutExtra("customSaladDescription", etCustomSaladDescription.Text);
+
+                                    mActivity.StartActivity(intent);
+                                }
+                            };
 
                             return view;
                         }
@@ -158,7 +232,7 @@ namespace Saladio.Activities
 
                                     savedGroups.Add(flatClassicGroup);
 
-                                    SaladGroupAdapter adapter = new SaladGroupAdapter(mActivity, savedGroups);
+                                    SaladGroupAdapter adapter = new SaladGroupAdapter(mActivity, savedGroups.Where(x => x.Items.Count > 0).ToList());
 
                                     mActivity.RunOnUiThread(() =>
                                     {
@@ -196,22 +270,17 @@ namespace Saladio.Activities
 
                             Action<int, int> updateList = new Action<int, int>((year, month) =>
                             {
-                                using (SaladioContext saladioContext = new SaladioContext())
+                                Task.Factory.StartNew(() =>
                                 {
-                                    IList<OrderSchedule> orders = saladioContext.GetOrderSchedules(year, month);
-                                    Dictionary<int, OrderSchedule> days = orders.ToDictionary(x => x.Day);
-                                    int daysOfMonth = persianCalendar.GetDaysInMonth(year, month);
-                                    orders = Range.New(1, daysOfMonth + 1).Select(x => days.ContainsKey(x) ? days[x] : new OrderSchedule()
-                                    {
-                                        Day = x,
-                                        Month = month,
-                                        Year = year,
-                                        DinnerCount = 0,
-                                        LaunchCount = 0
-                                    }).ToList();
+                                    IList<GroupedOrderSchedule> orders = mActivity.DataContext.GetGroupedOrderSchedules(year, month);
 
                                     OrderScheduleCalendarAdapter adapter = new OrderScheduleCalendarAdapter(mActivity, orders);
-                                    lstOrderSchedule.Adapter = adapter;
+
+                                    mActivity.RunOnUiThread(() =>
+                                    {
+                                        lstOrderSchedule.Adapter = adapter;
+                                        txtCalendarCurrentMonth.Text = year.ToString().ToPersianNumbers() + " " + monthNames[month - 1];
+                                    });
 
                                     adapter.NewOrder += (sender, args) =>
                                     {
@@ -222,9 +291,7 @@ namespace Saladio.Activities
 
                                         mActivity.StartActivity(intent);
                                     };
-
-                                    txtCalendarCurrentMonth.Text = year.ToString().ToPersianNumbers() + " " + monthNames[month - 1];
-                                }
+                                });
                             });
 
                             btnCalendarNextMonth.Click += (sender, args) =>

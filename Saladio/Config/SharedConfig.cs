@@ -142,7 +142,13 @@ namespace Saladio.Config
             get
             {
                 //return "http://192.168.2.9:10010/v1";
+#if DEBUG
                 return "http://169.254.89.238:10010/v1";
+                //return "http://178.162.207.98:10010/v1";
+#else
+                //return "http://169.254.89.238:10010/v1";
+                return "http://178.162.207.98:10010/v1";
+#endif
             }
         }
     }

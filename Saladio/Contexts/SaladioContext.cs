@@ -9,7 +9,6 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Saladio.Models;
 using System.Globalization;
 using IO.Swagger.Api;
 using Saladio.Utility;
@@ -29,7 +28,7 @@ namespace Saladio.Contexts
         private static IList<SavedSalad> mSavedSalads;
         private static IList<DeliverySchedule> mDeliveryHours;
         private static IList<string> mDeliveryAddresses;
-        private static IList<OrderSchedule> mOrderSchedules;
+        private static IDictionary<int, IDictionary<int, IList<Order>>> mOrderSchedules; //[year][month]
 
         public SaladioContext()
         {
@@ -200,6 +199,11 @@ namespace Saladio.Contexts
             }
         }
 
+        public void ClearSavedSaladsCache()
+        {
+            mSavedSalads = null;
+        }
+
         public IList<SavedSalad> SavedSalads
         {
             get
@@ -299,70 +303,99 @@ namespace Saladio.Contexts
             }
         }
 
-        public IList<OrderSchedule> GetOrderSchedules(int year, int month)
+        public IList<GroupedOrderSchedule> GetGroupedOrderSchedules(int year, int month)
         {
-            if (mOrderSchedules == null)
+            IList<Order> orders = GetOrderSchedules(year, month);
+            ILookup<int, DeliverySchedule> deliverySchedules = DeliveryHours.ToLookup(x => x.Id.Value);
+
+            PersianCalendar persianCalendar = new PersianCalendar();
+            int daysOfMonth = persianCalendar.GetDaysInMonth(year, month);
+
+            List<GroupedOrderSchedule> result = new List<GroupedOrderSchedule>();
+
+            for (int i = 1; i <= daysOfMonth; i++)
             {
-                mOrderSchedules = new List<OrderSchedule>();
-                mOrderSchedules.Add(new OrderSchedule
+                result.Add(new GroupedOrderSchedule()
                 {
-                    Year = 1395,
-                    Month = 9,
-                    Day = 1,
-                    LaunchCount = 1,
-                    DinnerCount = 0
-                });
-                mOrderSchedules.Add(new OrderSchedule
-                {
-                    Year = 1395,
-                    Month = 9,
-                    Day = 2,
-                    LaunchCount = 1,
-                    DinnerCount = 0
-                });
-                mOrderSchedules.Add(new OrderSchedule
-                {
-                    Year = 1395,
-                    Month = 9,
-                    Day = 3,
-                    LaunchCount = 0,
-                    DinnerCount = 1
-                });
-                mOrderSchedules.Add(new OrderSchedule
-                {
-                    Year = 1395,
-                    Month = 9,
-                    Day = 4,
-                    LaunchCount = 1,
-                    DinnerCount = 0
-                });
-                mOrderSchedules.Add(new OrderSchedule
-                {
-                    Year = 1395,
-                    Month = 9,
-                    Day = 5,
-                    LaunchCount = 1,
-                    DinnerCount = 0
-                });
-                mOrderSchedules.Add(new OrderSchedule
-                {
-                    Year = 1395,
-                    Month = 9,
-                    Day = 6,
-                    LaunchCount = 0,
-                    DinnerCount = 1
-                });
-                mOrderSchedules.Add(new OrderSchedule
-                {
-                    Year = 1395,
-                    Month = 9,
-                    Day = 8,
-                    LaunchCount = 0,
-                    DinnerCount = 2
+                    LaunchOrders = new List<Order>(),
+                    DinnerOrders = new List<Order>(),
+                    Year = year,
+                    Month = month,
+                    Day = i
                 });
             }
 
-            return mOrderSchedules.Where(x => x.Year == year && x.Month == month).ToList();
+            foreach (var item in orders)
+            {
+                DeliverySchedule schedule = deliverySchedules[item.DeliveryScheduleId.Value].FirstOrDefault();
+
+                if (schedule.Catagory == DeliverySchedule.CatagoryEnum.Launch)
+                {
+                    result[item.DeliveryDate.Day.Value - 1].LaunchOrders.Add(item);
+                }
+                else
+                {
+                    result[item.DeliveryDate.Day.Value - 1].DinnerOrders.Add(item);
+                }
+            }
+
+            return result;
+        }
+
+        public IList<Order> GetOrderSchedules(int year, int month)
+        {
+            if (mOrderSchedules == null)
+            {
+                mOrderSchedules = new Dictionary<int, IDictionary<int, IList<Order>>>();
+            }
+
+            if (!mOrderSchedules.ContainsKey(year))
+            {
+                mOrderSchedules[year] = new Dictionary<int, IList<Order>>();
+            }
+
+            IDictionary<int, IList<Order>> yearSchedules = mOrderSchedules[year];
+
+            if (!yearSchedules.ContainsKey(month))
+            {
+                try
+                {
+                    using (mOwner.OpenLoadingFromThread())
+                    {
+                        OrdersApi api = new OrdersApi(SharedConfig.AuthorizedApiConfig);
+                        IList<Order> items = new List<Order>();
+
+                        PagedApiHelper.FetchAll((start, length) =>
+                        {
+                            var res = api.GetOrdersByMe(length, start, year, month, 1, year, month, 31);
+
+                            foreach (var item in res.Data)
+                            {
+                                items.Add(item);
+                            }
+
+                            return res.RecordsFiltered.Value;
+                        });
+
+                        yearSchedules[month] = items;
+                    }
+                }
+                catch(Exception e)
+                {
+                    mOwner.ShowMessageDialogForExceptionFromThread(e);
+                    return new List<Order>();
+                }
+            }
+
+            return yearSchedules[month];
+        }
+
+        public void ClearOrderScheduleCache(int year, int month)
+        {
+            if (mOrderSchedules != null && mOrderSchedules.ContainsKey(year))
+            {
+                mOrderSchedules[year].Remove(month);
+            }
         }
 
         #region IDisposable Support

@@ -5,7 +5,6 @@ using Android.Views;
 using Android.Widget;
 using Saladio.Adapters;
 using Saladio.Contexts;
-using Saladio.Models;
 
 namespace Saladio.Fragments
 {

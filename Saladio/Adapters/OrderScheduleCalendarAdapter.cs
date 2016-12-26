@@ -9,18 +9,19 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Saladio.Models;
 using System.Globalization;
 using Android.Graphics;
+using IO.Swagger.Model;
+using Saladio.Contexts;
 
 namespace Saladio.Adapters
 {
-    public class OrderScheduleCalendarAdapter : BaseAdapter<OrderSchedule>
+    public class OrderScheduleCalendarAdapter : BaseAdapter<GroupedOrderSchedule>
     {
         private Context mContext;
-        private IList<OrderSchedule> mOrderSchedules;
+        private IList<GroupedOrderSchedule> mOrderSchedules;
 
-        public OrderScheduleCalendarAdapter(Context context, IList<OrderSchedule> orderSchedules)
+        public OrderScheduleCalendarAdapter(Context context, IList<GroupedOrderSchedule> orderSchedules)
         {
             mContext = context;
             mOrderSchedules = orderSchedules;
@@ -28,7 +29,7 @@ namespace Saladio.Adapters
 
         public event EventHandler<OrderScheduleNewOrderEventArgs> NewOrder;
 
-        public override OrderSchedule this[int position]
+        public override GroupedOrderSchedule this[int position]
         {
             get
             {
@@ -59,7 +60,7 @@ namespace Saladio.Adapters
             }
 
             PersianCalendar persianCalendar = new PersianCalendar();
-            OrderSchedule item = this[position];
+            GroupedOrderSchedule item = this[position];
             LinearLayout layoutDinnerIcons = row.FindViewById<LinearLayout>(Resource.Id.layoutDinnerIcons);
             LinearLayout layoutLaunchIcons = row.FindViewById<LinearLayout>(Resource.Id.layoutLaunchIcons);
             TextView txtDayOfWeek = row.FindViewById<TextView>(Resource.Id.txtDayOfWeek);
@@ -77,11 +78,11 @@ namespace Saladio.Adapters
             layoutLaunchIcons.RemoveAllViews();
             layoutDinnerIcons.RemoveAllViews();
 
-            if (item.LaunchCount > 0)
+            if (item.LaunchOrders.Count > 0)
             {
-                for (int i = 0; i < item.LaunchCount; i++)
+                foreach (var order in item.LaunchOrders)
                 {
-                    layoutLaunchIcons.AddView(NewImage(item));
+                    layoutLaunchIcons.AddView(NewImage(order));
                 }
             }
             else
@@ -89,11 +90,11 @@ namespace Saladio.Adapters
                 layoutLaunchIcons.AddView(NewBlackWhiteImage(item));
             }
 
-            if (item.DinnerCount > 0)
+            if (item.DinnerOrders.Count > 0)
             {
-                for (int i = 0; i < item.DinnerCount; i++)
+                foreach (var order in item.DinnerOrders)
                 {
-                    layoutDinnerIcons.AddView(NewImage(item));
+                    layoutDinnerIcons.AddView(NewImage(order));
                 }
             }
             else
@@ -116,14 +117,15 @@ namespace Saladio.Adapters
             return ret;
         }
 
-        private ImageView NewImage(OrderSchedule order)
+        private ImageView NewImage(Order order)
         {
             ImageView ret = NewImage(Resource.Drawable.ic_pie_salad_64);
+            ret.Tag = order.Id.Value.ToString();
 
             return ret;
         }
 
-        private ImageView NewBlackWhiteImage(OrderSchedule order)
+        private ImageView NewBlackWhiteImage(GroupedOrderSchedule order)
         {
             ImageView ret = NewImage(Resource.Drawable.ic_pie_salad_blackwhite_64);
 

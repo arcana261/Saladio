@@ -14,6 +14,8 @@ using IO.Swagger.Api;
 using Saladio.Config;
 using IO.Swagger.Client;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Converters;
+using Android.Util;
 
 namespace Saladio.Activities
 {
@@ -98,6 +100,16 @@ namespace Saladio.Activities
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+
+            {
+                StringEnumConverter x = new StringEnumConverter();
+
+                if (SharedConfig.UserName == null || SharedConfig.Password == null)
+                {
+                    SharedConfig.UserName = "--xadmin--";
+                    SharedConfig.Password = "--xadmin--";
+                }
+            }
 
             // Set our view from the "main" layout resource
             SetContentView (Resource.Layout.ActivityStart);
@@ -353,12 +365,25 @@ namespace Saladio.Activities
 
                         try
                         {
+                            decimal? weight = null;
+
+                            if (!string.IsNullOrEmpty(etWeight.Text))
+                            {
+                                decimal val;
+                                if (!decimal.TryParse(etWeight.Text.ToLatinNumbers(), out val))
+                                {
+                                    ShowMessageDialog(Resource.String.ToastInvalidWeight);
+                                    break;
+                                }
+                                weight = val;
+                            }
+
                             UsersApi api = new UsersApi(SharedConfig.UnAuthorizedApiConfig);
-                            var res = api.Signup(new IO.Swagger.Model.User(null, etEmail.Text, etPhone.Text,
+                            var res = api.Signup(new IO.Swagger.Model.User(null, etEmail.Text, etPhone.Text.ToLatinNumbers(),
                                 etPassword.Text, etFirstName.Text, etLastName.Text,
                                 new IO.Swagger.Model.PersianDate(etBirthDate.SelectedYear, etBirthDate.SelectedMonth, etBirthDate.SelectedDay),
                                 radioMaleSelected.Checked ? IO.Swagger.Model.User.GenderEnum.Male : IO.Swagger.Model.User.GenderEnum.Female,
-                                !string.IsNullOrEmpty(etWeight.Text) ? (decimal?)decimal.Parse(etWeight.Text) : null, addresses));
+                                weight, addresses));
 
                             SharedConfig.UserName = res.UserName;
                             SharedConfig.Password = etPassword.Text;

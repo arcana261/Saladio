@@ -28,6 +28,8 @@ namespace Saladio.Fragments
             mMessage = "";
         }
 
+        public event EventHandler<DialogDismissEventArgs> DialogDismissEvent;
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
@@ -40,6 +42,13 @@ namespace Saladio.Fragments
             base.OnSaveInstanceState(outState);
 
             outState.PutString("message", mMessage);
+        }
+
+        public override void OnDismiss(IDialogInterface dialog)
+        {
+            base.OnDismiss(dialog);
+
+            DialogDismissEvent?.Invoke(this, new DialogDismissEventArgs());
         }
 
         public override void OnViewCreated(View view, Bundle savedInstanceState)

@@ -414,6 +414,9 @@ namespace Saladio
 			// aapt resource value: 0x7f0a0006
 			public const int btnOk = 2131361798;
 			
+			// aapt resource value: 0x7f0a0074
+			public const int btnOrderCustomSalad = 2131361908;
+			
 			// aapt resource value: 0x7f0a0000
 			public const int btnOrderScheduledSalad = 2131361792;
 			
@@ -437,6 +440,9 @@ namespace Saladio
 			
 			// aapt resource value: 0x7f0a004e
 			public const int etBirthDate = 2131361870;
+			
+			// aapt resource value: 0x7f0a0073
+			public const int etCustomSaladDescription = 2131361907;
 			
 			// aapt resource value: 0x7f0a0045
 			public const int etEmail = 2131361861;
@@ -462,8 +468,8 @@ namespace Saladio
 			// aapt resource value: 0x7f0a0005
 			public const int frameCalendarContainer = 2131361797;
 			
-			// aapt resource value: 0x7f0a0073
-			public const int iconLogo = 2131361907;
+			// aapt resource value: 0x7f0a0078
+			public const int iconLogo = 2131361912;
 			
 			// aapt resource value: 0x7f0a0068
 			public const int imgSalad = 2131361896;
@@ -471,8 +477,8 @@ namespace Saladio
 			// aapt resource value: 0x7f0a000a
 			public const int imgSaladPicture = 2131361802;
 			
-			// aapt resource value: 0x7f0a0071
-			public const int layoutCalendarWidgetSet = 2131361905;
+			// aapt resource value: 0x7f0a0076
+			public const int layoutCalendarWidgetSet = 2131361910;
 			
 			// aapt resource value: 0x7f0a005c
 			public const int layoutChoices = 2131361884;
@@ -501,17 +507,17 @@ namespace Saladio
 			// aapt resource value: 0x7f0a006e
 			public const int lstClassicSalads = 2131361902;
 			
-			// aapt resource value: 0x7f0a006f
-			public const int lstCustomSalad = 2131361903;
+			// aapt resource value: 0x7f0a0072
+			public const int lstCustomSalad = 2131361906;
 			
-			// aapt resource value: 0x7f0a0070
-			public const int lstOrderSchedule = 2131361904;
+			// aapt resource value: 0x7f0a0075
+			public const int lstOrderSchedule = 2131361909;
 			
 			// aapt resource value: 0x7f0a000c
 			public const int lstSaladComponents = 2131361804;
 			
-			// aapt resource value: 0x7f0a0072
-			public const int lstSavedSalads = 2131361906;
+			// aapt resource value: 0x7f0a0077
+			public const int lstSavedSalads = 2131361911;
 			
 			// aapt resource value: 0x7f0a0041
 			public const int lstSelectDeliveryAddress = 2131361857;
@@ -732,6 +738,15 @@ namespace Saladio
 			// aapt resource value: 0x7f0a006c
 			public const int txtSavedSaladGroup = 2131361900;
 			
+			// aapt resource value: 0x7f0a0071
+			public const int txtTotalSaladCallorie = 2131361905;
+			
+			// aapt resource value: 0x7f0a006f
+			public const int txtTotalSaladPrice = 2131361903;
+			
+			// aapt resource value: 0x7f0a0070
+			public const int txtTotalSaladWeight = 2131361904;
+			
 			// aapt resource value: 0x7f0a003e
 			public const int viewPager = 2131361854;
 			
@@ -812,52 +827,55 @@ namespace Saladio
 			public const int PageSelectDeliveryHour = 2130903056;
 			
 			// aapt resource value: 0x7f030011
-			public const int PageSelectSalad = 2130903057;
+			public const int PageSelectNewSaladName = 2130903057;
 			
 			// aapt resource value: 0x7f030012
-			public const int PageSignUp = 2130903058;
+			public const int PageSelectSalad = 2130903058;
 			
 			// aapt resource value: 0x7f030013
-			public const int PageSignUpDetails = 2130903059;
+			public const int PageSignUp = 2130903059;
 			
 			// aapt resource value: 0x7f030014
-			public const int PageWelcome = 2130903060;
+			public const int PageSignUpDetails = 2130903060;
 			
 			// aapt resource value: 0x7f030015
-			public const int RowItemSelector = 2130903061;
+			public const int PageWelcome = 2130903061;
 			
 			// aapt resource value: 0x7f030016
-			public const int RowItemSelectorGroup = 2130903062;
+			public const int RowItemSelector = 2130903062;
 			
 			// aapt resource value: 0x7f030017
-			public const int RowOrderScheduleCalendar = 2130903063;
+			public const int RowItemSelectorGroup = 2130903063;
 			
 			// aapt resource value: 0x7f030018
-			public const int RowSaladComponent = 2130903064;
+			public const int RowOrderScheduleCalendar = 2130903064;
 			
 			// aapt resource value: 0x7f030019
-			public const int RowSaladComponentGroup = 2130903065;
+			public const int RowSaladComponent = 2130903065;
 			
 			// aapt resource value: 0x7f03001a
-			public const int RowSavedSalad = 2130903066;
+			public const int RowSaladComponentGroup = 2130903066;
 			
 			// aapt resource value: 0x7f03001b
-			public const int RowSavedSaladGroup = 2130903067;
+			public const int RowSavedSalad = 2130903067;
 			
 			// aapt resource value: 0x7f03001c
-			public const int TabAbout = 2130903068;
+			public const int RowSavedSaladGroup = 2130903068;
 			
 			// aapt resource value: 0x7f03001d
-			public const int TabClassicSalads = 2130903069;
+			public const int TabAbout = 2130903069;
 			
 			// aapt resource value: 0x7f03001e
-			public const int TabOrderCustomSalad = 2130903070;
+			public const int TabClassicSalads = 2130903070;
 			
 			// aapt resource value: 0x7f03001f
-			public const int TabOrderSchedule = 2130903071;
+			public const int TabOrderCustomSalad = 2130903071;
 			
 			// aapt resource value: 0x7f030020
-			public const int TabSavedSalads = 2130903072;
+			public const int TabOrderSchedule = 2130903072;
+			
+			// aapt resource value: 0x7f030021
+			public const int TabSavedSalads = 2130903073;
 			
 			static Layout()
 			{
@@ -1095,6 +1113,15 @@ namespace Saladio
 			// aapt resource value: 0x7f070046
 			public const int ToastBirthDateEmpty = 2131165254;
 			
+			// aapt resource value: 0x7f070053
+			public const int ToastDeliveryAddressNotSelected = 2131165267;
+			
+			// aapt resource value: 0x7f070051
+			public const int ToastDeliveryDateNotSelected = 2131165265;
+			
+			// aapt resource value: 0x7f070052
+			public const int ToastDeliveryScheduleNotSelected = 2131165266;
+			
 			// aapt resource value: 0x7f07004e
 			public const int ToastDuplicateEmail = 2131165262;
 			
@@ -1110,17 +1137,29 @@ namespace Saladio
 			// aapt resource value: 0x7f070041
 			public const int ToastInvalidPhoneNumber = 2131165249;
 			
+			// aapt resource value: 0x7f070056
+			public const int ToastInvalidWeight = 2131165270;
+			
 			// aapt resource value: 0x7f070044
 			public const int ToastLastNameEmpty = 2131165252;
 			
 			// aapt resource value: 0x7f07004f
 			public const int ToastLoading = 2131165263;
 			
+			// aapt resource value: 0x7f070055
+			public const int ToastOrderPlaced = 2131165269;
+			
 			// aapt resource value: 0x7f070042
 			public const int ToastPasswordMinLength = 2131165250;
 			
 			// aapt resource value: 0x7f07003f
 			public const int ToastPasswordsDoNotMatch = 2131165247;
+			
+			// aapt resource value: 0x7f070054
+			public const int ToastSaladComponentNotSelected = 2131165268;
+			
+			// aapt resource value: 0x7f070050
+			public const int ToastSaladNotSelected = 2131165264;
 			
 			// aapt resource value: 0x7f070006
 			public const int Welcome1 = 2131165190;

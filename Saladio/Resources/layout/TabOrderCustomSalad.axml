@@ -52,6 +52,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/CustomSaladInformationToman" />
                     <TextView
+                        android:id="@+id/txtTotalSaladPrice"
                         style="@style/CustomSaladInformation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -85,6 +86,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/CustomSaladInformationGrams" />
                     <TextView
+                        android:id="@+id/txtTotalSaladWeight"
                         style="@style/CustomSaladInformation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -118,6 +120,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/CustomSaladInformationKilloCalorie" />
                     <TextView
+                        android:id="@+id/txtTotalSaladCallorie"
                         style="@style/CustomSaladInformation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -142,12 +145,14 @@
                 android:layout_marginTop="@dimen/VerticalMargin"
                 android:divider="@null" />
             <EditText
+                android:id="@+id/etCustomSaladDescription"
                 style="@style/BorderedEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/VerticalMargin"
                 android:hint="@string/CustomSaladMoreDetails" />
             <Button
+                android:id="@+id/btnOrderCustomSalad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/VerticalMargin"

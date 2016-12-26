@@ -93,6 +93,13 @@
   <string name="ToastApiErrorBadRequest">فرمت اطلاعات ارسالی به سرور صحیح نیست</string>
   <string name="ToastApiErrorForbidden">حقوق دسترسی کافی برای فراخوانی درخواست وجود ندارد</string>
   <string name="ToastErrorUnknown">خطای نامشخص</string>
-  <string name="ToastDuplicateEmail">ایمیل وارد شده تکراری است</string>
+  <string name="ToastDuplicateEmail">ایمیل یا شماره تلفن وارد شده تکراری است</string>
   <string name="ToastLoading">در حال بارگزاری...</string>
+  <string name="ToastSaladNotSelected">لطفا یکی از سالادها را انتخاب نمایید</string>
+  <string name="ToastDeliveryDateNotSelected">لطفا تاریخ تحویل سالاد را مشخص نمایید</string>
+  <string name="ToastDeliveryScheduleNotSelected">لطفا زمان تحویل سالاد را مشخص نمایید</string>
+  <string name="ToastDeliveryAddressNotSelected">لطفا آدرس تحویل سالاد را مشخص نمایید</string>
+  <string name="ToastSaladComponentNotSelected">باید تعدادی از اجزای سالاد را انتخاب نمایید</string>
+  <string name="ToastOrderPlaced">سفارش شما ثبت شد! از انتخاب شما متشکریم!</string>
+  <string name="ToastInvalidWeight">مقدار وارد شده برای وزن صحیح نیست</string>
 </resources>

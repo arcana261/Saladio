@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="Saladio.Saladio" android:versionCode="1" android:versionName="1.132">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="Saladio.Saladio" android:versionName="1.4" android:installLocation="auto" android:versionCode="4">
 	<uses-sdk android:minSdkVersion="15" />
+	<uses-permission android:name="android.permission.INTERNET" />
 	<application android:label="Saladio" android:icon="@drawable/ic_pie_salad_64" android:theme="@style/SaladioTheme" android:supportsRtl="true" android:configChanges="orientation|screenSize"></application>
 </manifest>

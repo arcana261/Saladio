@@ -9,7 +9,6 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Saladio.Models;
 
 namespace Saladio.Adapters
 {

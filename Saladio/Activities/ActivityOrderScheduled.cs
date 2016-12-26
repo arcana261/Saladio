@@ -14,9 +14,11 @@ using Saladio.Components;
 using Android.Support.V4.Content;
 using Saladio.Adapters;
 using Saladio.Contexts;
-using Saladio.Models;
 using Saladio.Fragments;
 using System.Threading.Tasks;
+using IO.Swagger.Model;
+using IO.Swagger.Api;
+using Saladio.Config;
 
 namespace Saladio.Activities
 {
@@ -26,12 +28,15 @@ namespace Saladio.Activities
         private int? mDeliveryYear;
         private int? mDeliveryMonth;
         private int? mDeliveryDay;
+        private List<PickedSaladComponent> mPickedComponents;
+        private string mCustomSaladDescription;
 
         public ActivityOrderScheduled()
         {
             mDeliveryYear = null;
             mDeliveryMonth = null;
             mDeliveryDay = null;
+            mPickedComponents = null;
         }
 
         private enum WizardPage
@@ -126,7 +131,30 @@ namespace Saladio.Activities
                 mDeliveryDay = intent.GetIntExtra("day", -1);
             }
 
-            SwitchToPage(WizardPage.SelectSalad);
+            if (intent.HasExtra("saladComponentIds"))
+            {
+                mPickedComponents = intent.GetStringExtra("saladComponentIds").Split(',')
+                    .Select(x => int.Parse(x))
+                    .Select(x => new PickedSaladComponent(x, intent.GetIntExtra("quantity-" + x, 0)))
+                    .ToList();
+                mCustomSaladDescription = intent.GetStringExtra("customSaladDescription");
+            }
+
+            if (mPickedComponents == null)
+            {
+                SwitchToPage(WizardPage.SelectSalad);
+            }
+            else
+            {
+                if (mDeliveryDay == null || mDeliveryMonth == null || mDeliveryYear == null)
+                {
+                    SwitchToPage(WizardPage.SelectDeliveryDate);
+                }
+                else
+                {
+                    SwitchToPage(WizardPage.SelectDeliveryHour);
+                }
+            }
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -161,6 +189,9 @@ namespace Saladio.Activities
         }
 
         private SaladListItem mSelectedSalad;
+        private FragmentCalendar mFragmentCalendar;
+        private GroupedItemSelectorAdapter mDeliveryScheduleAdapter;
+        private ItemSelectorAdapter mDeliveryAddressAdapter;
 
         private void OnInitializePage(WizardPage page, View view)
         {
@@ -190,12 +221,13 @@ namespace Saladio.Activities
                                     foreach (var item in group.Items)
                                     {
                                         flatClassicGroup.Items.Add(item);
+                                        item.Group = flatClassicGroup;
                                     }
                                 }
 
                                 savedGroups.Add(flatClassicGroup);
 
-                                SaladGroupAdapter adapter = new SaladGroupAdapter(this, savedGroups);
+                                SaladGroupAdapter adapter = new SaladGroupAdapter(this, savedGroups.Where(x => x.Items.Count > 0).ToList());
 
                                 RunOnUiThread(() =>
                                 {
@@ -217,9 +249,9 @@ namespace Saladio.Activities
                 case WizardPage.SelectDeliveryDate:
                     using (FragmentTransaction transaction = FragmentManager.BeginTransaction())
                     {
-                        FragmentCalendar calendar = new FragmentCalendar();
+                        mFragmentCalendar = new FragmentCalendar();
 
-                        transaction.Replace(Resource.Id.layoutDatePickerContainer, calendar);
+                        transaction.Replace(Resource.Id.layoutDatePickerContainer, mFragmentCalendar);
                         transaction.Commit();
                     }
                     break;
@@ -229,15 +261,15 @@ namespace Saladio.Activities
 
                         Task.Factory.StartNew(() =>
                         {
-                            GroupedItemSelectorAdapter adapter = new GroupedItemSelectorAdapter(this,
+                            mDeliveryScheduleAdapter = new GroupedItemSelectorAdapter(this,
                                 DataContext.DeliveryHours.Select(x => new KeyValuePair<string, string>(
-                                    x.Catagory.Value == IO.Swagger.Model.DeliverySchedule.CatagoryEnum.Dinner ? "ناهار" : "شام",
+                                    x.Catagory.Value == DeliverySchedule.CatagoryEnum.Dinner ? "ناهار" : "شام",
                                     "ساعت " + x.FromHour.ToString().ToPersianNumbers() + " الی " + x.ToHour.ToString().ToPersianNumbers())).ToList(),
                                 new DeliveryScheduleGroupComparer());
 
                             RunOnUiThread(() =>
                             {
-                                lstSelectDeliveryHour.Adapter = adapter;
+                                lstSelectDeliveryHour.Adapter = mDeliveryScheduleAdapter;
                             });
                         });
                     }
@@ -248,11 +280,11 @@ namespace Saladio.Activities
 
                         Task.Factory.StartNew(() =>
                         {
-                            ItemSelectorAdapter adapter = new ItemSelectorAdapter(this, DataContext.DeliveryAddresses);
+                            mDeliveryAddressAdapter = new ItemSelectorAdapter(this, DataContext.DeliveryAddresses);
 
                             RunOnUiThread(() =>
                             {
-                                lstSelectDeliveryAddress.Adapter = adapter;
+                                lstSelectDeliveryAddress.Adapter = mDeliveryAddressAdapter;
                             });
                         });
                     }
@@ -298,20 +330,96 @@ namespace Saladio.Activities
             switch (page)
             {
                 case WizardPage.SelectSalad:
-                    if (mDeliveryDay == null || mDeliveryMonth == null || mDeliveryYear == null)
                     {
-                        SwitchToPage(WizardPage.SelectDeliveryDate);
-                    }
-                    else
-                    {
-                        SwitchToPage(WizardPage.SelectDeliveryHour);
+                        if (mSelectedSalad == null)
+                        {
+                            ShowMessageDialog(Resource.String.ToastSaladNotSelected);
+                            break;
+                        }
+
+                        if (mDeliveryDay == null || mDeliveryMonth == null || mDeliveryYear == null)
+                        {
+                            SwitchToPage(WizardPage.SelectDeliveryDate);
+                        }
+                        else
+                        {
+                            SwitchToPage(WizardPage.SelectDeliveryHour);
+                        }
                     }
                     break;
                 case WizardPage.SelectDeliveryDate:
-                    SwitchToPage(WizardPage.SelectDeliveryHour);
+                    {
+                        if (!mFragmentCalendar.HasValue)
+                        {
+                            ShowMessageDialog(Resource.String.ToastDeliveryDateNotSelected);
+                            break;
+                        }
+
+                        SwitchToPage(WizardPage.SelectDeliveryHour);
+                    }
                     break;
                 case WizardPage.SelectDeliveryHour:
-                    SwitchToPage(WizardPage.SelectDeliveryAddress);
+                    {
+                        if (!mDeliveryScheduleAdapter.HasValue)
+                        {
+                            ShowMessageDialog(Resource.String.ToastDeliveryScheduleNotSelected);
+                            break;
+                        }
+
+                        SwitchToPage(WizardPage.SelectDeliveryAddress);
+                    }
+                    break;
+                case WizardPage.SelectDeliveryAddress:
+                    {
+                        if (!mDeliveryAddressAdapter.HasValue)
+                        {
+                            ShowMessageDialog(Resource.String.ToastDeliveryAddressNotSelected);
+                            break;
+                        }
+
+                        Task.Factory.StartNew(() =>
+                        {
+                            try
+                            {
+                                OrdersApi api = new OrdersApi(SharedConfig.AuthorizedApiConfig);
+
+                                if (mPickedComponents != null)
+                                {
+                                    using (OpenLoadingFromThread())
+                                    {
+                                        api.OrderNewCustomSalad(new OrderCustomSalad(mPickedComponents,
+                                            new PersianDate(mFragmentCalendar.SelectedYear, mFragmentCalendar.SelectedMonth, mFragmentCalendar.SelectedDay),
+                                            DataContext.DeliveryHours[mDeliveryScheduleAdapter.SelectedIndex].Id.Value,
+                                            mDeliveryAddressAdapter.SelectedItem,
+                                            "یک سالاد خوشمزه!"));
+                                    }
+                                }
+                                else
+                                {
+                                    using (OpenLoadingFromThread())
+                                    {
+                                        api.OrderNewSalad(new Order(null, mSelectedSalad.Id,
+                                            new PersianDate(mFragmentCalendar.SelectedYear, mFragmentCalendar.SelectedMonth, mFragmentCalendar.SelectedDay),
+                                            DataContext.DeliveryHours[mDeliveryScheduleAdapter.SelectedIndex].Id.Value,
+                                            mDeliveryAddressAdapter.SelectedItem,
+                                            null));
+                                    }
+                                }
+
+                                DataContext.ClearOrderScheduleCache(mFragmentCalendar.SelectedYear.Value, mFragmentCalendar.SelectedMonth.Value);
+                                DataContext.ClearSavedSaladsCache();
+                            }
+                            catch (Exception e)
+                            {
+                                ShowMessageDialogForExceptionFromThread(e);
+                            }
+
+                            ShowMessageDialog(Resource.String.ToastOrderPlaced, () =>
+                            {
+                                Finish();
+                            });
+                        });
+                    }
                     break;
                 default:
                     throw new ArgumentException("invalid requested page: " + page.ToString(), "page");

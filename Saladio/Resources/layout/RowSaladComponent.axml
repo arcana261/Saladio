@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/HorizontalMargin"
             android:layout_marginRight="@dimen/HorizontalMargin"
-            android:text="0" />
+            android:text="۰" />
         <Button
             android:id="@+id/btnPlus"
             style="@style/PlusMinusButton"

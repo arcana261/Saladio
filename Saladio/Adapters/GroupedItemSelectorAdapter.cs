@@ -20,6 +20,7 @@ namespace Saladio.Adapters
         private Dictionary<string, IList<string>> mGroupItems;
         private int? mSelectedPosition;
         private int? mSelectedIndex;
+        private Dictionary<int, Dictionary<int, int>> mPositionIndexToInputIndex;
 
         public GroupedItemSelectorAdapter(Context context, List<KeyValuePair<string, string>> data, IComparer<string> groupComparer)
         {
@@ -34,6 +35,28 @@ namespace Saladio.Adapters
 
             mGroupItems = mGroups.Select(x => new KeyValuePair<string, IList<string>>(x, data.Where(y => y.Key.Equals(x)).Select(y => y.Value).ToList()))
                 .ToDictionary(x => x.Key, x => x.Value);
+
+            Dictionary<string, int> groupIndex = new Dictionary<string, int>();
+            for (int i = 0; i < mGroups.Count; i++)
+            {
+                groupIndex[mGroups[i]] = i;
+            }
+
+            mPositionIndexToInputIndex = new Dictionary<int, Dictionary<int, int>>();
+            for (int i = 0; i < data.Count; i++)
+            {
+                KeyValuePair<string, string> item = data[i];
+
+                int position = groupIndex[item.Key];
+                if (!mPositionIndexToInputIndex.ContainsKey(position))
+                {
+                    mPositionIndexToInputIndex[position] = new Dictionary<int, int>();
+                }
+
+                Dictionary<int, int> indexDictionary = mPositionIndexToInputIndex[position];
+
+                indexDictionary[mGroupItems[item.Key].IndexOf(item.Value)] = i;
+            }
         }
 
         public GroupedItemSelectorAdapter(Context context, List<KeyValuePair<string, string>> data)
@@ -126,6 +149,76 @@ namespace Saladio.Adapters
             }
 
             return row;
+        }
+
+        public bool HasValue
+        {
+            get
+            {
+                return mSelectedPosition.HasValue && mSelectedIndex.HasValue;
+            }
+        }
+
+        public int SelectedIndex
+        {
+            get
+            {
+                if (!HasValue)
+                {
+                    return -1;
+                }
+
+                return mPositionIndexToInputIndex[mSelectedPosition.Value][mSelectedIndex.Value];
+            }
+            set
+            {
+                SelectedItem = mData[value];
+            }
+        }
+
+        public KeyValuePair<string, string>? SelectedItem
+        {
+            get
+            {
+                if (!HasValue)
+                {
+                    return null;
+                }
+
+                return mData[SelectedIndex];
+            }
+            set
+            {
+                if (value == null)
+                {
+                    mSelectedIndex = null;
+                    mSelectedPosition = null;
+
+                    NotifyDataSetChanged();
+                }
+                else
+                {
+                    mSelectedPosition = mGroups.IndexOf(value.Value.Key);
+
+                    if (mSelectedPosition < 0)
+                    {
+                        mSelectedPosition = null;
+                        mSelectedIndex = null;
+                    }
+                    else
+                    {
+                        mSelectedIndex = mGroupItems[value.Value.Key].IndexOf(value.Value.Value);
+
+                        if (mSelectedIndex < 0)
+                        {
+                            mSelectedIndex = null;
+                            mSelectedPosition = null;
+                        }
+                    }
+
+                    NotifyDataSetChanged();
+                }
+            }
         }
 
         private void RadioItemSelected_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)

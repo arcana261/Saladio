@@ -45,6 +45,55 @@ namespace Saladio.Adapters
             return position;
         }
 
+        public bool HasValue
+        {
+            get
+            {
+                return mSelectedPosition.HasValue;
+            }
+        }
+
+        public int? SelectedPosition
+        {
+            get
+            {
+                return mSelectedPosition;
+            }
+            set
+            {
+                mSelectedPosition = value;
+                NotifyDataSetChanged();
+            }
+        }
+
+        public string SelectedItem
+        {
+            get
+            {
+                if (!HasValue)
+                {
+                    return null;
+                }
+
+                return mItems[mSelectedPosition.Value];
+            }
+            set
+            {
+                int index = mItems.IndexOf(value);
+                
+                if (index < 0)
+                {
+                    mSelectedPosition = null;
+                }
+                else
+                {
+                    mSelectedPosition = index;
+                }
+
+                NotifyDataSetChanged();
+            }
+        }
+
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             View row = convertView;
