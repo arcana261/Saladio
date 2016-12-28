@@ -18,6 +18,7 @@
             android:weightSum="85">
             <LinearLayout
                 android:layout_width="0dp"
+                android:id="@+id/customSaladInformationOther"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
                 android:orientation="vertical">

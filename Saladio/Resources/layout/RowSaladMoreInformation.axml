@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/layoutContainer">
+  <LinearLayout
+      android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:weightSum="5"
+      android:gravity="right">
+    <TextView
+        style="@style/SaladioTextView"
+        android:id="@+id/txtItemLeft"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:text="left"
+        android:textColor="@android:color/black"
+        android:gravity="center"/>
+    <TextView
+        style="@style/SaladioTextView"
+        android:id="@+id/txtItemMiddle"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:text="middle"
+        android:textColor="@android:color/black"
+        android:gravity="center"/>
+    <TextView
+        style="@style/SaladioTextView"
+        android:id="@+id/txtItemRight"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="right"
+        android:textColor="@android:color/black"
+        android:gravity="center"/>
+  </LinearLayout>
+
+  <View
+    android:id="@+id/divider"
+    style="@style/SaladioListDivider"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/ListDividerStroke"
+    android:layout_marginTop="@dimen/DividerMargin"
+    android:layout_marginBottom="@dimen/DividerMargin" />
+</LinearLayout>

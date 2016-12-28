@@ -82,6 +82,7 @@ namespace Saladio.Activities
                             TextView txtTotalSaladPrice = view.FindViewById<TextView>(Resource.Id.txtTotalSaladPrice);
                             TextView txtTotalSaladWeight = view.FindViewById<TextView>(Resource.Id.txtTotalSaladWeight);
                             TextView txtTotalSaladCallorie = view.FindViewById<TextView>(Resource.Id.txtTotalSaladCallorie);
+                            View customSaladInformationOther = view.FindViewById<View>(Resource.Id.customSaladInformationOther);
                             EditText etCustomSaladDescription = view.FindViewById<EditText>(Resource.Id.etCustomSaladDescription);
                             Button btnOrderCustomSalad = view.FindViewById<Button>(Resource.Id.btnOrderCustomSalad);
                             decimal totalSaladPrice = 0;
@@ -105,7 +106,7 @@ namespace Saladio.Activities
                                 {
                                     totalSaladPrice += (args.Quantity - args.OldQuantity) * args.SaladComponent.Price.Value;
                                     totalSaladWeight += (args.Quantity - args.OldQuantity) * args.SaladComponent.Weight.Value;
-                                    totalSaladCallorie += (args.Quantity - args.OldQuantity) * args.SaladComponent.Callorie.Value;
+                                    totalSaladCallorie += (args.Quantity - args.OldQuantity) * args.SaladComponent.Energy.Value;
 
                                     txtTotalSaladPrice.Text = ((int)totalSaladPrice).ToString().ToPersianNumbers();
                                     txtTotalSaladWeight.Text = ((int)totalSaladWeight).ToString().ToPersianNumbers();
@@ -116,13 +117,42 @@ namespace Saladio.Activities
                                 {
                                     totalSaladPrice += (args.Quantity - args.OldQuantity) * args.SaladComponent.Price.Value;
                                     totalSaladWeight += (args.Quantity - args.OldQuantity) * args.SaladComponent.Weight.Value;
-                                    totalSaladCallorie += (args.Quantity - args.OldQuantity) * args.SaladComponent.Callorie.Value;
+                                    totalSaladCallorie += (args.Quantity - args.OldQuantity) * args.SaladComponent.Energy.Value;
 
                                     txtTotalSaladPrice.Text = ((int)totalSaladPrice).ToString().ToPersianNumbers();
                                     txtTotalSaladWeight.Text = ((int)totalSaladWeight).ToString().ToPersianNumbers();
                                     txtTotalSaladCallorie.Text = ((int)totalSaladCallorie).ToString().ToPersianNumbers();
                                 };
                             });
+
+                            customSaladInformationOther.Click += (sender, args) =>
+                            {
+                                Task.Factory.StartNew(() =>
+                                {
+                                    IList<PickedSaladComponent> picked = new List<PickedSaladComponent>();
+
+                                    foreach (var saladComponentGroup in saladComponentGroups)
+                                    {
+                                        foreach (var saladComponent in saladComponentGroup.Items)
+                                        {
+                                            int quantity = saladComponentAdapter.GetQuantity(saladComponent);
+
+                                            if (quantity > 0)
+                                            {
+                                                picked.Add(new PickedSaladComponent(SaladComponentId: saladComponent.Id, Quantity: quantity));
+                                            }
+                                        }
+                                    }
+
+                                    IList<SaladBodyNeedGroup> groups = mActivity.DataContext.GetCustomSaladBodyNeedComparison(picked);
+
+                                    using (FragmentTransaction transaction = mActivity.FragmentManager.BeginTransaction())
+                                    {
+                                        DialogSaladBodyNeeds dialog = new DialogSaladBodyNeeds(groups);
+                                        dialog.Show(transaction, "dialogSaladBodyNeeds");
+                                    }
+                                });
+                            };
 
                             btnOrderCustomSalad.Click += (sender, args) =>
                             {

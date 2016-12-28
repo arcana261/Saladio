@@ -82,9 +82,17 @@
             android:id="@+id/etWeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:nextFocusDown="@+id/etAddress1"
+            android:inputType="numberDecimal"
+            android:nextFocusDown="@+id/etHeight"
             android:hint="@string/FormInputWeightHint"
+            android:layout_marginTop="@dimen/VerticalMargin" />
+       <EditText
+            android:id="@+id/etHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:nextFocusDown="@+id/etAddress1"
+            android:hint="@string/FormInputHeightHint"
             android:layout_marginTop="@dimen/VerticalMargin" />
         <TextView
             android:layout_width="match_parent"

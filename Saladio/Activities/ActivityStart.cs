@@ -326,6 +326,7 @@ namespace Saladio.Activities
                         RadioButton radioFemaleSelected = FindViewById<RadioButton>(Resource.Id.radioFemaleSelected);
                         CalendarPickerEditText etBirthDate = FindViewById<CalendarPickerEditText>(Resource.Id.etBirthDate);
                         EditText etWeight = FindViewById<EditText>(Resource.Id.etWeight);
+                        EditText etHeight = FindViewById<EditText>(Resource.Id.etHeight);
                         EditText etAddress1 = FindViewById<EditText>(Resource.Id.etAddress1);
                         EditText etAddress2 = FindViewById<EditText>(Resource.Id.etAddress2);
 
@@ -378,12 +379,19 @@ namespace Saladio.Activities
                                 weight = val;
                             }
 
+                            int height;
+                            if (!int.TryParse(etHeight.Text, out height))
+                            {
+                                ShowMessageDialog(Resource.String.ToastInvalidHeight);
+                                break;
+                            }
+
                             UsersApi api = new UsersApi(SharedConfig.UnAuthorizedApiConfig);
-                            var res = api.Signup(new IO.Swagger.Model.User(null, etEmail.Text, etPhone.Text.ToLatinNumbers(),
-                                etPassword.Text, etFirstName.Text, etLastName.Text,
-                                new IO.Swagger.Model.PersianDate(etBirthDate.SelectedYear, etBirthDate.SelectedMonth, etBirthDate.SelectedDay),
-                                radioMaleSelected.Checked ? IO.Swagger.Model.User.GenderEnum.Male : IO.Swagger.Model.User.GenderEnum.Female,
-                                weight, addresses));
+                            var res = api.Signup(new IO.Swagger.Model.User(UserName: null, Email: etEmail.Text, PhoneNumber: etPhone.Text.ToLatinNumbers(),
+                                Password: etPassword.Text, FirstName: etFirstName.Text, LastName: etLastName.Text,
+                                BirthDate: new IO.Swagger.Model.PersianDate(etBirthDate.SelectedYear, etBirthDate.SelectedMonth, etBirthDate.SelectedDay),
+                                Gender: radioMaleSelected.Checked ? IO.Swagger.Model.User.GenderEnum.Male : IO.Swagger.Model.User.GenderEnum.Female,
+                                Weight: weight, Height: height, Addresses: addresses));
 
                             SharedConfig.UserName = res.UserName;
                             SharedConfig.Password = etPassword.Text;

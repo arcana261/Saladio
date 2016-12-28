@@ -26,6 +26,7 @@
   <string name="FormInputGenderHint">جنسیت</string>
   <string name="FormInputBirthDateHint">تاریخ تولد</string>
   <string name="FormInputWeightHint">وزن</string>
+  <string name="FormInputHeightHint">قذ به سانتی متر</string>
   <string name="FormInputAddress1">آدرس ۱</string>
   <string name="FormInputAddress2">آدرس ۲</string>
 
@@ -78,6 +79,46 @@
   <string name="PersianFriday">جمعه</string>
   <string name="PersianSaturday">شنبه</string>
 
+  <string name="body_need_callorie">انرژی</string>
+  <string name="body_need_protein">پروتئین</string>
+  <string name="body_need_carbohydrat">کربوهیدرات</string>
+  <string name="body_need_fiber">فیبر</string>
+  <string name="body_need_fat">چربی</string>
+  <string name="body_need_water">آب</string>
+  <string name="body_need_sugar">قند</string>
+  <string name="body_need_calcium">کلسیم</string>
+  <string name="body_need_iron">آهن</string>
+  <string name="body_need_magnesium">منیزیم</string>
+  <string name="body_need_phosphorus">فسفر</string>
+  <string name="body_need_zinc">روی</string>
+  <string name="body_need_copper">مس</string>
+  <string name="body_need_manganese">منگنز</string>
+  <string name="body_need_vitamin_a">ویتامین A</string>
+  <string name="body_need_vitamin_b1">ویتامین B1 (تیامین)</string>
+  <string name="body_need_vitamin_b2">ویتامین B2 (ریبوفلاوین)</string>
+  <string name="body_need_vitamin_b3">ویتامین B3 (نیاسین)</string>
+  <string name="body_need_vitamin_b6">ویتامین B6</string>
+  <string name="body_need_vitamin_b12">ویتامین B12</string>
+  <string name="body_need_vitamin_c">ویتامین C</string>
+  <string name="body_need_vitamin_d">ویتامین D</string>
+  <string name="body_need_vitamin_e">ویتامین E</string>
+  <string name="body_need_vitamin_k">ویتامین K</string>
+  <string name="body_need_provided_not_available"></string>
+  <string name="body_need_required_not_available">لطفا برای محاسبه اطلاعات خود را تکمیل نمایید</string>
+  <string name="body_need_header_item"></string>
+  <string name="body_need_header_provided">مقدار</string>
+  <string name="body_need_header_required">درصد روزانه</string>
+  <string name="body_need_unit_micro_gram">µg</string>
+  <string name="body_need_unit_mili_gram">mg</string>
+  <string name="body_need_unit_iu">IU</string>
+  <string name="body_need_unit_gram">g</string>
+  <string name="body_need_unit_energy">kCal</string>
+  <string name="body_need_unit_percent">درصد</string>
+
+  <string name="body_need_group_food">موارد تغذیه ای سالاد شما</string>
+  <string name="body_need_group_irons">مواد معدنی سالاد شما</string>
+  <string name="body_need_group_vitamins">ویتامین های سالاد شما</string>
+
   <string name="ToastPasswordsDoNotMatch">رمزهای عبور یکسان نیستند</string>
   <string name="ToastInvalidEmail">ایمیل وارد شده صحیح نیست</string>
   <string name="ToastInvalidPhoneNumber">شماره تلفن وارد شده صحیح نیست</string>
@@ -102,4 +143,5 @@
   <string name="ToastSaladComponentNotSelected">باید تعدادی از اجزای سالاد را انتخاب نمایید</string>
   <string name="ToastOrderPlaced">سفارش شما ثبت شد! از انتخاب شما متشکریم!</string>
   <string name="ToastInvalidWeight">مقدار وارد شده برای وزن صحیح نیست</string>
+  <string name="ToastInvalidHeight">مقدار وارد شده برای قد صحیح نیست</string>
 </resources>
